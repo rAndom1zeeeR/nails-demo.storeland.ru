@@ -1849,10 +1849,6 @@ function removeFromCart(e){
   e.parent().parent().parent().fadeOut().remove();
   url = del.attr('href');
   quantity = del.data('count');
-  console.log(del)
-  console.log(e)
-  console.log(url)
-  console.log('quantity', quantity)
   $.ajax({
     cache  : false,
 		url		 : url,
@@ -1909,7 +1905,7 @@ function removeFromCartAll(e){
 
 // Валидаторы для телефона в "Подсказать" на главной
 function validName(){
-  var name = $('#callback').find('.form__person');
+  let name = $('#callback').find('.form__person');
   if(name.val() != ''){
     name.removeClass('error');
     name.attr('placeholder','Введите Имя');
@@ -1921,8 +1917,8 @@ function validName(){
   } 
 }
 function validPhone(){ 
-  var tel = $('#callback').find('.form__phone');
-  var check = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/.test(tel.val());
+  let tel = $('#callback').find('.form__phone');
+  let check = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/.test(tel.val());
   if(check == true && check != ''){
     tel.removeClass('error');
     tel.attr('placeholder','Введите номер');
@@ -1936,8 +1932,8 @@ function validPhone(){
 }
 // Проверка телефона в обратном звонке.
 function validSubmit(){
-  var name = validName();
-  var phone = validPhone();
+  let name = validName();
+  let phone = validPhone();
   return name && phone;
 }
 // Проверка отправки формы
@@ -2619,7 +2615,6 @@ function cartDelete(s){
 // Функция быстрого оформления заказа в корзине
 function startOrder(){  
   var globalOrder = $('#globalOrder');
-  var buttonStartOrder = $('#startOrder');
   var closeOrder = $('#closeOrder');
   var cartTable = $('.cartTable');
   //объект блока куда будет выводиться форма быстрого заказа
@@ -2647,7 +2642,7 @@ function startOrder(){
       showPass();
       $(".form__phone").mask("+7 (999) 999-9999");
       $("#sites_client_phone").mask("+7 (999) 999-9999");
-      $('#closeOrder').on('click', function() {
+      closeOrder.on('click', function() {
         cartTable.show('slow');
         globalOrder.hide();
         $('html, body').delay(400).animate({scrollTop : jQuery('#main').offset().top}, 800);
@@ -2983,10 +2978,10 @@ function pdtSlider() {
 // Функция показать больше для Товаров на главной странице
 function pdtSale() {
   const pdtContent = $('#pdt__sale');
-  const pdtButtons = pdtContent.find('.showAll');
-  const pdtItem = pdtContent.find('.product__item');
-  const pdtCount = pdtItem.length;
-  const pdtVisible = pdtItem.filter(":visible").length;
+  let pdtButtons = pdtContent.find('.showAll');
+  let pdtItem = pdtContent.find('.product__item');
+  let pdtCount = pdtItem.length;
+  let pdtVisible = pdtItem.filter(":visible").length;
   if(pdtCount <= pdtVisible){ 
     pdtButtons.hide();
   }else{
@@ -3182,7 +3177,7 @@ function newsCarousel() {
   $('#news .block__nav .owl-next').click(function(event) {
     $('#news .owl-carousel').trigger('next.owl.carousel');
   });
-
+  // Табы в новостях
   $('#news .nav__tab').on('click', function (event) {
     event.preventDefault();
     let content = $(this).attr('data-content');
@@ -3224,7 +3219,7 @@ function OpenMenu() {
     }
   });
   // Закрытие элементов
-  $('.dropdown__label').on('click', function(event){
+  $('.dropdown__close').on('click', function(event){
     $('.dropdown__content').removeClass('opened');
     $('#overlay.transparent').removeClass('opened');
   });
@@ -3281,7 +3276,6 @@ $(document).ready(function(){
   showPass();
   quickViewMod();
   goodsModRest();
-  OpenMenuCatalog();
   // Ленивая загрузка
   $(function(){
     const observer = lozad(); // lazy loads elements with default selector as '.lozad'
