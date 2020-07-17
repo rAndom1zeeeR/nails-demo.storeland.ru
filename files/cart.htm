@@ -1,0 +1,92 @@
+<div class="cartItems">
+  {% IF cart_items_empty %}
+    <div class="attention">Корзина покупок пуста. Вы можете выбрать нужный товар из <a href="{CATALOG_URL}">каталога</a>.</div>
+  {% ELSE %}
+    <form action="{CART_URL}" method="post" class="cartForm">
+    <input type="hidden" name="fast_order" value="1" />
+    <input type="hidden" name="hash" value="{HASH}" />
+    <div class="cartTable">
+      <div class="cart__items">
+        {% FOR cart_items %}
+        <div class="cart__item" data-id="{cart_items.GOODS_MOD_ID}">
+          <div class="cart__image"><a href="{cart_items.GOODS_URL}"><img class="goods-image-icon" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=florist{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}"></a></div> 
+          <div class="cart__inner">
+            <div class="cart__info"> 
+              <a class="cart__name" href="{cart_items.GOODS_URL}">{cart_items.GOODS_NAME}</a>
+              <!-- Если у товара есть отличительные свойства для модификации товара, допишем их к названию товара -->
+              {% IF cart_items.GOODS_MOD_ART_NUMBER %}<div class="cart__art"><span class="label">Артикул:</span><span>{cart_items.GOODS_MOD_ART_NUMBER}</span></div>{% ENDIF %}
+              {% IFNOT cart_items.distinctive_properties_empty %}<div class="cart__properties"><span class="label">{% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}:</span><span>{cart_items.distinctive_properties.VALUE}</span>{% IFNOT cart_items.distinctive_properties.last %},<br> {% ENDIF %}{% ENDFOR %}</div>{% ENDIF %}
+              <div class="cart__price cartPriceTotal price__now">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</div>
+            </div>
+            <div class="cart__actions">
+              <div class="cart__qty qty bordered">
+                <a href="javascript:void(0)" class="qty__minus unselectable" title="Уменьшить"><i class="icon-minus"></i></a>
+                <a href="javascript:void(0)" class="qty__plus unselectable" title="Увеличить"><i class="icon-plus"></i></a>
+                <input type="text" name="form[quantity][{cart_items.GOODS_MOD_ID}]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" max="{cart_items.GOODS_MOD_REST_VALUE}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="cartqty" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
+                <span class="top"></span>
+                <span class="left"></span>
+                <span class="right"></span>
+                <span class="bottom"></span>
+              </div>
+              <div class="cart__delete"><a data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="cartDelete($(this))" class="remove button4"><span>Удалить</span></a></div>
+            </div>
+          </div>
+        </div>
+        {% ENDFOR %}
+        <div class="cart__buttons">
+          <a href="{CATALOG_URL}" class="cart__back button4"><span>Вернуться к покупкам</span></a>
+          <a href="{CART_TRUNCATE_URL}" class="cart__clear button4" title="Очистить корзину" onclick="return confirm('Вы действительно хотите удалить все товары из корзины?')"><span>Очистить </span><span>корзину</span></a>
+        </div>
+      </div>
+      <div class="cart__total">
+        <div class="total__title">Ваш заказ:</div>
+        <div class="total__items">
+          <!-- Скидки, действующие на заказ -->
+          {% FOR cart_discount %}
+          {% IF cart_discount.DISCOUNT_IS_ENABLED %}
+          <div class="total__item total__discount">
+            <div class="total__label"><span>{cart_discount.DISCOUNT_NAME}:</span></div>
+            <div class="total__price"><span class="discount__value" data-value="{cart_discount.DISCOUNT_VALUE}">{cart_discount.DISCOUNT_VALUE}</span>{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="rub"> руб.</span>{% ENDIF %}</div>
+          </div>
+          {% ENDIF %}
+          {% ENDFOR %}
+          <!-- Корзина: Купон -->
+          <div class="total__item total__coupons" style="display: none;">
+            <div class="total__label"><span>Купон:</span></div>
+            <div class="total__price"><span class="cartSumCoupons" data-value=""></span></div>
+          </div>
+          <!-- Корзина: Доставка -->
+          <div class="total__item total__delivery">
+            <div class="total__label"><span>Доставка:</span></div>
+            <div class="total__price"><span class="cartSumDelivery" data-value="{CART_SUM_DELIVERY}">{CART_SUM_DELIVERY | money_format}</span></div>
+          </div>
+          <!-- Корзина: Итого -->
+          <div class="total__item total__cart">
+            <div class="total__label">Итого:</div>
+            <div class="total__price cartSumTotal" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
+            <div style="display: none;" class="total__price cartSum" data-value="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</div>
+            <div style="display: none;" class="total__price cartSumTotalHide" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
+          </div>
+        </div>
+        <div class="total__buttons">
+          <a id="startOrder" class="button" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
+          <noscript>
+            <button type="submit" class="button button3" title="Пересчитать">Пересчитать</button>
+            <button type="submit" class="button" name="next_step" title="Перейти к оформлению заказа в 4 шага"><span>Оформить </span><span>заказ</span></button>
+          </noscript>
+        </div>
+      </div>
+    </div>
+    </form> 
+  {% ENDIF %}
+  <div id="globalOrder" style="display: none">
+    <div class="preloader top"><div class="loading"></div></div>
+    <div id="OrderAjaxBlock" style="display:none">
+      <!-- Сюда грузится форма оформления быстрого заказа -->
+    </div>
+  </div>
+</div>
+
+<style>
+ #ui-datepicker-div {display: none;}
+</style>

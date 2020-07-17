@@ -1,0 +1,106 @@
+<div class="feedback__page client">
+  {% IFNOT FORM_SEND_OK %}
+  <div class="client__block">
+    <h3 class="client__title">Форма связи</h3>
+    <form method="post" action="{FEEDBACK_URL}" class="feedbackForm" enctype="multipart/form-data">
+      <input type="hidden" name="hash" value="{HASH}" />
+      <!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
+      {ANTISPAM_CODE}
+      <div class="form__list">
+        <div class="form__fields">
+          <input id="feedback_name" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_NAME}]" value="{FORM_FEEDBACK_NAME}" maxlength="50"  class="form__input" placeholder="Представьтесь, пожалуйста:" required>
+        </div>
+        <div class="form__fields">
+          <input id="feedback_email" type="email"  name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_EMAIL}]" value="{FORM_FEEDBACK_EMAIL}" maxlength="100" class="form__input email" placeholder="Электронная почта:" required>
+        </div>
+        <div class="form__fields">
+          <input id="feedback_phone" type="text" name="form[Телефон]"  value="{FORM_FEEDBACK_PHONE}" maxlength="50"  class="form__input form__phone" placeholder="Телефон:">
+        </div>
+        <div class="form__fields">
+          <textarea id="feedback_message" rows="4" name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_MESSAGE}]" class="textarea" placeholder="Текст сообщения:" required>{FORM_FEEDBACK_MESSAGE}</textarea>
+        </div>
+        <div class="file">
+          <label for="feedback_file">Прикрепить файл</label>
+          <div class="input-box">
+            <input id="feedback_file" type="file" name="form[assets_file]" value=""  class="">
+          </div>
+        </div>
+      </div>
+      <div class="form__pp">Нажимая на кнопку Отправить, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
+      <button type="submit" title="Отправить" class="button"><span>Отправить</span></button>
+    </form>
+  </div>
+  {% ENDIF %}
+  <div class="client__block" itemscope itemtype="https://schema.org/Organization">
+    <h3 class="client__title">Наши контакты</h3>
+    <div class="contacts__content" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="{SETTINGS_STORE_ORG_NAME}"/>
+      {% IF SETTINGS_STORE_PHONE_NUMBER1 %}
+      <div class="phone">
+        <a href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}{SETTINGS_STORE_PHONE_CITY_CODE1}{SETTINGS_STORE_PHONE_NUMBER1}">
+          <b>Заказать звонок</b>
+          <i class="material-icons">phone</i>
+          <span itemprop="telephone">{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}</span>
+        </a>
+      </div>
+      {% ENDIF %}
+      {% IF SETTINGS_STORE_PHONE_NUMBER2 %}
+      <div class="phone">
+        <a href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}{SETTINGS_STORE_PHONE_CITY_CODE2}{SETTINGS_STORE_PHONE_NUMBER2}">
+          <b>Телефон</b>
+          <i class="material-icons">phone</i>
+          <span itemprop="telephone">{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}</span>
+        </a>
+      </div>
+      {% ENDIF %}
+      {% IF SETTINGS_STORE_PHONE_NUMBER3 %}
+      <div class="phone">
+        <a href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}{SETTINGS_STORE_PHONE_CITY_CODE3}{SETTINGS_STORE_PHONE_NUMBER3}">
+          <b>Messengers</b>
+          <i class="material-icons">phone</i>
+          <span itemprop="faxNumber">{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}</span>
+        </a>
+      </div>
+      {% ENDIF %}
+      {% IF SETTINGS_STORE_EMAIL_MAIN %}
+      <div class="mail">
+        <a href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+          <b>E-mail</b>
+          <i class="material-icons">email</i>
+          <span itemprop="email">{SETTINGS_STORE_EMAIL_MAIN}</span>
+        </a>
+      </div>
+      {% ENDIF %}
+      {% IF SETTINGS_STORE_SKYPE %}
+      <div class="skype">
+        <a href="skype:{SETTINGS_STORE_SKYPE}?call" title="{SETTINGS_STORE_SKYPE}">
+          <b>Skype</b>
+          <i class="icon-skype"></i>
+          <span>{SETTINGS_STORE_SKYPE}</span>
+        </a>
+      </div>
+      {% ENDIF %}
+      {% IF SETTINGS_STORE_WORK_TIME %}
+      <div class="phone">
+        <a href="{FEEDBACK_URL}" title="Связь с администрацией">
+          <b>Режим работы</b>
+          <i class="material-icons">access_time</i>
+          <span>{SETTINGS_STORE_WORK_TIME}</span>
+        </a>
+      </div>
+      {% ENDIF %}
+      {% IF SETTINGS_STORE_REGION %}
+      <div class="region" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <a href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" target="_blank">
+          <b>Адрес</b>
+          <i class="icon-location"></i>
+          <span itemprop="addressLocality">{SETTINGS_STORE_REGION}</span>
+        </a>
+      </div>
+      {% ENDIF %}
+    </div>
+  </div>
+  <div class="client__block maps">
+    <iframe src="https://api-maps.yandex.ru/frame/v1/-/CZRYYCOw" width="100%" height="400" frameborder="0"></iframe>
+  </div>
+</div>

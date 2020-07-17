@@ -1,0 +1,360 @@
+<div>
+<div class="preloader"><div class="loading"></div></div>
+<div class="fastOrder">
+  {% IF FORM_NOTICE %}<div class="modal__title {% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>{% ENDIF %}
+  {% IF cart_count_empty %}
+    <div class="attention">Ваша корзина пуста, пожалуйста, выберите другой товар для оформления заказа</div>
+  {% ELSE %}
+  <div class="fastOrderForm">
+    <form action="{ORDER_STAGE_CONFIRM_WITHOUT_DOMAIN_URL}" method="post" class="fastOrder__form" novalidate="novalidate">
+      <!-- Данные покупателя -->
+      <div class="account" order="1">
+        <h3 class="title"><span>Личные данные</span></h3>
+        <div class="form__list">
+          <div class="form__fields">
+            <label for="sites_client_person" class="required"><span>Ваше Имя</span><em>*</em></label>
+            <input id="sites_client_person" type="text" name="form[contact][person]" value="{ORDER_FORM_CONTACT_PERSON}" maxlength="100" class="form__input" type="text" placeholder="ФИО *" required/>
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_phone" class="required"><span>Телефон</span><em>*</em></label>
+            <input id="sites_client_phone" type="tel" name="form[contact][phone]" value="{ORDER_FORM_CONTACT_PHONE}" maxlength="255" class="form__input form__phone" type="text" placeholder="Телефон *" required/>
+          </div>
+          <div class="form__fields email">
+            <label for="sites_client_email" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}class="required"{% ENDIF %}><span>Ваш E-mail</span><em>*</em></label>
+            <input id="sites_client_email" type="email" name="form[contact][email]" value="{ORDER_FORM_CONTACT_EMAIL}" maxlength="255" class="form__input" type="text" placeholder="Электронная почта" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %}/>
+          </div>
+          <!-- Если в тарифном плане подключен раздел личного кабинета -->
+          {% IFNOT CLIENT_IS_LOGIN %}
+          <div class="form__fields form__wantRegister">
+            <input type="checkbox" class="square" id="form__wantRegister" name="form[contact][want_register]" value="1" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}checked="checked"{% ENDIF %}>
+            <label for="form__wantRegister"><span>Я хочу зарегистрироваться</span></label>
+          </div>
+          <div class="form__fields form__WantRegisterPass" {% IFNOT ORDER_FORM_CONTACT_WANT_REGISTER %}style="display: none;"{% ENDIF %}>
+            <input id="sites_client_pass" type="password" name="form[contact][pass]" value="{ORDER_FORM_CONTACT_PASS}" maxlength="50" minlength="6" class="form__input {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %}" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" placeholder="Придумайте пароль *"/>
+            <div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
+            <div id="capslock"> 
+              <div><i class="material-icons">warning</i></div>
+              <div><strong>Caps Lock включен.</strong></div>
+              <div>Пароль может быть введен неверно.</div>
+            </div>
+          </div>
+          {% ENDIF %}
+          <!-- Если поле комментарии запрашивается -->
+          {% IF SETTINGS_ORDER_FIELDS_COMMENT < 3 %}
+          <div class="form__fields fields-1 {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}">
+            <label for="quickDeliveryComment" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}class="required"{% ENDIF %}><span>Комментарий</span><em>*</em></label>
+            <textarea cols="100" rows="6" id="quickDeliveryComment" name="form[delivery][comment]" class="textarea" placeholder="Комментарий {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}>{ORDER_FORM_DELIVERY_COMMENT}</textarea>
+          </div>
+          {% ENDIF %}
+        </div>
+      </div>
+      <!-- Адрес доставки-->
+      {% IF SETTINGS_ORDER_FIELDS_COUNTRY < 3 || SETTINGS_ORDER_FIELDS_REGION < 3 || SETTINGS_ORDER_FIELDS_CITY < 3 || SETTINGS_ORDER_FIELDS_ADDRESS < 3 || SETTINGS_ORDER_FIELDS_ZIP_CODE < 3 || SETTINGS_ORDER_FIELDS_CONVENIENT_TIME < 3 || SETTINGS_ORDER_FIELDS_COMMENT < 3 %}
+      <div order="2" class="address {% IF SETTINGS_ORDER_FIELDS_COUNTRY = 1 || SETTINGS_ORDER_FIELDS_REGION = 1 || SETTINGS_ORDER_FIELDS_CITY = 1 || SETTINGS_ORDER_FIELDS_ADDRESS = 1 || SETTINGS_ORDER_FIELDS_ZIP_CODE = 1 || SETTINGS_ORDER_FIELDS_CONVENIENT_TIME = 1 || SETTINGS_ORDER_FIELDS_COMMENT = 1 %}hasRequired{% ENDIF %}"> 
+        <h3 class="title" title="Выберите удобный для вас Адрес доставки заказа"><span>Адрес доставки</span></h3>
+        <div class="form__list">
+          <!-- Если поле страны доставки запрашивается -->
+          {% IF SETTINGS_ORDER_FIELDS_COUNTRY < 3 %}
+            {% IFNOT country_list_empty %}
+            <div class="form__fields fields-1 selectBox {% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}required{% ENDIF %}">
+              <label for="quickDeliveryCountry" {% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}class="required"{% ENDIF %}><span>Страна</span>{% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}<em>*</em>{% ENDIF %}</label>
+              <select id="quickDeliveryCountry" name="form[delivery][country_id]" class="form__input {% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}required{% ENDIF %}">
+                {% FOR country_list %}
+                  <option value="{country_list.ID}" {% IF country_list.ID=ORDER_FORM_DELIVERY_COUNTRY_ID %}selected="selected"{% ENDIF %}>
+                    {country_list.NAME}
+                  </option>
+                {% ENDFOR %}
+              </select>
+            </div>
+            {% ENDIF %}
+          {% ENDIF %}
+          <!-- Если поле области запрашивается -->
+          {% IF SETTINGS_ORDER_FIELDS_REGION < 3 %}
+          <div class="form__fields {% IF SETTINGS_ORDER_FIELDS_REGION=1 %}required{% ENDIF %}">
+            <label for="quickDeliveryRegion" {% IF SETTINGS_ORDER_FIELDS_REGION=1 %}class="required"{% ENDIF %}><span>Область</span><em>*</em></label>
+            <input id="quickDeliveryRegion" type="text" name="form[delivery][region]" value="{ORDER_FORM_DELIVERY_REGION}" class="form__input" placeholder="Область {% IF SETTINGS_ORDER_FIELDS_REGION=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_REGION=1 %}required{% ENDIF %} />
+          </div>
+          {% ENDIF %}
+          <!-- Если поле города запрашивается -->
+          {% IF SETTINGS_ORDER_FIELDS_CITY < 3 %}
+          <div class="form__fields {% IF SETTINGS_ORDER_FIELDS_CITY=1 %}required{% ENDIF %}">
+            <label for="quickDeliveryCity" {% IF SETTINGS_ORDER_FIELDS_CITY=1 %}class="required"{% ENDIF %}><span>Город</span><em>*</em></label>
+            <input id="quickDeliveryCity" type="text" name="form[delivery][city]" value="{ORDER_FORM_DELIVERY_CITY}" class="form__input" maxlength="255" placeholder="Город {% IF SETTINGS_ORDER_FIELDS_CITY=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_CITY=1 %}required{% ENDIF %}/>
+          </div>
+          {% ENDIF %}
+          <!-- Если поле почтового индекса запрашивается -->
+          {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE < 3 %}
+          <div class="form__fields {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}required{% ENDIF %}">
+            <label for="quickDeliveryZipCode" {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}class="required"{% ENDIF %}><span>Индекс</span><em>*</em></label>
+            <input id="quickDeliveryZipCode" type="text" name="form[delivery][zip_code]" value="{ORDER_FORM_DELIVERY_ZIP_CODE}" minlength="5" maxlength="6" class="form__input" placeholder="Индекс {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}required{% ENDIF %} />
+          </div>
+          {% ENDIF %}
+          <!-- Если поле адреса доставки запрашивается -->
+          {% IF SETTINGS_ORDER_FIELDS_ADDRESS < 3 %}
+          <div class="form__fields {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}">
+            <label for="quickDeliveryAddress" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}class="required"{% ENDIF %}><span>Адрес</span><em>*</em></label>
+            <input id="quickDeliveryAddress" type="text" name="form[delivery][address]" value="{ORDER_FORM_DELIVERY_ADDRESS}" class="form__input" placeholder="Улица {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %} />
+          </div>
+          {% ENDIF %}
+          <!-- Если поле даты доставки запрашивается -->
+          {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME < 3 %}
+          <div class="form__fields deliveryDate {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %}">
+            <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}><span>Дата доставки</span><em>*</em></label>
+            <input id="deliveryConvenientDate" type="text" name="form[delivery][convenient_date]" value="{ORDER_FORM_DELIVERY_CONVENIENT_DATE}" class="form__input" maxlength="10" minlength="10" placeholder="17.11.2020 {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %} />
+          </div>
+          <div class="form__fields deliveryDate {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %}">
+            <div class="form__field deliveryConvenientDate selectBox">
+              <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}><span>Время доставки</span>{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
+              <select class="form__input" name="form[delivery][convenient_time_from]">
+                {% FOR convenient_time_from_list %}
+                  <option value="{convenient_time_from_list.HOUR_INT}" {% IF convenient_time_from_list.SELECTED %}selected="selected"{% ENDIF %}>{convenient_time_from_list.HOUR}</option>
+                {% ENDFOR %}
+              </select>
+            </div>
+            <div class="form__field deliveryConvenientDate selectBox">
+              <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}><span>Время доставки</span>{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>
+              <select class="form__input" name="form[delivery][convenient_time_to]">
+                {% FOR convenient_time_to_list %}
+                  <option value="{convenient_time_to_list.HOUR_INT}" {% IF convenient_time_to_list.SELECTED %}selected="selected"{% ENDIF %}>{convenient_time_to_list.HOUR}</option>
+                {% ENDFOR %}
+              </select>
+            </div>
+          </div>
+          {% ENDIF %}
+        </div>
+      </div>
+      {% ENDIF %}
+      <!-- Способ доставки-->
+      <div class="delivery" order="3"> 
+        <h3 class="title" title="Выберите удобный для вас способ доставки"><span>Cпособ доставки</span></h3>
+        <!-- Старый скрытый вариант способа доставки -->
+        <div class="delivery__selects">
+          <div class="delivery__select selectBox form__fields">
+            <select class="form__input">
+              {% FOR order_delivery %}
+                <option id="deliveryId{order_delivery.ID}" delId="{order_delivery.ID}" name="form[delivery][id]" value="{order_delivery.ID}">{order_delivery.NAME}</option>
+              {% ENDFOR %}
+            </select>
+          </div>
+          {% FOR order_delivery %}
+            {% IFNOT order_delivery.zone_list_empty %}
+            <div class="delivery__zoneSelect selectBox form__fields" del="{order_delivery.ID}">
+              <select class="form__input">
+                {% FOR zone_list %}
+                  <option deliveryid="{order_delivery.ID}" id="deliveryZoneId{order_delivery.zone_list.ID}" name="form[delivery][zone_id]" value="{order_delivery.zone_list.ID}">{order_delivery.zone_list.NAME}</option>            
+                {% ENDFOR %}
+              </select>
+            </div>
+            {% ENDIF %}
+          {% ENDFOR %}
+          <div class="delivery__descriptionBlock">
+            <div class="delivery__price">
+              <span class="label">Стоимость доставки:</span>
+              <span class="changeprice"></span>
+              <span class="currency">{CURRENCY_NAME}</span>
+            </div>
+            <div class="delivery__description"></div>
+          </div>
+        </div>
+        <!-- Новый Cпособ доставки -->
+        <div class="order__delivery" style="display: none;">
+          {% FOR order_delivery %}
+            <div class="delivery__option" rel="{order_delivery.ID}">
+              <input type="radio" id="deliveryId{order_delivery.ID}" name="form[delivery][id]" value="{order_delivery.ID}" class="deliveryRadio square delivery__radio"
+                price="{order_delivery.END_PRICE}"
+                pricewithoutzones="{order_delivery.END_PRICE}"
+                pricewithzone="{order_delivery.ZONE_END_PRICE}"
+                data-name="{order_delivery.NAME}"
+              {% IFNOT ORDER_FORM_DELIVERY_ID %}
+                {% IF order_delivery.first %}checked="checked"{% ENDIF %}
+              {% ELSEIF order_delivery.ID = ORDER_FORM_DELIVERY_ID %}
+                checked="checked"
+              {% ENDIF %}
+              />
+              <div class="delivery__desc">{order_delivery.DESC}</div>
+              <label for="deliveryId{order_delivery.ID}" class="delivery__name">{order_delivery.NAME}</label>
+              <div class="delivery__fields">
+                <label>Стоимость доставки:</label><span class="delivery__price">{order_delivery.END_PRICE | money_format}</span>
+              </div>
+              {% IFNOT order_delivery.zone_list_empty %}
+              <div class="delivery__zones">
+                {% FOR zone_list %}
+                <!-- Заголовок внутри метода доставки, появляется только один раз-->  
+                {% IF order_delivery.zone_list.index=1 %}
+                  <div class="zones__title">Зоны доставки:</div>
+                {% ENDIF %}
+                <div class="delivery__zone">
+                  <input type="radio" class="zone__radio square" id="deliveryZoneId{order_delivery.zone_list.ID}" 
+                    name="form[delivery][zone_id]" 
+                    value="{order_delivery.zone_list.ID}"
+                    deliveryid="{order_delivery.ID}" 
+                    price="{order_delivery.zone_list.END_PRICE}"
+                    {% IF order_delivery.zone_list.ID = ORDER_FORM_DELIVERY_ZONE_ID %}
+                      checked="checked" rel="true"
+                    {% ENDIF %}
+                  />
+                  <label class="zones__name" for="deliveryZoneId{order_delivery.zone_list.ID}">{order_delivery.zone_list.NAME}</label>
+                  <span class="zones__price">{order_delivery.zone_list.END_PRICE | money_format}</span>
+                </div>
+                {% ENDFOR %}
+              </div>
+              {% ENDIF %}
+            </div>
+          {% ENDFOR %}
+        </div>
+      </div>
+      <!-- Способ оплаты -->
+      <div class="payment" order="4">
+        <!-- Старый скрытый способ оплаты -->
+        {% FOR order_delivery %}
+          {% IFNOT order_delivery.available_payment_list_empty  %}
+            <div class="order__payment" rel="{order_delivery.ID}"> 
+              <h3 class="title" title="Выберите удобный для вас способ оплаты заказа"><span>Cпособ оплаты</span></h3>
+              <div class="order__paymentSelect selectBox form__fields">
+                <select class="paymentSelect form__input">
+                  {% FOR available_payment_list %}
+                    <option type="radio" id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" name="form[payment][id]" value="{order_delivery.available_payment_list.ID}" class="required" {% IFNOT ORDER_FORM_PAYMENT_ID %}{% IF order_delivery.available_payment_list.first %}checked="checked"{% ENDIF %}{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}>
+                      {order_delivery.available_payment_list.NAME}
+                    </option>
+                  {% ENDFOR %}
+                </select>
+                <div class="currentPaymentDesc">
+                  <div class="currentPaymentDescription"></div>
+                </div>
+              </div>
+              <div class="payment__description"></div>
+            </div>
+          {% ENDIF %}
+        {% ENDFOR %}
+        <!-- Новый способ оплаты -->
+        <div class="hiddenRadio" style="display: none;">
+        {% FOR order_delivery %}
+          {% IFNOT order_delivery.available_payment_list_empty %}
+            <div class="order__payment" rel="{order_delivery.ID}" style="display: none;">
+              {% FOR available_payment_list %}  
+              <div class="payment__option">
+                <label for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" class="payment__name">{order_delivery.available_payment_list.NAME}</label>
+                <input type="radio" id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" name="form[payment][id]" deliveryid="{order_delivery.available_payment_list.ID}" value="{order_delivery.available_payment_list.ID}" class="paymentRadio square required" {% IFNOT ORDER_FORM_PAYMENT_ID %}{% IF order_delivery.available_payment_list.first %}checked="checked"{% ENDIF %}{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}/>
+                <!-- Сообщение для пользователя -->
+                {% IF order_delivery.available_payment_list.MESSAGE %}
+                  <div class="payment__desc">{order_delivery.available_payment_list.MESSAGE}</div>
+                {% ENDIF %}
+              </div>
+              {% ENDFOR %}
+            </div>
+          {% ENDIF %}
+        {% ENDFOR %}
+        </div>
+        <!-- Если скидки по купонам активированы в панели управления магазином -->
+        {% IF ORDER_DISCOUNT_COUPON_IS_ENABLED %}
+        <div class="coupons">
+          <h3 class="title"><span>Код купона на скидку</span></h3>
+          <div class="form__fields coupon__order">
+            <input type="hidden" name="oldPromoDiscount" value="0">
+            <input type="hidden" name="orderSumDefaul" value="{CART_SUM_NOW}">
+            <input type="text" id="coupon__code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="form__input" placeholder="Введите код"/>
+            <a href="javascript:void(0)" class="coupon__button" title="Применить"><i class="icon-arrow-right"></i></a>
+            <a href="javascript:void(0)" class="coupon__reset" title="Сбросить"><i class="material-icons">close</i></a>
+          </div>
+        </div>
+        {% ENDIF %}
+      </div>
+      <!-- END Если скидки по купонам активированы в панели управления магазином -->
+      <div class="cart__total">
+        <div class="total__items">
+          <!-- Скидки, действующие на заказ -->
+          {% FOR cart_discount %}
+          {% IF cart_discount.DISCOUNT_IS_ENABLED %}
+          <div class="total__item total__discount" style="display: none;">
+            <div class="total__label"><span>{cart_discount.DISCOUNT_NAME}</span>:</div>
+            <div class="total__price"><span class="discount__value" data-value="{cart_discount.DISCOUNT_VALUE}">{cart_discount.DISCOUNT_VALUE}</span>{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="rub"> руб.</span>{% ENDIF %}</div>
+          </div>
+          {% ENDIF %}
+          {% ENDFOR %}
+          <div class="total__item total__coupons" style="display: none;">
+            <div class="total__label"><span>Купон</span>:</div>
+            <div class="total__price"><span class="cartSumCoupons" data-value=""></span></div>
+          </div>
+          <div class="total__item total__delivery" style="display: none;">
+            <div class="total__label"><span>Доставка</span>:</div>
+            <div class="total__price"><span class="cartSumDelivery" data-value="{CART_SUM_DELIVERY}">{CART_SUM_DELIVERY | money_format}</span></div>
+          </div>
+          <div class="total__item total__cart">
+            <div class="total__label">Итого:</div>
+            <div class="total__price cartSumTotal" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
+            <div style="display: none;" class="total__price cartSum" data-value="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</div>
+            <div style="display: none;" class="total__price cartSumTotalHide" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
+          </div>
+        </div>
+        <div class="total__buttons">
+          <input type="hidden" name="hash" value="{HASH}" />
+          <div class="total__pp">Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
+          <div class="total__buttons">
+            <a id="closeOrder" class="button button4" title="Отменить заказ"><span>Отменить </span><span>заказ</span></a>
+            <button type="submit" class="button disabled" titleOFF="Оформить заказ" data-tooltip="Заполните все поля"><span>Оформить </span><span>заказ</span></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  {% ENDIF %}
+</div>
+</div>
+
+<!-- Блок для обновления данных корзины. Не виден пользователю -->
+<div style="display:none;" id="newCartLabel">
+  <a href="{CART_URL}" title="Корзина">
+    <div class="icon">
+      <i class="icon-cart"></i>
+      <span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
+    </div>
+    <div class="content">
+      <div class="cart__label">Корзина</div>
+      <div class="cart__totalSum totalSum">{CART_SUM_NOW_WITH_DISCOUNT | money_format }</div>
+    </div>
+    <span class="dropdown__angle"></span>
+  </a>
+</div>
+<!-- Блок для обновления данных корзины. Не виден пользователю -->
+<div style="display:none;" id="newCartCount">
+  {CART_COUNT_TOTAL}
+</div>
+<div style="display:none;" id="newCartData">
+  <div class="addto__title"><span>Всего товаров на:</span><span class="totalSum" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span></div>
+  <div class="addto__items">
+    {% FOR cart_items %}
+    <div class="addto__item" data-id="{cart_items.GOODS_ID}">
+      <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="addto__image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=florist{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon" /></a>
+      <div class="addto__shop">
+        <!-- Название -->
+        <a href="{cart_items.GOODS_URL}" class="addto__name" title="{cart_items.GOODS_NAME}"><span>{cart_items.GOODS_NAME}</span></a>
+        {% IFNOT cart_items.distinctive_properties_empty %}<div class="addto__mod">({% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %}, {% ENDIF %}{% ENDFOR %})</div>{% ENDIF %}
+        <!-- Цена -->
+        <div class="addto__priceBox">
+          <div class="addto__count">{cart_items.ORDER_LINE_QUANTITY}</div>
+          <div class="addto__price" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</div>
+          <!-- Удаление -->
+          <a class="addto__remove remove" href="{cart_items.ORDER_LINE_DELETE_URL}" data-count="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" onclick="removeFromCart($(this))"><span>Удалить</span></a>
+        </div>
+      </div>
+    </div>
+    {% ENDFOR %}
+  </div>
+  <div class="addto__empty">
+    <div class="addto__title">В корзине пока ничего нет</div>
+    <a href="{CATALOG_URL}" class="button small" title="Продолжить покупки">Продолжить покупки</a>
+  </div>
+  <div class="addto__buttons">
+    <a href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" class="button4 removeAll" title="Очистить корзину"><span>Очистить</span></a>
+    <a href="{CART_URL}" class="button" title="Перейти в Корзину">В корзину</a>
+  </div>
+</div>
+<!-- Обновление данных корзины -->
+<script>
+$('.cart .addto__label').html($('#newCartLabel').html());
+$('.cart__count').html($('#newCartCount').html());
+$('.cart__count').attr('data-count', $('#newCartCount').html());
+$('.addto__cart').html($('#newCartData').html());
+$('.header__cart').addClass('hasItems');
+</script>
+<!-- end Блок для обновления данных корзины. Не виден пользователю -->

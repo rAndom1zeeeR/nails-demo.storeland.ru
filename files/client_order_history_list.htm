@@ -1,0 +1,37 @@
+<div class="client_history">
+  {% IF order_list_empty %}
+  <p class="attention">Вы пока не оформляли у нас заказов. Самое время <a href="{CATALOG_URL}">начать</a>.</p>
+  {% ELSE %}
+  <div class="scroll">
+  <table class="table-box"> 
+    <thead> 
+      <tr> 
+        <td title="Номер заказа">№</td> 
+        <td>Дата</td> 
+        <td>Получатель</td> 
+        <td><span class="">Сумма заказа</span></td> 
+        <td><span class="">Статус заказа</span></td>
+        <td><span class="">Статус оплаты</span></td>
+        <td>&nbsp;</th>
+      </tr> 
+    </thead> 
+    <tbody>
+    {% FOR order_list %}
+      <tr class="{order_list.index | is_divided("2","second","first")}"> 
+        <td><a href="{USER_HISTORY_INFO_URL}/{order_list.NUM}">{order_list.NUM}</a></td> 
+        <td>{%IF order_list.TIME%}{order_list.TIME | date("d.m.Y")}{%ELSE%}<span title="Внутренняя ошибка сервера. Для этого заказа не указано время создания">Не известно</span>{%ENDIF%}</td> 
+        <td>{order_list.PERSON}</td> 
+        <td><span class="">{order_list.SUM | money}</span></td> 
+        <td><em title="{order_list.STATUS_DESC}">{order_list.STATUS_NAME}</em></td> 
+        <td>{%IF order_list.PAYMENT=1%}Оплачен{% ELSEIF order_list.PAYMENT=2 %}Оплачен частично{%ELSE%}Не оплачен{%ENDIF%}</td> 
+        <td><a href="{USER_HISTORY_INFO_URL}/{order_list.NUM}" class="button small">Детали</a></td> 
+      </tr>
+    {% ENDFOR %}
+    </tbody> 
+  </table>
+  </div>
+  {% ENDIF %}
+  <div class="client__buttons"> 
+    <a href="{USER_SETTINGS_URL}" class="button" title="Вернуться назад к странице персональных настроек">Назад</a>
+  </div>
+</div>

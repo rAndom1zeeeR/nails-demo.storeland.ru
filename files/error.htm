@@ -1,0 +1,31 @@
+<div class="error__page">
+  {% IF FORM_NOTICE %}<div class="message {% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>{% ENDIF %}
+  <div class="attention">{MSG}</div>
+  <div class="error__image">
+    <a href="{INDEX_PAGE_URL}"><img src="{ASSETS_IMAGES_PATH}404.png?design=florist" /></a>
+  </div>
+  <div class="error__content" style="display: none;">
+    <h3>Ой, страничка не найдена...</h3>
+    <dl>
+      <h4>Запрашиваемая Вами страница не найдена, и у нас есть прекрасная догадка, почему!</h4>
+      <ul class="disc">
+        <li>Если вы набрали URL напрямую, убедитесь, что написание является правильным.</li>
+        <li>Если вы нажали на ссылку, чтобы попасть сюда, ссылка устарела.</li>
+      </ul>
+    </dl>
+    <dl>
+      <h5>Что делать? Не бойтесь, помощь рядом!</h5>
+      <ul class="disc">
+        <li>Вернуться на <a href="{INDEX_PAGE_URL}" class="button small">Главную</a></li>
+        <li>Используйте строку поиска в верхней части страницы для поиска нужных товаров.</li>
+        <li>Отправить письмо админиcтрации сайта через форму <a href="{FEEDBACK_URL}" class="button small">Обратной связи</a></li>
+      </ul>
+    </dl>
+  </div>
+</div>
+<style>
+  #page__title {display: none;}
+  #breadcrumbs {display: none;}
+  #main {margin-bottom: 0;}
+  .sidebar {display: none;}
+</style>

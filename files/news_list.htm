@@ -1,0 +1,33 @@
+{% IF news_list_empty %}
+  <div class="attention">Пока нет, но обязательно будут</div>
+{% ELSE %}
+  <!-- Список новостей -->
+  <div class="news__list">
+  {% FOR news_list %}
+  <div class="news__item">
+    <h4 class="news__title"><a href="{news_list.URL}" title="Перейти к странице новости">{news_list.TITLE}</a></h4>
+    <div class="news__text">{news_list.TEXT_SHORT}</div>
+    {% IF news_list.SHOW_TIME %}<div class="news__date">{news_list.TIME | date("d M Y")}</div>{% ENDIF %}
+  </div>
+  {% ENDFOR %}
+  </div>
+  <!-- Страницы -->
+  {% IF show_pages %}
+  <ol class="pages">
+    {% IF NEWS_PAGES_SHOW_PREVIOUS %}   
+      <li class="first"><a href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_PREVIOUS}" title="Предыдущая страница"><i class="icon-left-arrow"></i></a></li>
+    {% ENDIF %}
+    {% FOR news_pages %}
+      {% IF news_pages.CURRENT %}
+        <li class="current"><span>{news_pages.PAGE}</span></li>
+      {% ELSE %}
+        <li><a href="?sid={NEWS_SECTION_ID}&page={news_pages.PAGE}"><span>{news_pages.PAGE}</span></a></li>
+      {% ENDIF %}
+    {% ENDFOR %}
+    {% IF NEWS_PAGES_SHOW_NEXT %}
+      <li class="last"><a href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_NEXT}" title="Следующая страница"><i class="icon-right-arrow"></i></a></li>
+    {% ENDIF %}
+  </ol>
+  {% ENDIF %}
+  <!-- /Страницы -->
+{% ENDIF %}

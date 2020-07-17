@@ -1,0 +1,16 @@
+<div class="client">
+  <div class="information location" rel="{USER_LOGIN_URL}">
+    <span>Через <span id="time">10</span> секунд вы будете перенаправлены на страницу <a href="{USER_LOGIN_URL}" title="Вход в личный кабинет">входа в личный кабинет</a></span>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var r_time = 10;
+  function set_time(t) {
+    if(t<0) { return false; }
+    document.getElementById('time').innerHTML = t;
+    setTimeout(function() {set_time(t-1);}, 1000);
+  }
+  set_time(r_time);
+  setTimeout(function() {window.location.href = '{USER_LOGIN_URL}';}, r_time*1000);
+</script>

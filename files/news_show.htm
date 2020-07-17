@@ -1,0 +1,46 @@
+<div class="news__page">
+  <div class="htmlDataBlock">
+    <p>{NEWS_TEXT_LARGE}</p>
+  </div>
+  <!-- Короткое SEO-описание -->
+  {% IF NEWS_SEO_DESCRIPTION_SHORT %}
+    <div class="htmlDataBlock">
+      <p>{NEWS_SEO_DESCRIPTION_SHORT}</p>
+    </div>
+  {% ENDIF %}
+  <!-- END Короткое SEO-описание -->
+  <!-- Полное SEO-описание -->
+  {% IF NEWS_SEO_DESCRIPTION_LARGE %}
+    <div class="htmlDataBlock">
+      <p>{NEWS_SEO_DESCRIPTION_LARGE}</p>
+    </div>
+  {% ENDIF %}
+  <!-- END Полное SEO-описание -->
+  
+  <!-- Список прикрепленный файлов -->
+  {% IFNOT news_files_empty %}
+    <table class="newsListBlockItemFiles">
+      <tbody>
+        {% FOR news_files %}
+          <tr rel="{news_files.ID}">
+            <td><i class="file_extension_icon {news_files.FORMAT}" title="{% IF news_files.FORMAT_DESC %}{news_files.FORMAT_DESC}{% ELSE %}{news_files.FORMAT}{% ENDIF %}"></i></td>
+            <td><a href="{news_files.URL}" target="_blank" title="Открыть файл &laquo;{news_files.DESC_OR_NAME}&raquo; в новом окне">{news_files.DESC_AND_NAME}</a></td>
+          </tr>
+        {% ENDFOR %}
+      </tbody>
+    </table>
+  {% ENDIF %}
+  
+  {% IF NEWS_SHOW_TIME %}<div class="news__date">{NEWS_TIME | date("d M Y")}</div>{% ENDIF %} 
+  
+  <!-- Ссылка на страницу новостей, откуда пришел пользователь -->
+  <div class="news__buttons">
+    <a href="{NEWS_SECTION_URL}" class="button">
+      {% IF NEWS_SECTION_ID=1 %}К другим новостям магазина
+      {% ELSEIF NEWS_SECTION_ID=2 %}К другим статьям
+      {% ELSEIF NEWS_SECTION_ID=3 %}К другим материалам СМИ
+      {% ELSE %}К другим новостям
+      {% ENDIF %}
+    </a>
+  </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="client">
+  <form action="{USER_SETTINGS_URL}" method="post" class="form__client">
+    <input type="hidden" name="hash" value="{HASH}" />
+    <input type="hidden" name="from" value="{FROM}" />
+    <!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
+    {ANTISPAM_CODE}
+    <div class="client__blocks">
+      <div class="client__block">
+        <div class="client__icon"><i class="icon-users"></i><span></span></div>
+        <h3 class="client__title">Персональные данные</h3>
+        <div class="form__list">
+          <div class="form__fields">
+            <label for="sites_client_name" class="required">Представьтесь, пожалуйста <em>*</em></label>
+            <input id="sites_client_name" type="text" name="form[sites_client_name]" value="{FORM_SITES_CLIENT_NAME}" maxlength="100" class="form__input" placeholder="Представьтесь, пожалуйста" required/>
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_phone" class="required">Телефон для связи <em>*</em></label>
+            <input id="sites_client_phone" type="text" name="form[sites_client_phone]" value="{FORM_SITES_CLIENT_PHONE}" maxlength="255" class="form__input" placeholder="Телефон для связи" required/>
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_mail" class="required">Электронная почта <em>*</em></label>
+            <input id="sites_client_mail" type="text" name="form[sites_client_mail]" value="{FORM_SITES_CLIENT_MAIL}" maxlength="255" class="form__input email" placeholder="Электронная почта" required/>
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_pass" class="required">Пароль <em>*</em></label>
+            <input id="sites_client_pass" type="password" name="form[sites_client_pass]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" class="form__input" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" placeholder="Пароль" required/>
+            {% IFNOT user_agent_ie %}
+              <div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
+            {% ENDIF %}
+            <div id="capslock">
+              <div><i class="material-icons">warning</i></div>
+              <div><strong>Caps Lock включен.</strong></div>
+              <div>Пароль может быть введен неверно.</div>
+            </div>
+          </div>
+        </div>
+        <div class="client__buttons">
+          <button type="submit" title="Сохранить персональные настройки" class="button">Сохранить</button>
+        </div>
+      </div>
+      <div class="client__block">
+        <div class="client__icon"><i class="icon-location"></i><span></span></div>
+        <h3 class="client__title">Адрес доставки</h3>
+        <div class="form__list">
+          <div class="form__fields">
+            <label for="sites_client_country" class="required">Страна</label>
+            <input id="sites_client_country" type="text" name="form[sites_client_country]" value="{FORM_SITES_CLIENT_COUNTRY}" maxlength="255" class="form__input"/>
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_region">Область</label>
+            <input id="sites_client_region" type="text" name="form[sites_client_region]" value="{FORM_SITES_CLIENT_REGION}" maxlength="255" class="form__input"/>
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_city" class="required">Город</label>
+            <input id="sites_client_city" type="text" name="form[sites_client_city]" value="{FORM_SITES_CLIENT_CITY}" maxlength="255" class="form__input"/>
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_zip_code" class="required">Почтовый индекс</label>
+            <input id="sites_client_zip_code" type="text" name="form[sites_client_zip_code]" value="{FORM_SITES_CLIENT_ZIP_CODE}" maxlength="6" class="digits form__input"/>
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_addr" class="required">Адрес доставки</label>
+            <textarea id="sites_client_addr" rows="4" name="form[sites_client_addr]" class="textarea" >{FORM_SITES_CLIENT_ADDR}</textarea>
+          </div>
+        </div>
+        <div class="client__buttons">
+          <button type="submit" title="Сохранить персональные настройки" class="button">Сохранить</button>
+        </div>
+      </div>
+    </div>
+    <div class="client__blocks">
+      <div class="client__block">
+        <div class="client__icon"><i class="icon-urid"></i><span></span></div>
+        <h3 class="client__title">Юридическая информация</h3>
+        <div class="form__list">
+          <div class="form__fields">
+            <label for="sites_client_org_name">Наименование организации или ИП</label>
+            <input id="sites_client_org_name" type="text" name="form[sites_client_org_name]"  value="{FORM_SITES_CLIENT_ORG_NAME}" minlength="5" class="required form__input" placeholder="Наименование организации или ИП">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_org_inn">ИНН</label>
+            <input id="sites_client_org_inn" type="text" name="form[sites_client_org_inn]"  value="{FORM_SITES_CLIENT_ORG_INN}" minlength="9" maxlength="12" class="digits form__input" placeholder="ИНН">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_org_ogrn">ОГРН</label>
+            <input id="sites_client_org_ogrn" type="text" name="form[sites_client_org_ogrn]"  value="{FORM_SITES_CLIENT_ORG_OGRN}" minlength="13" maxlength="15" class="digits form__input" placeholder="ОГРН">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_org_kpp">КПП</label>
+            <input id="sites_client_org_kpp" type="text" name="form[sites_client_org_kpp]"  value="{FORM_SITES_CLIENT_ORG_KPP}" minlength="9" maxlength="9" class="digits form__input" placeholder="КПП">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_org_okpo">ОКПО</label>
+            <input id="sites_client_org_okpo" type="text" name="form[sites_client_org_okpo]"  value="{FORM_SITES_CLIENT_ORG_OKPO}" minlength="8" maxlength="10" class="digits form__input" placeholder="ОКПО">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_org_address">Юридический адрес</label>
+            <input id="sites_client_org_address" type="text" name="form[sites_client_org_address]"  value="{FORM_SITES_CLIENT_ORG_ADDRESS}" minlength="5" class="form__input" placeholder="Юридический адрес">
+          </div>
+        </div>
+        <div class="client__buttons">
+          <button type="submit" title="Сохранить персональные настройки" class="button">Сохранить</button>
+        </div>
+      </div>
+      <div class="client__block">
+        <div class="client__icon"><i class="icon-bank"></i><span></span></div>
+        <h3 class="client__title">Банковские реквизиты</h3>
+        <div class="form__list">
+          <div class="form__fields">
+            <label for="sites_client_bank_account">Расчетный счет</label>
+            <input id="sites_client_bank_account" type="text" name="form[sites_client_bank_account]"  value="{FORM_SITES_CLIENT_BANK_ACCOUNT}" minlength="13" maxlength="20" class="digits form__input" placeholder="Расчетный счет">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_bank_bik">БИК</label>
+            <input id="sites_client_bank_bik" type="text" name="form[sites_client_bank_bik]"  value="{FORM_SITES_CLIENT_BANK_BIK}" minlength="9" maxlength="9" class="digits form__input" placeholder="БИК">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_bank_name">Название банка</label>
+            <input id="sites_client_bank_name" type="text" name="form[sites_client_bank_name]"  value="{FORM_SITES_CLIENT_BANK_NAME}" minlength="5" class=" form__input" placeholder="Название банка">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_bank_corr_account">Корреспондентский счет</label>
+            <input id="sites_client_bank_corr_account" type="text" name="form[sites_client_bank_corr_account]"  value="{FORM_SITES_CLIENT_BANK_CORR_ACCOUNT}" minlength="13" maxlength="20" class="digits form__input" placeholder="Корреспондентский счет">
+          </div>
+          <div class="form__fields">
+            <label for="sites_client_bank_address">Адрес банка</label>
+            <input id="sites_client_bank_address" type="text" name="form[sites_client_bank_address]"  value="{FORM_SITES_CLIENT_BANK_ADDRESS}" minlength="5" class=" form__input" placeholder="Адрес банка">
+          </div>
+        </div>
+        <div class="client__buttons">
+          <button type="submit" title="Сохранить персональные настройки" class="button">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

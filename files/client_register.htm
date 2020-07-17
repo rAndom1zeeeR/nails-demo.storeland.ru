@@ -1,0 +1,50 @@
+<div class="client">
+  <div class="client__block">
+    <h3 class="client__title">Персональные данные</h3>
+    <form action="{USER_REGISTER_URL}" method="post" class="form__client">
+      <input type="hidden" name="hash" value="{HASH}" />
+      <input type="hidden" name="from" value="{FROM}" />
+      <!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
+      {ANTISPAM_CODE}
+      <div class="form__list">
+        <div class="form__fields">
+          <label for="sites_client_name" class="required">Представьтесь, пожалуйста <em>*</em></label>
+          <input id="sites_client_name" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_SITES_CLIENT_NAME}]" value="{FORM_SITES_CLIENT_NAME}" maxlength="100" class="form__input" placeholder="Ваше имя" required />
+        </div>
+        <div class="form__fields">
+          <label for="sites_client_phone" class="required">Телефон для связи <em>*</em></label>
+          <input id="sites_client_phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_SITES_CLIENT_PHONE}]" value="{FORM_SITES_CLIENT_PHONE}" maxlength="255" class="form__input form__phone" placeholder="Телефон" required />
+        </div>
+        <div class="form__fields">
+          <label for="sites_client_mail" class="required">Электронная почта <em>*</em></label>
+          <input id="sites_client_mail" type="email" name="form[{ANTISPAM_FORM_FIELD_NAME_SITES_CLIENT_MAIL}]" value="{FORM_SITES_CLIENT_MAIL}" maxlength="255" class="form__input email" placeholder="Email" required />
+        </div>
+        <div class="form__fields">
+          <label for="sites_client_pass" class="required">Придумайте пароль <em>*</em></label>
+          <input id="sites_client_pass" type="password" name="form[{ANTISPAM_FORM_FIELD_NAME_SITES_CLIENT_PASS}]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" class="form__input" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" placeholder="Придумайте пароль" required />
+          {% IFNOT user_agent_ie %}
+            <div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
+          {% ENDIF %}
+          <div id="capslock"> 
+            <div><i class="material-icons">warning</i></div>
+            <div><strong>Caps Lock включен.</strong></div>
+            <div>Пароль может быть введен неверно.</div>
+          </div>
+        </div>
+      </div>
+      <div class="client__buttons">
+        <div class="form__pp">Нажимая на кнопку Зарегистрироваться, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
+        <button type="submit" title="Зарегистрироваться" class="button">Зарегистрироваться</button>
+      </div>
+    </form>
+  </div>
+  <div class="client__block">
+    <h3 class="client__title">Ваш аккаунт</h3>
+    <p>Если Вы уже имеете аккаунт у нас, пожалуйста, входите.</p>
+    <p>Если Вы забыли пароль, воспользуйтесь формой восстановления.</p>
+    <div class="client__buttons">
+      <a href="{USER_LOGIN_URL}" class="button">Вход с паролем</a>
+      <a href="{USER_RECOVERY_URL}" class="button">Восстановление пароля</a>
+    </div>
+  </div>
+</div>
