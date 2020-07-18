@@ -1908,10 +1908,12 @@ function validName(){
   let name = $('#callback').find('.form__person');
   if(name.val() != ''){
     name.removeClass('error');
+    name.parent().removeClass('error');
     name.attr('placeholder','Введите Имя');
     return true;
   }else{
     name.addClass('error');
+    name.parent().addClass('error');
     name.attr('placeholder','Вы не ввели Имя');
     return false;
   } 
@@ -1921,11 +1923,13 @@ function validPhone(){
   let check = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/.test(tel.val());
   if(check == true && check != ''){
     tel.removeClass('error');
+    tel.parent().removeClass('error');
     tel.attr('placeholder','Введите номер');
     return true;
   }
   else{
     tel.addClass('error');
+    tel.parent().addClass('error');
     tel.attr('placeholder','Вы ввели неверный номер');
     return false;
   }
@@ -1941,68 +1945,6 @@ $(function(){
   $('#callback .form__callback').submit(validSubmit);
 });
 
-// Валидаторы для телефона на странице обратного звонка /callback
-function validNameMain(){
-  var name = $('#main').find('.form__person');
-  if(name.val() != ''){
-    name.removeClass('error');
-    name.attr('placeholder','Введите Имя');
-    return true;
-  }else{
-    name.addClass('error');
-    name.attr('placeholder','Вы не ввели Имя');
-    return false;
-  }
-}
-function validPhoneMain(){
-  var tel = $('#main').find('.form__phone');
-  var check = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/.test(tel.val());
-  if(check == true && check != ''){
-    tel.removeClass('error');
-    tel.attr('placeholder','Введите номер');
-    return true;
-  }
-  else{
-    tel.addClass('error');
-    tel.attr('placeholder','Вы ввели неверный номер');
-    return false;
-  }
-}
-// Проверка телефона в обратном звонке.
-function validSubmitMain(){
-  var name = validNameMain();
-  var phone = validPhoneMain();
-  return name && phone;
-}
-// Проверка отправки формы
-$(function(){
-  $('#main .form__callback').submit(validSubmitMain);
-});
-
-// Подписаться. Валидатор почты в Подписаться
-function validEmail(){ 
-  var email = $('#subscribe').find('.form__email');
-  var check = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.val());
-  if(check == true && check != ''){
-    email.removeClass('error');
-    email.attr('placeholder','Введите Email');
-    return true;
-  }else{
-    email.addClass('error');
-    email.val('');
-    email.attr('placeholder','Вы ввели неверный Email');
-    return false;
-  }
-}
-// Проверка телефона в обратном звонке.
-function validSubmitEmail(){
-  var email = validEmail();
-  return email;
-}
-// Проверка отправки формы
-$(function(){
-  $('#subscribe .form__callback').submit(validSubmitEmail);
-});
 
 // Валидаторы для Имени и телефона в "Служба поддержки" на главной
 function validNameFancy(){

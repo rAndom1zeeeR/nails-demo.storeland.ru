@@ -497,7 +497,8 @@ header .logo a {font-size: 20px;}
 #callback .callback__title {font-size: 30px;font-weight: bold;margin-bottom: 1.5rem;}
 #callback .callback__subtitle span {display: block;line-height: 24px;}
 #callback .form__fields {margin-top: 2rem;height: 68px;background: #FFFFFF;padding: 5px;border-radius: 20px;display: flex;flex-wrap: wrap;align-items: center;position: relative;}
-#callback .form__fields input {border: 0;height: 58px;padding: 0 12rem 0 3.5rem;}
+#callback .form__fields.error i {color: #eb5c5e;}
+#callback .form__fields input {border: 0;height: 58px;padding: 0 12rem 0 3.5rem;border-radius: 20px;}
 #callback .form__fields i {position: absolute;left: 1rem;color: #ffbe31;font-size: 30px;}
 #callback .form__fields .form__button {background: #925ab5;height: 58px;border-radius: 20px;position: absolute;right: 5px;}
 #callback .form__fields .form__button:hover {background: #8da5db;}
@@ -514,7 +515,7 @@ header .logo a {font-size: 20px;}
 #callback .form__fields {height: auto;background: transparent;padding: 0;}
 #callback .form__fields .form__button {margin-top: 1rem;position: relative;width: 100%;right: auto;height: 68px;border: 5px solid #FFFFFF;}
 #callback .form__fields i {top: 1.25rem;}
-#callback .form__fields input {border-radius: 20px;height: 68px;border: 5px solid #FFFFFF;padding: 0 1rem 0 3.5rem;}
+#callback .form__fields input {height: 68px;border: 5px solid #FFFFFF;padding: 0 1rem 0 3.5rem;}
 }
 @media all and (max-width: 480px) {
 #callback .callback__inner {padding: 1rem 1.5rem;}
