@@ -137,7 +137,6 @@
               <i class="icon-cart"></i>
               <span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
             </a>
-            <!-- Корзина -->
             <div id="addtoCart" class="addto__cart dropdown__content" data-open="cart">
               {% IFNOT cart_items_empty %}
               <div class="addto__items">
@@ -158,7 +157,7 @@
                         <a href="javascript:void(0)" class="qty__plus unselectable" title="Увеличить"><i class="icon-plus"></i></a>
                       </div>
                       <!-- Удаление -->
-                      <a class="addto__remove remove" href="{cart_items.ORDER_LINE_DELETE_URL}" data-count="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" onclick="removeFromCart($(this))"><span>Удалить</span></a>
+                      <a class="addto__remove remove" href="{cart_items.ORDER_LINE_DELETE_URL}" data-qty="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" onclick="removeFromCart($(this))"><span>Удалить</span></a>
                     </div>
                   </div>
                 </div>
@@ -249,11 +248,39 @@
             <a href="{CALLBACK_URL}" class="addto__label dropdown__open callback__icon" title="Обратный звонок" data-open="callback">
               <i class="icon-phone"></i>
             </a>
+            <div id="addtoCallback" class="addto__callback dropdown__content" data-open="callback">
+              <!-- Контакты -->
+              <div class="addto__contacts">
+                <!-- Телефон 1 -->
+                {% IF SETTINGS_STORE_PHONE_NUMBER1 %}
+                <div class="contacts__block phone">
+                  <div class="contacts__icon"><i class="icon-phone"></i></div>
+                  <div class="content">
+                    <a href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" class="contacts__phone phone" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}"><span>{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}</span></a>
+                    <a data-fancybox data-src="#fancybox__callback" class="more"><i class="icon-arrow-right"></i><span>Заказать звонок</span></a>
+                  </div>
+                </div>
+                {% ENDIF %}
+                {% IF SETTINGS_STORE_EMAIL_MAIN %}
+                <a class="contacts__block email" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+                  <div class="contacts__icon"><i class="icon-mail"></i></div>
+                  <div class="content">
+                    <span>{SETTINGS_STORE_EMAIL_MAIN}</span>
+                    <div data-fancybox data-src="#fancybox__feedback" class="more"><i class="icon-arrow-right"></i><span>Написать нам</span></div>
+                  </div>
+                </a>
+                {% ENDIF %}
+                <div class="addto__close">
+                  <i class="icon-arrow-right"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
+    {% IF index_page %}<!-- Главная -->
     <!-- Слайдшоу -->
     <section id="slideshow">
       <div class="container">
@@ -1241,6 +1268,18 @@
         </div>
       </div>
     </section>
+    {% ELSE %}<!-- /END Главная -->
+
+    <!-- Основные страницы -->
+    <div id="main">
+      <div class="container">
+        <div class="block__title">
+          <h1 class="title">{PAGE_TITLE}</h1>
+        </div>
+        <div class="body">{BODY}</div>
+      </div>
+    </div>
+    {% ENDIF %}<!-- /END Основные страницы -->
 
     <!-- Контакты -->
     <section id="contacts">

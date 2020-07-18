@@ -1344,6 +1344,7 @@ $('.add-compare').off('click').click(function(){
   pImg = a.attr('data-prodimg'),
   pDataid = a.attr('data-id'),
   pDataPrice = a.attr('data-mod-price'),
+  pDataChar = a.attr('data-char-code'),
   pDataMod = a.attr('data-mod-id'),
   aText = a.parent().find('.add-compare'),
   addTooltip = a.attr('data-action-text-add'),
@@ -1386,7 +1387,7 @@ $('.add-compare').off('click').click(function(){
               '<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image"><img src="'+ pImg +'" class="goods-image-icon" /></a>' +
               '<div class="addto__shop">' +
                 '<a href="'+ pUrl +'" class="addto__name" title="'+ pName +'"><span>'+ pName +'</span></a>' +
-                '<div class="addto__priceBox RUB">' +
+                '<div class="addto__priceBox  '+ pDataChar +'">' +
                   '<div class="addto__price price__now"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
                   '<a href="'+ delUrl +'?id='+ pDataMod +'" data-goods-mod-id="'+ pDataMod +'" class="addto__remove remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><span>Удалить</span></a>' +
                 '</div>' +
@@ -1526,6 +1527,7 @@ $('.add-favorites').off('click').click(function(){
   pPrice = a.attr('data-prodprice'),
   pDataid = a.attr('data-id'),
   pDataPrice = a.attr('data-mod-price'),
+  pDataChar = a.attr('data-char-code'),
   pDataMod = a.attr('data-mod-id'),
   pDataGoodsid = a.attr('data-goodsid'),
   aText = a.parent().find('.add-favorites'),
@@ -1568,7 +1570,7 @@ $('.add-favorites').off('click').click(function(){
             '<div class="addto__item" data-id="'+ pDataid +'">' +
               '<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image"><img src="'+ pImg +'" class="goods-image-icon" /></a>' +
               '<div class="addto__shop"><a href="'+ pUrl +'" class="addto__name" title="'+ pName +'"><span>'+ pName +'</span></a>' +
-                '<div class="addto__priceBox RUB">' +
+                '<div class="addto__priceBox '+ pDataChar +'">' +
                   '<div class="addto__price price__now"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
                   '<a href="'+ delUrl +'?id='+ pDataMod +'" data-goods-mod-id="'+ pDataMod +'" class="addto__remove remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><span>Удалить</span></a>' +
                 '</div>' +
@@ -1700,20 +1702,17 @@ $('.add-favorites').off('click').click(function(){
 function removeFromFavorites(e){
   event.preventDefault();
   if(confirm('Вы точно хотите удалить товар из сравнения?')){
-    let del = e;
-    let count = $('.favorites__count');
-    let num = count.attr('data-count');
     e.parent().parent().parent().fadeOut().remove();
-    url = del.attr('href');
-    goodsModId = $(del).attr('data-goods-mod-id');
+    let href = e.attr('href');
+    let oldCount = $('.cart__count').attr('data-count');
+    let goodsModId = e.attr('data-goods-mod-id');
     $.ajax({
       cache : false,
-      url		: url,
+      url		: href,
       success: function(d){
-        var oldCount = num;
-        var newCount = oldCount - 1;
+        let newCount = oldCount - 1;
         $('.favorites__count').attr('data-count', newCount).text(newCount);
-        var flag = 0;
+        let flag = 0;
         if(newCount != 0){
           $('.favorites__goods .addto__item').each(function(){
             if(flag == 0){
@@ -1724,14 +1723,10 @@ function removeFromFavorites(e){
             }
           });
         }else{
-          $('#addtoFavorites').removeClass("hasItems");
           $('.favorites').removeClass("hasItems");
-          $('.favorites__count').removeClass("hasItems");
           $('.favorites__count').attr('data-count', '0').text('0');
-          $('.favorites__goods .addto__empty').show();
-          $('.favorites__goods .addto__buttons').hide();
         }
-        var obj = $('.add-favorites[data-mod-id="' + goodsModId + '"]');
+        let obj = $('.add-favorites[data-mod-id="' + goodsModId + '"]');
         if(obj.length) {
           obj.attr("data-action-is-add", "1")
           .removeAttr("title")
@@ -1748,20 +1743,15 @@ function removeFromFavoritesAll(e){
   if(confirm('Вы точно хотите очистить сравнение?')){
   // Предзагрузчик анимации
   $('.favorites__goods').prepend('<div class="preloader small"><div class="loading"></div></div>');
-  var del = e;  
   e.parent().fadeOut();
-  url = del.attr('href');
+  let href = e.attr('href');
   $.ajax({
     cache  : false,
-    url		 : url,
+    url		 : href,
     success: function(d){
-      $('#addtoFavorites').removeClass("hasItems");
       $('.favorites').removeClass("hasItems");
-      $('.favorites__goods').removeClass("hasItems");
       $('.favorites__count').attr('data-count', '0').text("0");
       $('.favorites__goods .addto__item').remove();
-      $('.favorites__goods .addto__buttons').hide();
-      $('.favorites__goods .addto__empty').show();
       $('.favorites__goods .preloader').hide();
       $('.add-favorites').removeAttr("title").removeClass("added");
     }
@@ -1773,19 +1763,17 @@ function removeFromFavoritesAll(e){
 function removeFromCompare(e){
   event.preventDefault();
   if(confirm('Вы точно хотите удалить товар из сравнения?')){
-  var del = e;
-  var num = $('.compare__count').attr('data-count');
   e.parent().parent().parent().fadeOut().remove();
-  url = del.attr('href');
-  goodsModId = $(del).attr('data-goods-mod-id');
+  let href = e.attr('href');
+  let oldCount = $('.cart__count').attr('data-count');
+  let goodsModId = e.attr('data-goods-mod-id');
   $.ajax({ 
     cache : false,
-    url		: url,
+    url		: href,
     success: function(d){
-      var oldCount = num;
-      var newCount = oldCount - 1;
+      let newCount = oldCount - 1;
       $('.compare__count').attr('data-count', newCount).text(newCount);
-      var flag = 0;
+      let flag = 0;
       if(newCount != 0){
         $('.addto__compare .addto__item').each(function(){
           if(flag == 0){
@@ -1796,14 +1784,10 @@ function removeFromCompare(e){
           }
         });
       }else{
-        $('#addtoCompare').removeClass("hasItems");
         $('.compare').removeClass("hasItems");
-        $('.addto__compare').removeClass("hasItems");
         $('.compare__count').attr('data-count', '0').text('0');
-        $('.addto__compare .addto__empty').show();
-        $('.addto__compare .addto__buttons').hide();
       }
-      var obj = $('.add-compare[data-mod-id="' + goodsModId + '"]');
+      let obj = $('.add-compare[data-mod-id="' + goodsModId + '"]');
       if(obj.length) {
         obj.attr("data-action-is-add", "1")
         .removeAttr("title")
@@ -1820,20 +1804,15 @@ function removeFromCompareAll(e){
   if(confirm('Вы точно хотите очистить сравнение?')){
   // Предзагрузчик анимации
   $('.addto__compare').prepend('<div class="preloader small"><div class="loading"></div></div>');
-  var del = e;  
   e.parent().fadeOut();
-  url = del.attr('href');
+  let href = e.attr('href');
   $.ajax({
     cache  : false,
-    url		 : url,
+    url		 : href,
     success: function(d){
-      $('#addtoCompare').removeClass("hasItems");
       $('.compare').removeClass("hasItems");
-      $('.addto__compare').removeClass("hasItems");
       $('.compare__count').attr('data-count', '0').text("0");
       $('.addto__compare .addto__item').remove();
-      $('.addto__compare .addto__buttons').hide();
-      $('.addto__compare .addto__empty').show();
       $('.addto__compare .preloader').hide();
       $('.add-compare').removeAttr("title").removeClass("added");
     }
@@ -1845,34 +1824,31 @@ function removeFromCompareAll(e){
 function removeFromCart(e){
   event.preventDefault();
   if(confirm('Вы точно хотите удалить товар из корзины?')){
-  var del = e;  
   e.parent().parent().parent().fadeOut().remove();
-  url = del.attr('href');
-  quantity = del.data('count');
+  let href = e.attr('href');
+  let qty = e.data('qty');
+  let oldCount = $('.cart__count').attr('data-count');
   $.ajax({
     cache  : false,
-		url		 : url,
+    url		 : href,
     success: function(d){
-      var oldCount = $('.cart__count').attr('data-count');
-      var oldQuantity = quantity;
-      var newCount = oldCount - oldQuantity;
+      let newCount = oldCount - qty;
       $('.cart__count').attr('data-count', newCount).text(newCount);
       $('.totalSum').html($(d).find('.totalSum').html());
-      var flag = 0; 
+      let flag = 0;
       if(newCount != 0){
-      $('.addto__cart .addto__item').each(function(){
-        if(flag == 0){
-          if($(this).css('display') == 'none'){
-            $(this).css('display', 'flex');
-            flag++;
+        $('.addto__cart .addto__item').each(function(){
+          if(flag == 0){
+            if($(this).css('display') == 'none'){
+                $(this).css('display', 'flex');
+              flag++;
+            }
           }
-        }
-      })}else{
+        })
+      }else{
         $('.cart').removeClass("hasItems");
         $('.cart__count').attr('data-count', '0').text("0");
         $('.addto__cart .addto__item').remove();
-        $('.addto__cart .preloader').hide();
-        $('header .totalSum').hide();
       }
     }
   });
@@ -1884,19 +1860,17 @@ function removeFromCartAll(e){
   if(confirm('Вы точно хотите очистить корзину?')){
   // Предзагрузчик анимации
   $('.addto__cart').prepend('<div class="preloader small"><div class="loading"></div></div>');
-  var del = e;  
   e.parent().fadeOut().remove();
-  url = del.attr('href');
+  let href = e.attr('href');
   $.ajax({ 
     cache  : false,
-    url		 : url,
+    url		 : href,
     success: function(d){
       $('.totalSum').html($(d).find('.totalSum').html());
       $('.cart').removeClass("hasItems");
       $('.cart__count').attr('data-count', '0').text("0");
       $('.addto__cart .addto__item').remove();
       $('.addto__cart .preloader').hide();
-      $('header .cart__totalSum').hide();
 		}
   });
   }
@@ -3164,6 +3138,7 @@ function OpenMenu() {
   // Закрытие элементов
   $('.dropdown__close, .addto__close').on('click', function(event){
     event.preventDefault();
+    $('.dropdown__open').removeClass('opened');
     $('.dropdown__content').removeClass('opened');
     $('#overlay.transparent').removeClass('opened');
   });
