@@ -380,6 +380,8 @@ section {margin: 1rem 0;}
 /*** Заголовки ***/
 .block__title {margin-bottom: 2rem;position: relative;}
 .block__title .title {font-size: 30px;font-weight: bold;}
+/* Заголовки на странице */
+#page__title .block__title {margin-bottom: 1.5rem;}
 /* Заголовки с навигацией */
 .block__nav {margin-bottom: 1.75rem;display: flex;flex-wrap: wrap;align-items: center;justify-content: space-between;}
 .block__nav .owl-nav {width: 120px;}
@@ -727,6 +729,80 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .products__grid .product__item:nth-child(2n) {margin-top: 1rem;}
 .products__grid .product__item:nth-child(n) {margin-top: 1rem;}
 }
+
+
+
+
+
+.categories__list {display: flex;flex-wrap: wrap;}
+.categories__item {position: relative;width: calc(25% - 2rem);margin: 2rem 1rem 0 1rem;overflow: hidden;}
+.categories__item:nth-child(-n+4) {margin-top: 0;}
+.categories__name {margin-top: 1rem;width: 100%;word-break: break-word;}
+.categories__image {border: 5px solid #fff;background: #ffffff;border-radius: 20px;height: calc(100% - 84px);display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;}
+.categories__image img {border-radius: 20px;}
+.categories__image:before {content: "";display: block;width: 100%;height: 100%;position: absolute;background-color: rgba(255, 255, 255, 0.5);transition: all 0.3s ease;}
+.categories__item:hover .categories__image:before {background-color: rgba(255, 255, 255, 0);}
+
+
+/*** Хлебные крошки ***/
+#breadcrumbs {display: inline-block;position: relative;margin-bottom: 2.5rem;background: #ffffff;border-radius: 10px;}
+#breadcrumbs ul {margin: 0;padding: 0 1rem;list-style: none;display: flex;flex-wrap: nowrap;align-items: center;justify-content: flex-start;overflow-x: auto;}
+#breadcrumbs ul li {display: flex;align-items: center;line-height: 2rem;}
+#breadcrumbs ul li:before {content: "/";font-family: 'icomoon';font-size: 1rem;display: block;margin: 0 1.25rem;}
+#breadcrumbs ul li:first-child:before {display: none;}
+#breadcrumbs ul li span {white-space: nowrap;}
+#breadcrumbs ul li:last-child {color: #925ab5;}
+#breadcrumbs ul::-webkit-scrollbar {width: 0;height: 6px;}
+#breadcrumbs ul::-webkit-scrollbar-thumb {border-radius: 0;background-color: #1d8884;}
+#breadcrumbs ul::-webkit-scrollbar-track {border-radius: 0;background-color: #f3f3f3;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
