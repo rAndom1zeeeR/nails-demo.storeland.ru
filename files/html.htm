@@ -140,7 +140,6 @@
             <!-- Корзина -->
             <div id="addtoCart" class="addto__cart dropdown__content" data-open="cart">
               {% IFNOT cart_items_empty %}
-              <div class="addto__title"><span>Всего товаров на:</span><span class="totalSum" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span></div>
               <div class="addto__items">
                 {% FOR cart_items %}
                 <div class="addto__item" data-id="{cart_items.GOODS_ID}">
@@ -150,9 +149,14 @@
                     <a href="{cart_items.GOODS_URL}" class="addto__name" title="{cart_items.GOODS_NAME}"><span>{cart_items.GOODS_NAME}</span></a>
                     {% IFNOT cart_items.distinctive_properties_empty %}<div class="addto__mod">({% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %}, {% ENDIF %}{% ENDFOR %})</div>{% ENDIF %}
                     <!-- Цена -->
-                    <div class="addto__priceBox">
-                      <div class="addto__count">{cart_items.ORDER_LINE_QUANTITY}</div>
-                      <div class="addto__price" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</div>
+                    <div class="addto__priceBox {CURRENCY_CHAR_CODE}">
+                      <div class="addto__price price__now" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</div>
+                      <!-- Количество -->
+                      <div class="addto__qty qty">
+                        <a href="javascript:void(0)" class="qty__minus unselectable" title="Уменьшить"><i class="icon-minus"></i></a>
+                        <input type="text" name="form[goods_mod_quantity]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" min="1" max="{cart_items.MAX_REST_VALUE}" title="Количество" class="quantity" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
+                        <a href="javascript:void(0)" class="qty__plus unselectable" title="Увеличить"><i class="icon-plus"></i></a>
+                      </div>
                       <!-- Удаление -->
                       <a class="addto__remove remove" href="{cart_items.ORDER_LINE_DELETE_URL}" data-count="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" onclick="removeFromCart($(this))"><span>Удалить</span></a>
                     </div>
@@ -163,11 +167,11 @@
               {% ENDIF %}
               <div class="addto__empty">
                 <div class="addto__title">В корзине пока ничего нет</div>
-                <a href="{CATALOG_URL}" class="button small" title="Продолжить покупки">Продолжить покупки</a>
+                <a href="{CATALOG_URL}" class="button addto__close" title="Продолжить покупки">Продолжить покупки</a>
               </div>
               <div class="addto__buttons">
-                <a href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" class="button4 removeAll" title="Очистить корзину"><span>Очистить</span></a>
-                <a href="{CART_URL}" class="button" title="Перейти в Корзину">В корзину</a>
+                <a href="{CATALOG_URL}" class="button addto__close" title="Продолжить покупки">Продолжить покупки</a>
+                <a href="{CART_URL}" class="button button2" title="Перейти в Корзину">В корзину</a>
               </div>
             </div>
           </div>
@@ -187,8 +191,8 @@
                     <!-- Название -->
                     <a href="{favorites_goods.URL}" class="addto__name" title="{favorites_goods.NAME}">{favorites_goods.NAME}</a>
                     <!-- Цена -->
-                    <div class="addto__priceBox">
-                      <div class="addto__price">{favorites_goods.MIN_PRICE_NOW | money_format}</div>
+                    <div class="addto__priceBox {CURRENCY_CHAR_CODE}">
+                      <div class="addto__price price__now">{favorites_goods.MIN_PRICE_NOW | money_format}</div>
                       <!-- Удаление -->
                       <a href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{favorites_goods.MIN_PRICE_NOW_ID}" class="addto__remove remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><span>Удалить</span></a>
                     </div>
@@ -223,8 +227,8 @@
                     <!-- Название -->
                     <a href="{compare_goods.URL}" class="addto__name" title="{compare_goods.NAME}"><span>{compare_goods.NAME}</span></a>
                     <!-- Цена -->
-                    <div class="addto__priceBox">
-                      <div class="addto__price">{compare_goods.MIN_PRICE_NOW | money_format}</div>
+                    <div class="addto__priceBox {CURRENCY_CHAR_CODE}">
+                      <div class="addto__price price__now">{compare_goods.MIN_PRICE_NOW | money_format}</div>
                       <!-- Удаление -->
                       <a href="{COMPARE_DELETE_URL}?id={compare_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{compare_goods.MIN_PRICE_NOW_ID}" class="addto__remove remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><span>Удалить</span></a>
                     </div>
@@ -404,6 +408,7 @@
                         data-id="{index_page_favorites_goods.ID}"
                         data-mod-id="{index_page_favorites_goods.MIN_PRICE_NOW_ID}"
                         data-mod-price="{index_page_favorites_goods.MIN_PRICE_NOW}"
+                        data-char-code="{CURRENCY_CHAR_CODE}"
                         data-add-tooltip="Добавить в сравнение"
                         data-del-tooltip="Убрать из сравнения"
                         data-tooltipOFF="Убрать из сравнения"
@@ -425,6 +430,7 @@
                         data-id="{index_page_favorites_goods.ID}"
                         data-mod-id="{index_page_favorites_goods.MIN_PRICE_NOW_ID}"
                         data-mod-price="{index_page_favorites_goods.MIN_PRICE_NOW}"
+                        data-char-code="{CURRENCY_CHAR_CODE}"
                         data-add-tooltip="Добавить в сравнение"
                         data-del-tooltip="Убрать из сравнения"
                         data-tooltipOFF="Добавить в сравнение"
@@ -448,6 +454,7 @@
                         data-id="{index_page_favorites_goods.ID}"
                         data-mod-id="{index_page_favorites_goods.MIN_PRICE_NOW_ID}"
                         data-mod-price="{index_page_favorites_goods.MIN_PRICE_NOW}"
+                        data-char-code="{CURRENCY_CHAR_CODE}"
                         data-add-tooltip="Добавить в избранное"
                         data-del-tooltip="Убрать из избранного"
                         data-tooltipOFF="Убрать из избранного"
@@ -469,6 +476,7 @@
                         data-id="{index_page_favorites_goods.ID}"
                         data-mod-id="{index_page_favorites_goods.MIN_PRICE_NOW_ID}"
                         data-mod-price="{index_page_favorites_goods.MIN_PRICE_NOW}"
+                        data-char-code="{CURRENCY_CHAR_CODE}"
                         data-add-tooltip="Добавить в избранное"
                         data-del-tooltip="Убрать из избранного"
                         data-tooltipOFF="Добавить в избранное"
@@ -569,6 +577,7 @@
                         data-id="{index_page_new_goods.ID}"
                         data-mod-id="{index_page_new_goods.MIN_PRICE_NOW_ID}"
                         data-mod-price="{index_page_new_goods.MIN_PRICE_NOW}"
+                        data-char-code="{CURRENCY_CHAR_CODE}"
                         data-add-tooltip="Добавить в сравнение"
                         data-del-tooltip="Убрать из сравнения"
                         data-tooltipOFF="Убрать из сравнения"
@@ -590,6 +599,7 @@
                         data-id="{index_page_new_goods.ID}"
                         data-mod-id="{index_page_new_goods.MIN_PRICE_NOW_ID}"
                         data-mod-price="{index_page_new_goods.MIN_PRICE_NOW}"
+                        data-char-code="{CURRENCY_CHAR_CODE}"
                         data-add-tooltip="Добавить в сравнение"
                         data-del-tooltip="Убрать из сравнения"
                         data-tooltipOFF="Добавить в сравнение"
@@ -613,6 +623,7 @@
                         data-id="{index_page_new_goods.ID}"
                         data-mod-id="{index_page_new_goods.MIN_PRICE_NOW_ID}"
                         data-mod-price="{index_page_new_goods.MIN_PRICE_NOW}"
+                        data-char-code="{CURRENCY_CHAR_CODE}"
                         data-add-tooltip="Добавить в избранное"
                         data-del-tooltip="Убрать из избранного"
                         data-tooltipOFF="Убрать из избранного"
@@ -634,6 +645,7 @@
                         data-id="{index_page_new_goods.ID}"
                         data-mod-id="{index_page_new_goods.MIN_PRICE_NOW_ID}"
                         data-mod-price="{index_page_new_goods.MIN_PRICE_NOW}"
+                        data-char-code="{CURRENCY_CHAR_CODE}"
                         data-add-tooltip="Добавить в избранное"
                         data-del-tooltip="Убрать из избранного"
                         data-tooltipOFF="Добавить в избранное"
@@ -773,6 +785,7 @@
                       data-id="{index_page_sale_goods.ID}"
                       data-mod-id="{index_page_sale_goods.MIN_PRICE_NOW_ID}"
                       data-mod-price="{index_page_sale_goods.MIN_PRICE_NOW}"
+                      data-char-code="{CURRENCY_CHAR_CODE}"
                       data-add-tooltip="Добавить в сравнение"
                       data-del-tooltip="Убрать из сравнения"
                       data-tooltipOFF="Убрать из сравнения"
@@ -794,6 +807,7 @@
                       data-id="{index_page_sale_goods.ID}"
                       data-mod-id="{index_page_sale_goods.MIN_PRICE_NOW_ID}"
                       data-mod-price="{index_page_sale_goods.MIN_PRICE_NOW}"
+                      data-char-code="{CURRENCY_CHAR_CODE}"
                       data-add-tooltip="Добавить в сравнение"
                       data-del-tooltip="Убрать из сравнения"
                       data-tooltipOFF="Добавить в сравнение"
@@ -817,6 +831,7 @@
                       data-id="{index_page_sale_goods.ID}"
                       data-mod-id="{index_page_sale_goods.MIN_PRICE_NOW_ID}"
                       data-mod-price="{index_page_sale_goods.MIN_PRICE_NOW}"
+                      data-char-code="{CURRENCY_CHAR_CODE}"
                       data-add-tooltip="Добавить в избранное"
                       data-del-tooltip="Убрать из избранного"
                       data-tooltipOFF="Убрать из избранного"
@@ -838,6 +853,7 @@
                       data-id="{index_page_sale_goods.ID}"
                       data-mod-id="{index_page_sale_goods.MIN_PRICE_NOW_ID}"
                       data-mod-price="{index_page_sale_goods.MIN_PRICE_NOW}"
+                      data-char-code="{CURRENCY_CHAR_CODE}"
                       data-add-tooltip="Добавить в избранное"
                       data-del-tooltip="Убрать из избранного"
                       data-tooltipOFF="Добавить в избранное"
@@ -987,6 +1003,7 @@
                       data-id="{index_page_goods.ID}"
                       data-mod-id="{index_page_goods.MIN_PRICE_NOW_ID}"
                       data-mod-price="{index_page_goods.MIN_PRICE_NOW}"
+                      data-char-code="{CURRENCY_CHAR_CODE}"
                       data-add-tooltip="Добавить в сравнение"
                       data-del-tooltip="Убрать из сравнения"
                       data-tooltipOFF="Убрать из сравнения"
@@ -1008,6 +1025,7 @@
                       data-id="{index_page_goods.ID}"
                       data-mod-id="{index_page_goods.MIN_PRICE_NOW_ID}"
                       data-mod-price="{index_page_goods.MIN_PRICE_NOW}"
+                      data-char-code="{CURRENCY_CHAR_CODE}"
                       data-add-tooltip="Добавить в сравнение"
                       data-del-tooltip="Убрать из сравнения"
                       data-tooltipOFF="Добавить в сравнение"
@@ -1031,6 +1049,7 @@
                       data-id="{index_page_goods.ID}"
                       data-mod-id="{index_page_goods.MIN_PRICE_NOW_ID}"
                       data-mod-price="{index_page_goods.MIN_PRICE_NOW}"
+                      data-char-code="{CURRENCY_CHAR_CODE}"
                       data-add-tooltip="Добавить в избранное"
                       data-del-tooltip="Убрать из избранного"
                       data-tooltipOFF="Убрать из избранного"
@@ -1052,6 +1071,7 @@
                       data-id="{index_page_goods.ID}"
                       data-mod-id="{index_page_goods.MIN_PRICE_NOW_ID}"
                       data-mod-price="{index_page_goods.MIN_PRICE_NOW}"
+                      data-char-code="{CURRENCY_CHAR_CODE}"
                       data-add-tooltip="Добавить в избранное"
                       data-del-tooltip="Убрать из избранного"
                       data-tooltipOFF="Добавить в избранное"

@@ -1386,8 +1386,8 @@ $('.add-compare').off('click').click(function(){
               '<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image"><img src="'+ pImg +'" class="goods-image-icon" /></a>' +
               '<div class="addto__shop">' +
                 '<a href="'+ pUrl +'" class="addto__name" title="'+ pName +'"><span>'+ pName +'</span></a>' +
-                '<div class="addto__priceBox">' +
-                  '<div class="addto__price"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
+                '<div class="addto__priceBox RUB">' +
+                  '<div class="addto__price price__now"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
                   '<a href="'+ delUrl +'?id='+ pDataMod +'" data-goods-mod-id="'+ pDataMod +'" class="addto__remove remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><span>Удалить</span></a>' +
                 '</div>' +
               '</div>' +
@@ -1568,8 +1568,8 @@ $('.add-favorites').off('click').click(function(){
             '<div class="addto__item" data-id="'+ pDataid +'">' +
               '<a href="'+ pUrl +'" title="'+ pName +'" class="addto__image"><img src="'+ pImg +'" class="goods-image-icon" /></a>' +
               '<div class="addto__shop"><a href="'+ pUrl +'" class="addto__name" title="'+ pName +'"><span>'+ pName +'</span></a>' +
-                '<div class="addto__priceBox">' +
-                  '<div class="addto__price"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
+                '<div class="addto__priceBox RUB">' +
+                  '<div class="addto__price price__now"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
                   '<a href="'+ delUrl +'?id='+ pDataMod +'" data-goods-mod-id="'+ pDataMod +'" class="addto__remove remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><span>Удалить</span></a>' +
                 '</div>' +
               '</div>' +
@@ -1858,7 +1858,6 @@ function removeFromCart(e){
       var newCount = oldCount - oldQuantity;
       $('.cart__count').attr('data-count', newCount).text(newCount);
       $('.totalSum').html($(d).find('.totalSum').html());
-      console.log('newCount', newCount)
       var flag = 0; 
       if(newCount != 0){
       $('.addto__cart .addto__item').each(function(){
@@ -3106,7 +3105,6 @@ function newsCarousel() {
   }
   // Кнопки навигации
   function carouselInitialized(event){
-    console.log(event)
     if (event.item.count > event.page.size) {
       $('#news .block__nav .owl-nav').css('display', 'block');
     }else{
@@ -3150,18 +3148,22 @@ function OpenMenu() {
   $('.dropdown__open').on('click', function(event){
     event.preventDefault();
     let value = $(this).data('open');
-    if ($('.dropdown__content').hasClass('opened')){
+    console.log(value)
+    if ($('.dropdown__content[data-open="'+ value +'"]').hasClass('opened')){
       $(this).removeClass('opened');
-      $('#overlay').removeClass('opened transparent');
+      $('#overlay').removeClass('opened');
       $('.dropdown__content[data-open="'+ value +'"]').removeClass('opened');
     }else{
+      $('.dropdown__open').removeClass('opened');
+      $('.dropdown__content').removeClass('opened');
       $(this).addClass('opened');
-      $('#overlay').addClass('opened transparent');
+      $('#overlay').addClass('opened');
       $('.dropdown__content[data-open="'+ value +'"]').addClass('opened');
     }
   });
   // Закрытие элементов
-  $('.dropdown__close').on('click', function(event){
+  $('.dropdown__close, .addto__close').on('click', function(event){
+    event.preventDefault();
     $('.dropdown__content').removeClass('opened');
     $('#overlay.transparent').removeClass('opened');
   });
