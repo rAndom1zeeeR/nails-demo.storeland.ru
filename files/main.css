@@ -303,7 +303,11 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 #addto .callback__icon {background: #ffbe31;color: #ffffff;}
 #addto .callback__icon:hover, #addto .callback__icon.opened {background: #925ab5;}
 #addto .dropdown__content {width: 530px;left: 100px;top: 0;border: 5px solid #ffffff;padding: 2rem;background: #edf2ff;}
-
+/*** Добавленные ***/
+.addto__items {max-height: 300px;overflow-y: auto;}
+.addto__items::-webkit-scrollbar {width: 0.5rem;height: 0;}
+.addto__items::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #925ab5;}
+.addto__items::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #edf2ff;}
 .addto__item {display: flex;flex-wrap: wrap;align-items: center;margin-bottom: 2rem;}
 .addto__image {width: 120px;height: 120px;background: #ffffff;border-radius: 20px;display: flex;align-items: center;justify-content: center;}
 .addto__image img {border-radius: 20px;}
@@ -325,7 +329,6 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 .addto__empty .button {margin: 1rem 0 0 0;}
 .addto__empty .addto__title {display: block;}
 .addto__buttons {display: none;padding: 1rem 0 0 0;justify-content: space-between;align-items: center;}
-.hasItems .addto__title {display: block;}
 .hasItems .addto__buttons {display: flex;}
 .hasItems .addto__empty {display: none;}
 

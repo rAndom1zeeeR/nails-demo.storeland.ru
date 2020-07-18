@@ -182,7 +182,6 @@
               <span class="favorites__count" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>
             </a>
             <div id="addtoFavorites" class="addto__favorites dropdown__content" data-open="favorites">
-              <div class="addto__title"><span>В избранном всего:</span><span class="favorites__count" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT} товар{FAVORITES_GOODS_COUNT| gen_word_end("","а","ов")}</span></div>
               <div class="addto__items">
                 {% FOR favorites_goods %}
                 <div class="addto__item" data-id="{favorites_goods.ID}">
@@ -202,11 +201,11 @@
               </div>
               <div class="addto__empty">
                 <div class="addto__title">Ваш список избранного пуст</div>
-                <a data-fancybox-close href="{CATALOG_URL}" class="button small" title="Продолжить покупки">Продолжить покупки</a>
+                <a href="{CATALOG_URL}" class="button addto__close" title="Продолжить покупки">Продолжить покупки</a>
               </div>
               <div class="addto__buttons">
-                <a href="{FAVORITES_RESET_URL}" onclick="removeFromFavoritesAll($(this))" class="button4 removeAll" title="Очистить список Избранного"><span>Очистить</span></a>
-                <a href="{FAVORITES_URL}" class="button" title="Перейти к Избранному">В Избранное</a>
+                <a href="{FAVORITES_RESET_URL}" onclick="removeFromFavoritesAll($(this))" class="button removeAll" title="Очистить список Избранного"><span>Очистить</span></a>
+                <a href="{FAVORITES_URL}" class="button button2" title="Перейти к Избранному">В Избранное</a>
               </div>
             </div>
           </div>
@@ -218,7 +217,6 @@
               <span class="compare__count" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>
             </a>
             <div id="addtoCompare" class="addto__compare dropdown__content" data-open="compare">
-              <div class="addto__title"><span>В сравнении всего:</span><span class="compare__count" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span> товар{COMPARE_GOODS_COUNT| gen_word_end("","а","ов")}</div>
               <div class="addto__items">
                 {% FOR compare_goods %}
                 <div class="addto__item" data-id="{compare_goods.ID}">
@@ -238,11 +236,11 @@
               </div>
               <div class="addto__empty">
                 <div class="addto__title">Ваш список сравнения пуст</div>
-                <a data-fancybox-close href="{CATALOG_URL}" class="button small" title="Продолжить покупки">Продолжить покупки</a>
+                <a href="{CATALOG_URL}" class="button addto__close" title="Продолжить покупки">Продолжить покупки</a>
               </div>
               <div class="addto__buttons">
-                <a href="{COMPARE_RESET_URL}" onclick="removeFromCompareAll($(this))" class="button4 removeAll" title="Очистить список сравнения"><span>Очистить</span></a>
-                <a href="{COMPARE_URL}" class="button" title="Перейти к Сравнению">В Сравнение</a>
+                <a href="{COMPARE_RESET_URL}" onclick="removeFromCompareAll($(this))" class="button removeAll" title="Очистить список сравнения"><span>Очистить</span></a>
+                <a href="{COMPARE_URL}" class="button button2" title="Перейти к Сравнению">В Сравнение</a>
               </div>
             </div>
           </div>
