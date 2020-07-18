@@ -277,10 +277,7 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 }
 
 /*** Выпадающее меню ***/
-.dropdown__content {opacity: 0;height: 0;position: absolute;top: -2rem;left: 0;width: 360px;background: #fff;border-radius: 20px;overflow: hidden;z-index: 11;
-	/*transition: all 0.3s ease-in;*/
-	transition: top 0.3s linear;
-}
+.dropdown__content {opacity: 0;height: 0;position: absolute;top: -2rem;left: 0;width: 360px;background: #fff;border-radius: 20px;overflow: hidden;z-index: 11;transition: top 0.3s linear;}
 .dropdown__content.opened {opacity: 1;height: auto;top: 0;}
 .dropdown__open {position: relative;cursor: pointer;}
 .opened .dropdown__angle {opacity: 1;}
@@ -345,11 +342,32 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 .addto__buttons {display: none;padding: 1rem 0 0 0;justify-content: space-between;align-items: center;}
 .hasItems .addto__buttons {display: flex;}
 .hasItems .addto__empty {display: none;}
-
-
 @media all and (max-width: 767px) {
-.index .container {padding-left: 1rem;}
+.container {padding-left: 1rem;}
 #addto {display: none;}
+}
+
+
+/*** Модальные окна ***/
+.fancybox-content {border-radius: 20px;padding: 2rem;}
+.fancybox-slide--html .fancybox-close-small {border-radius: 100%}
+.modal__title .title {padding: 1rem 1.25rem;color: #ffffff;background: #ffbe31;border-radius: 20px;border: 5px solid #fff;display: flex;align-items: center;justify-content: center;}
+
+/*** Модальный Обратный звонок ***/
+#fancybox__callback, #fancybox__feedback, #fancybox__notify {background: #ffbe31;max-width: 500px;}
+#fancybox__notify .modal__content .form__field {width: 100%;}
+.modal__content .form__fields {display: flex;flex-wrap: wrap;justify-content: space-between;}
+.modal__content .form__field {width: calc(50% - 0.5rem);height: 68px;background: #FFFFFF;padding: 5px;border-radius: 20px;display: flex;flex-wrap: wrap;align-items: center;position: relative;}
+.modal__content .form__field.error i {color: #eb5c5e;}
+.modal__content .form__fields input {border: 0;height: 58px;padding: 0 1rem 0 3.5rem;border-radius: 20px;}
+.modal__content .form__fields i {position: absolute;left: 1rem;color: #ffbe31;font-size: 30px;}
+.modal__content .form__fields.error i {color: #eb5c5e;}
+.modal__content .textarea {border-radius: 20px;margin-top: 1rem;}
+.modal__content .form__buttons {text-align: center;margin-top: 2rem;}
+.modal__content .form__pp {font-size: 12px;margin-top: 1rem;text-align: center;}
+@media all and (max-width: 640px) {
+.modal__content .form__field {width: 100%;}
+.modal__content .form__field + .form__field {margin-top: 1rem;}
 }
 
 
@@ -390,7 +408,7 @@ header .inner {align-items: center;}
 /* Меню */
 header .menu {padding-right: 2rem;order: 1;position: relative;}
 header .menu__icon {background-color: transparent;color: #001b59;border: 0;}
-header .menu__content {top: 0;width: 272px;margin: 0;z-index: 12;}
+header .menu__content {top: 0;width: 288px;margin: 0;z-index: 12;}
 header .menu__title {padding: 1rem 1.25rem;color: #ffffff;background: #ffbe31;border-radius: 20px;border: 5px solid #fff;display: flex;align-items: center;}
 header .menu__title i {font-size: 24px;}
 header .menu__title span {font-size: 1rem;font-weight: bold;padding: 0 1.25rem;flex-grow: 1;}

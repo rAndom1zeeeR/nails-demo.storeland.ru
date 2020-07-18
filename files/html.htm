@@ -1420,16 +1420,20 @@
           <input class="callbackredirect" type="hidden" name="return_to" value="{CALLBACK_URL}"/>
           <!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
           {ANTISPAM_CODE}
-          <div class="form__fields bordered">
-            <input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" class="form__input form__person" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="{FORM_CALLBACK_PERSON}" placeholder="Владимир П." autocomplete="off" />
+          <div class="form__fields">
+            <div class="form__field">
+              <i class="icon-user"></i>
+              <input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" class="form__input form__person" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="{FORM_CALLBACK_PERSON}" placeholder="Владимир П." autocomplete="off" />
+            </div>
+            <div class="form__field">
+              <i class="icon-phone"></i>
+              <input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="+7 (987) 654-3210" autocomplete="off" />
+            </div>
           </div>
-          <div class="form__fields bordered">
-            <input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="+7 (987) 654-3210" autocomplete="off" />
-          </div>
-          <div class="form__pp">Нажимая на кнопку &laquo;Заказать звонок&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
           <div class="form__buttons">
             <button type="submit" title=">Заказать звонок" class="form__button button">Заказать звонок</button>
           </div>
+          <div class="form__pp">Нажимая на кнопку &laquo;Заказать звонок&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
         </form>
       </div>
     </div>
@@ -1443,20 +1447,22 @@
           <!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
           {ANTISPAM_CODE}
           <div class="form__fields">
-            <div class="form__field bordered">
+            <div class="form__field">
+              <i class="icon-user"></i>
               <input class="form__input form__person form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="{FORM_CALLBACK_PERSON}" placeholder="Владимир П." autocomplete="off" />
             </div>
-            <div class="form__field bordered">
+            <div class="form__field">
+              <i class="icon-phone"></i>
               <input class="form__input form__phone form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="+7 (987) 654-3210" autocomplete="off" />
             </div>
           </div>
-          <div class="form__fields bordered area">
+          <div class="form__fields">
             <textarea class="textarea callback__comment" rows="3" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_COMMENT}]" placeholder="Текст запроса">{FORM_CALLBACK_COMMENT}</textarea>
           </div>
-          <div class="form__pp">Нажимая на кнопку &laquo;Заказать звонок&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
           <div class="form__buttons">
             <button type="submit" title=">Заказать звонок" class="form__button button">Отправить</button>
           </div>
+          <div class="form__pp">Нажимая на кнопку &laquo;Заказать звонок&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
         </form>
       </div>
     </div>
@@ -1475,15 +1481,21 @@
           <!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
           {ANTISPAM_CODE}
           <!-- Для использования почты для уведомлений необходимо удалить блок с телефоном -->
-          <div class="form__fields bordered">
-            <input class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="+7 (987) 654-3210" autocomplete="off" />
+          <div class="form__fields">
+            <div class="form__field">
+              <i class="icon-phone"></i>
+              <input class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="+7 (987) 654-3210" autocomplete="off" />
+            </div>
           </div>
           <!-- Для использования почты для уведомлений необходимо удалить ниже style="display: none;" -->
-          <div class="form__fields bordered" style="display: none;">
-            <input class="form__input form__email" type="email" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_EMAIL}]" value="{FORM_CALLBACK_EMAIL}" placeholder="email@email.ru *" autocomplete="off"  />
+          <div class="form__fields" style="display: none;">
+            <div class="form__field">
+              <i class="icon-mail"></i>
+              <input class="form__input form__email" type="email" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_EMAIL}]" value="{FORM_CALLBACK_EMAIL}" placeholder="email@email.ru *" autocomplete="off"  />
+            </div>
           </div>
-          <div class="form__pp">Нажимая на кнопку &laquo;Уведомить&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
           <div class="form__buttons"><button type="submit" title="Уведомить" class="form__button button">Уведомить</button></div>
+          <div class="form__pp">Нажимая на кнопку &laquo;Уведомить&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
         </form>
       </div>
     </div>
