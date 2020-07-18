@@ -319,7 +319,6 @@ section {margin: 1rem 0;}
 #addto .cart__icon:hover {background-color: #925ab5;}
 #addto .callback__icon {background: #ffbe31;color: #ffffff;}
 #addto .callback__icon:hover {background: #925ab5;}
-#addto .dropdown__content {display: none;}
 @media all and (max-width: 767px) {
 .index .container {padding-left: 1rem;}
 #addto {display: none;}
@@ -331,8 +330,15 @@ header {padding: 2rem 0;}
 .index #header .container {padding-left: 1rem;}
 header .inner {align-items: center;}
 /* Меню */
-header .menu {padding-right: 2rem;order: 1;}
+header .menu {padding-right: 2rem;order: 1;position: relative;}
 header .menu__icon {background-color: transparent;color: #001b59;border: 0;}
+header .menu__content {top: 0;width: 272px;margin: 0;}
+header .menu__title {padding: 1rem 1.25rem;color: #ffffff;background: #ffbe31;border-radius: 20px;border: 5px solid #fff;display: flex;align-items: center;}
+header .menu__title i {font-size: 24px;}
+header .menu__title span {font-size: 16px;font-weight: bold;padding: 0 1.25rem;flex-grow: 1;}
+header .menu__title span + i {cursor: pointer;}
+header .mainnav__list {padding: 0.625rem 0;}
+header .mainnav__item {display: block;padding: 0.625rem 1.5rem;font-size: 1rem;line-height: 1.25rem;}
 /* Логотип */
 header .logo {order: 2;}
 .logo {padding-right: 2rem;max-width: 272px;text-align: left;}
@@ -341,9 +347,9 @@ header .logo {order: 2;}
 /* Личный кабинет */
 header .users {padding-left: 2rem;order: 4;}
 header .users__icon {background-color: #8da5db;font-size: 24px;border: 0;}
-header .users__icon:hover {background: #ffbe31;}
+header .users__icon:hover {background: #ffbe31;color: #ffffff;}
 /** Каталог в Поиске **/
-header .header__inner {width: calc(100% - 272px - 200px);background: #FFFFFF;padding: 5px;height: 68px;border-radius: 20px;display: flex;flex-wrap: wrap;order: 3;}
+header .header__inner {width: calc(100% - 218px - 200px);background: #FFFFFF;padding: 5px;height: 68px;border-radius: 20px;display: flex;flex-wrap: wrap;order: 3;}
 /** Поиск **/
 header .search {width: calc(100% - 220px);position: relative;order: 3;}
 header .search input {border: 0;}
@@ -455,6 +461,7 @@ header .logo a {font-size: 20px;}
 #catalog .owl-item:nth-child(3n) .catalog__item {background-color: #ffbe31;}
 #catalog .owl-item:nth-child(4n) .catalog__item {background-color: #8da5db;}
 
+
 /*** Баннеры ***/
 .banners__items {display: flex;flex-wrap: wrap;justify-content: space-between;}
 .banners__item {width: calc(50% - 10px);position: relative;padding: 1.75rem 2.5rem;border-radius: 20px;background-repeat: no-repeat;background-size: cover;}
@@ -478,6 +485,7 @@ header .logo a {font-size: 20px;}
 .banners__button {display: none;}
 .banners__title a {font-size: 20px;}
 }
+
 
 /*** Промо ***/
 .promo__items {display: flex;flex-wrap: wrap;}
@@ -521,6 +529,7 @@ header .logo a {font-size: 20px;}
 #callback .callback__inner {padding: 1rem 1.5rem;}
 }
 
+
 /*** Контакты ***/
 #contacts .contacts {display: flex;flex-wrap: wrap;align-items: flex-start}
 #contacts .contacts__block {width: 25%;display: flex;flex-wrap: wrap;}
@@ -545,7 +554,6 @@ header .logo a {font-size: 20px;}
 }
 
 
-
 /*** Новости ***/
 #news {padding-bottom: 1rem}
 .news__title {display: block;overflow: hidden;line-height: 24px;max-height: 72px;margin-top: 1rem;}
@@ -554,6 +562,7 @@ header .logo a {font-size: 20px;}
 .news__date {background: #925ab5;position: absolute;left: -32px;padding: 0 1rem;line-height: 24px;border-radius: 0 0 18px 18px;color: #fff;transform: rotate(-90deg);}
 #news [class^="news_list_"] {display: none;}
 #news [class^="news_list_"].active {display: block;}
+
 
 /*** Подвал ***/
 .footer__top {padding: 2.75rem 0;border-top: 5px solid #FFFFFF;border-bottom: 5px solid #FFFFFF;display: flex;flex-wrap: wrap;align-items: center;}
@@ -646,6 +655,19 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 
 
 
+
+
+/*** Выпадающее меню ***/
+.dropdown__content {opacity: 0;height: 0;position: absolute;left: 0;width: 360px;background: #fff;border-radius: 20px;overflow: hidden;z-index: 11;transition: all 0.3s ease;}
+.dropdown__content.opened {opacity: 1;height: auto;}
+.dropdown__open {position: relative;cursor: pointer;}
+.opened .dropdown__angle {opacity: 1;}
+@media all and (max-width: 641px) {
+.dropdown__content {left: 0;right: auto;}
+}
+@media all and (max-width: 480px) {
+.dropdown__content {width: 288px;}
+}
 
 
 

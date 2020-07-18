@@ -154,6 +154,9 @@
 .icon-remove:before {
   content: "\e924";
 }
+.icon-close:before {
+  content: "\e924";
+}
 .icon-settings:before {
   content: "\e925";
 }

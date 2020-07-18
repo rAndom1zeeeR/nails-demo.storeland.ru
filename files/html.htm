@@ -54,8 +54,20 @@
         <div class="inner">
           <!-- Меню -->
           <div class="menu">
-            <div class="menu__icon">
+            <div class="menu__icon dropdown__open" data-open="menu">
               <i class="icon-menu"></i>
+            </div>
+            <div class="menu__content dropdown__content" data-open="menu">
+              <div class="menu__title"><i class="icon-menu"></i><span>Меню</span><i class="icon-close dropdown__close"></i></div>
+              <div class="mainnav__list" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                {% FOR menu %}
+                  {% FOR header %}
+                    {% FOR links %}
+                    <div class="mainnav__item {% IF menu.header.links.NAME = Каталог %}mainnav__catalog{% ENDIF %}"><a href="{menu.header.links.URL}" class="mainnav__link {% IF menu.header.links.SELECTED %}active{%ENDIF%}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url"><span itemprop="name">{menu.header.links.NAME}</span></a></div>
+                    {% ENDFOR %}
+                  {% ENDFOR %}
+                {% ENDFOR %}
+              </div>
             </div>
           </div>
           <!-- Логотип -->
@@ -107,9 +119,9 @@
             </div>
           </div>
           <div class="users">
-            <div class="users__icon">
+            <a href="{USER_LOGIN_URL}" class="users__icon">
               <i class="icon-login"></i>
-            </div>
+            </a>
           </div>
         </div>
       </div>
