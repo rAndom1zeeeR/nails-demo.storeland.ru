@@ -843,8 +843,9 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .empty .productView__qty {display: none;}
 
 
-
-
+.productView__tabs {margin-top: 2rem;}
+.tabs__nav {display: flex;align-items: center;margin-left: -10px;margin-right: -10px;}
+.tab {width: calc(25% - 20px);height: 68px;margin: 0 10px;background: #ffffff;border: 5px solid #ffffff;padding: 0 1rem;}
 
 
 
