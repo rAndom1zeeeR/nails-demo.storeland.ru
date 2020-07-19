@@ -416,8 +416,8 @@
           </div>
           <!-- Рейтинг -->
           {% IFNOT SETTINGS_OPINION_DISABLE %}
-          <div class="product__bottom">
-            <div class="product__ratings ratings">
+          <div class="product__ratings">
+            <div class="ratings">
               {% IF goods.OPINION_RATING_VALUE %}
               <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                 <meta itemprop="worstRating" content = "1">
@@ -430,8 +430,8 @@
               <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
               {% ENDIF %}
             </div>
-            <div>Рейтинг {goods.OPINION_RATING_VALUE}</div>
-            <div>{% IF goods.OPINION_RATING_VALUE %}{goods.OPINION_RATING_CNT_ALL} отзыв{goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзыва{% ENDIF %}</div>
+            <div class="ratings__total">Рейтинг {goods.OPINION_RATING_VALUE}</div>
+            <div class="ratings__label">{% IF goods.OPINION_RATING_VALUE %}{goods.OPINION_RATING_CNT_ALL} отзыв{goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзыва{% ENDIF %}</div>
           </div>
           {% ENDIF %}
         </form>

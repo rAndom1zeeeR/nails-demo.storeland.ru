@@ -532,8 +532,8 @@ function preload() {
 function goodspage() {
   // Слайдер доп. изображений
   $('.thumblist .owl-carousel').owlCarousel({
-    items: 5,
-    margin: 12,
+    items: 3,
+    margin: 16,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -552,11 +552,11 @@ function goodspage() {
       0:{items:2},
       320:{items:2},
       480:{items:3},
-      641:{items:4},
-      768:{items:5},
-      992:{items:4},
-      1200:{items:5},
-      1400:{items:5}
+      641:{items:3},
+      768:{items:4},
+      992:{items:3},
+      1200:{items:3},
+      1400:{items:3}
     }
   });
   // Сопутствующие товары Слайдер
