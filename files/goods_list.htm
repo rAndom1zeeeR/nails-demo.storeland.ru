@@ -43,9 +43,11 @@
       {% FOR goods_filters %}
         <input type="hidden" name="{goods_filters.NAME}" value="{goods_filters.VALUE}" />
       {% ENDFOR %}
+      {% IFNOT goods_filters_empty %}
       <div class="filters__icon selectBox">
         <span>Фильтр</span>
       </div>
+      {% ENDIF %}
       <!-- Сортировать по: (Поле сортировки товаров по умолчанию) -->
       <div class="sort-by selectBox">
         <!-- Сортировка выпадающим списком	-->
