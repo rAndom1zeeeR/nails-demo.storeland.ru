@@ -2757,7 +2757,7 @@ function pdtPromo() {
 function pdtSales() {
   $('#pdt__sales .owl-carousel').owlCarousel({
     items: 4,
-    margin: 20,
+    margin: 0,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -3148,7 +3148,7 @@ function OpenMenu() {
     event.preventDefault();
     $('.dropdown__open').removeClass('opened');
     $('.dropdown__content').removeClass('opened');
-    $('#overlay.transparent').removeClass('opened');
+    $('#overlay').removeClass('opened');
   });
 
 }
@@ -3219,15 +3219,29 @@ $(document).ready(function(){
   $(".form__phone").mask("+7 (999) 999-9999"); // будет грузится в нескольких местах
   // Возврашаем пользователя на страницу с которой был сделан обратный звонок
   $('.callbackredirect').val(document.location.href);
-  // Вызов функции быстрого заказа в корзине
-  $('#startOrder').on('click', function() {
-    startOrder();
-    return false;
+  // Добавление товара в корзину
+  $('.add-cart').on('click', function() {
+    let form = $(this).closest('form');
+    if ($(this).hasClass('quick')) {
+      form.attr('rel', 'quick');
+    } else {
+      let rel = form.attr('rel');
+      if (rel) {
+        form.attr('rel', rel.replace('quick', ''));
+      }
+    }
+    form.trigger('submit');
+    return (false);
   });
   // Уведомить при отсутствии товара
   $('.add-notify').on('click', function(){
     $('#fancy__name').val($(this).attr('data-name'));
     $('#fancy__art').val($(this).attr('data-art'));
+  });
+  // Вызов функции быстрого заказа в корзине
+  $('#startOrder').on('click', function() {
+    startOrder();
+    return false;
   });
 });
 

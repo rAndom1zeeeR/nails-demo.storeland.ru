@@ -10,7 +10,7 @@
 <div class="products">
   <!-- Вывод категорий -->
   {% IFNOT nested_categories_list_empty %}
-  <div class="categories__list row {% IF index_page %}index{% ENDIF %}">
+  <div class="categories__list {% IF index_page %}index{% ENDIF %}">
     {% FOR nested_categories_list %}
       <div class="categories__item" data-id="{nested_categories_list.ID}" {% IF nested_categories_list.LEVEL > 0 %}style="display: none;"{% ENDIF %}>
         <a class="categories__image" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
