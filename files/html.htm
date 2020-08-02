@@ -385,15 +385,11 @@
                     {% ENDFOR %}
                   </a>
                   <div class="product__ico">
-                    {% IF index_page_favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_favorites_goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ELSEIF index_page_favorites_goods.MIN_PRICE_OLD>index_page_favorites_goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ENDIF %}
-                    {% IF index_page_favorites_goods.IS_PLACE_ON_INDEX_PAGE %}<span class="ico__sale"></span>{% ENDIF %}
                     {% IF index_page_favorites_goods.IS_TOP %}<span class="ico__best"></span>{% ENDIF %}
-                    {% IF index_page_favorites_goods.IS_NEW %}<span class="ico__new"></span>{% ENDIF %}
                   </div>
                 </div>
                 <!-- Название товара -->
                 <div class="product__name"><a href="{index_page_favorites_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_favorites_goods.NAME}"><span itemprop="name">{index_page_favorites_goods.NAME}</span></a></div>
-
                 <div class="product__shop {% IF index_page_favorites_goods.IS_HAS_IN_COMPARE_LIST || index_page_favorites_goods.IS_HAS_IN_FAVORITES_LIST %}added{% ENDIF %}">
                   <meta itemprop="sku" content="{index_page_favorites_goods.ART_NUMBER}"/>
                   <!-- Цена для поисковиков -->
@@ -555,9 +551,6 @@
                     {% ENDFOR %}
                   </a>
                   <div class="product__ico">
-                    {% IF index_page_new_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_new_goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ELSEIF index_page_new_goods.MIN_PRICE_OLD>index_page_new_goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ENDIF %}
-                    {% IF index_page_new_goods.IS_PLACE_ON_INDEX_PAGE %}<span class="ico__sale"></span>{% ENDIF %}
-                    {% IF index_page_new_goods.IS_TOP %}<span class="ico__best"></span>{% ENDIF %}
                     {% IF index_page_new_goods.IS_NEW %}<span class="ico__new"></span>{% ENDIF %}
                   </div>
                 </div>
@@ -983,10 +976,7 @@
                   {% ENDFOR %}
                 </a>
                 <div class="product__ico">
-                  {% IF index_page_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ELSEIF index_page_goods.MIN_PRICE_OLD>index_page_goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ENDIF %}
                   {% IF index_page_goods.IS_PLACE_ON_INDEX_PAGE %}<span class="ico__sale"></span>{% ENDIF %}
-                  {% IF index_page_goods.IS_TOP %}<span class="ico__best"></span>{% ENDIF %}
-                  {% IF index_page_goods.IS_NEW %}<span class="ico__new"></span>{% ENDIF %}
                 </div>
               </div>
               <!-- Название товара -->
@@ -1376,23 +1366,23 @@
             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Заказ обратного звонка</span><meta itemprop="position" content="2" /></li>
             {% ELSEIF MOD_LNAME=goods %}
             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{CATALOG_URL}" title="Перейти в каталог товаров"><span itemprop="name">Каталог</span><meta itemprop="position" content="2" /></a></li>
-            {% FOR upper_navigation %}
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{upper_navigation.URL}" title="Перейти в категорию &laquo;{upper_navigation.NAME}&raquo;"><span itemprop="name">{upper_navigation.NAME}</span><meta itemprop="position" content="{upper_navigation.LEVEL | plus("3")}" /></a></li>
-            {% ENDFOR %}
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">{GOODS_NAME}</span><meta itemprop="position" content='{% FOR upper_navigation %}{%IF upper_navigation.last%}{upper_navigation.index | plus("3")}{%ENDIF%}{%ENDFOR%}' /></li>
+              {% FOR upper_navigation %}
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{upper_navigation.URL}" title="Перейти в категорию &laquo;{upper_navigation.NAME}&raquo;"><span itemprop="name" title="{upper_navigation.NAME}">{upper_navigation.NAME}</span><meta itemprop="position" content="{upper_navigation.LEVEL | plus("3")}" /></a></li>
+              {% ENDFOR %}
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name" title="{GOODS_NAME}">{GOODS_NAME}</span><meta itemprop="position" content='{% FOR upper_navigation %}{%IF upper_navigation.last%}{upper_navigation.index | plus("3")}{%ENDIF%}{%ENDFOR%}' /></li>
             {% ELSEIF MOD_LNAME=catalog %}
-            {% IF IS_FULL_CATALOG %}
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Каталог</span><meta itemprop="position" content="2" /></li>
-            {% ELSE %}
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{CATALOG_URL}" title="Перейти в каталог продукции нашего магазина"><span itemprop="name">Каталог</span><meta itemprop="position" content="2" /></a></li>
-            {% FOR upper_navigation %}
-            {% IF upper_navigation.CURRENT %}
-            <li><span>{upper_navigation.NAME}</span></li>
-            {% ELSEIF upper_navigation.CURRENT_PARENT %}
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{upper_navigation.URL}" title="Перейти в категорию &laquo;{upper_navigation.NAME}&raquo;"><span itemprop="name">{upper_navigation.NAME}</span><meta itemprop="position" content='{upper_navigation.index | plus("2")}' /></a></li>
-            {% ENDIF %}
-            {% ENDFOR %}
-            {% ENDIF %}
+              {% IF IS_FULL_CATALOG %}
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Каталог</span><meta itemprop="position" content="2" /></li>
+              {% ELSE %}
+              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{CATALOG_URL}" title="Перейти в каталог продукции нашего магазина"><span itemprop="name">Каталог</span><meta itemprop="position" content="2" /></a></li>
+                {% FOR upper_navigation %}
+                  {% IF upper_navigation.CURRENT %}
+                  <li><span title="{upper_navigation.NAME}">{upper_navigation.NAME}</span></li>
+                  {% ELSEIF upper_navigation.CURRENT_PARENT %}
+                  <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{upper_navigation.URL}" title="Перейти в категорию &laquo;{upper_navigation.NAME}&raquo;"><span itemprop="name" title="{upper_navigation.NAME}">{upper_navigation.NAME}</span><meta itemprop="position" content='{upper_navigation.index | plus("2")}' /></a></li>
+                  {% ENDIF %}
+                {% ENDFOR upper_navigation %}
+              {% ENDIF %}
             {% ENDIF %}
           </ul>
         </div>
