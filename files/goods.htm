@@ -85,7 +85,7 @@
           <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
           {% ENDIF %}
         </div>
-        <div class="ratings__total">Рейтинг {GOODS_OPINION_RATING_VALUE_ROUND}</div>
+        <div class="ratings__total">Рейтинг {GOODS_OPINION_RATING_VALUE_ROUND | divide("2")}</div>
         <div class="ratings__label">{% IF GOODS_OPINION_RATING_VALUE_ROUND %}{GOODS_OPINION_RATING_CNT_ALL} отзыв{GOODS_OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
       </div>
       {% ENDIF %}
@@ -262,7 +262,7 @@
         </div>
         <!-- Уведомить -->
         <div class="productView__notify">
-          <a class="button" data-fancybox data-src="#fancybox__notify" href="javascript:;"><span>Уведомить</span></a>
+          <a class="add-notify button" data-fancybox data-src="#fancybox__notify" href="javascript:;"><span>Уведомить</span></a>
         </div>
         <!-- Добавление товара в корзину -->
         <button type="submit" class="add-cart button3" title="Положить &laquo;{GOODS_NAME}&raquo; в корзину"><span>Купить</span></button>
@@ -274,10 +274,10 @@
 <!-- Табы Описание, Хар-ки, Доставка, Отзывы -->
 <div class="productView__tabs">
   <div class="tabs__nav">
-    {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}<div class="tab" data-tab="1">Описание</div>{% ENDIF %}
-    {% IFNOT goods_features_empty %}<div class="tab" data-tab="2"><span>Характеристики</span><span>Хар-ки</span></div>{% ENDIF %}
-    {% IFNOT goods_delivery_empty %}<div class="tab" data-tab="3">Доставка</div>{% ENDIF %}
-    {% IF SETTINGS_OPINION_DISABLE=0 %}<div class="tab" data-tab="4">Отзывы</div>{% ENDIF %}
+    {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}<div class="tab" data-tab="1"><span>Описание</span><i class="icon-miscellaneous"></i></div>{% ENDIF %}
+    {% IFNOT goods_features_empty %}<div class="tab" data-tab="2"><span>Характеристики</span><i class="icon-clipboard"></i></div>{% ENDIF %}
+    {% IFNOT goods_delivery_empty %}<div class="tab" data-tab="3"><span>Доставка</span><i class="icon-chat"></i></div>{% ENDIF %}
+    {% IF SETTINGS_OPINION_DISABLE=0 %}<div class="tab" data-tab="4"><span>Отзывы</span><i class="icon-delivery"></i></div>{% ENDIF %}
   </div>
   <div class="tabs__content">
     <!-- Описание -->
@@ -401,7 +401,6 @@
         <div class="opinion__addBlock">
           <div class="opinion__label">Нам важно ваше мнение!</div>
           <div>Уже купили этот товар? Оставьте отзыв! Публикация отзывов производится только после предварительной модерации.</div>
-          <img src="{ASSETS_IMAGES_PATH}opinion.png?design=florist" />
         </div>
         <!-- Форма добавления нового отзыва о товаре -->
         <form method="post" action="{CURRENT_URL}" class="opinion__form" enctype="multipart/form-data">

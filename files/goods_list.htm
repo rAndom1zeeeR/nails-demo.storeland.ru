@@ -432,7 +432,7 @@
               <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
               {% ENDIF %}
             </div>
-            <div class="ratings__total">Рейтинг {goods.OPINION_RATING_VALUE}</div>
+            <div class="ratings__total">Рейтинг {goods.OPINION_RATING_VALUE | divide("2")}</div>
             <div class="ratings__label">{% IF goods.OPINION_RATING_VALUE %}{goods.OPINION_RATING_CNT_ALL} отзыв{goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзыва{% ENDIF %}</div>
           </div>
           {% ENDIF %}

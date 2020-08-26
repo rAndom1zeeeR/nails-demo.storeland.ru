@@ -1267,21 +1267,21 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
           // Сообщение с ошибкой
           if(typeof(Noty) == "function") {
             new Noty({
-              text: '<div class="noty__addto"><i class="icon-danger"></i><div class="noty__message">'+ $(data).html() + '</div></div>',
+              text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ $(data).html() + '</div></div>',
               layout:"topCenter",
               type:"warning",
-              theme:"metroui",
+              theme:"",
               closeWith: ['click', 'button'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInUp',
-                close: 'animated fadeOutDown',
+                open: 'animated fadeInDown',
+                close: 'animated fadeOutUp',
                 easing: 'swing',
                 speed: 500
               },
-              timeout:"3000",
-              progressBar:true,
+              timeout:"2000",
+              progressBar:false,
               closable:true,
               closeOnSelfClick:true,
               modal:false,
@@ -1297,18 +1297,18 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
               text: '<div class="noty__addto"><i class="icon-check"></i><div class="noty__message">'+ $(data).html() + '</div></div>',
               layout:"topCenter",
               type:"success",
-              theme:"metroui",
-              closeWith: ['click', 'button'],
+              theme:"",
+              closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInUp',
-                close: 'animated fadeOutDown',
+                open: 'animated fadeInDown',
+                close: 'animated fadeOutUp',
                 easing: 'swing',
                 speed: 500
               },
-              timeout:"3000",
-              progressBar:true,
+              timeout:"2000",
+              progressBar:false,
               closable:true,
               closeOnSelfClick:true,
               modal:false,
@@ -1482,7 +1482,7 @@ $('.add-compare').off('click').click(function(){
           // Если есть функция, которая отображает сообщения пользователю
           if(typeof(Noty) == "function") {
             new Noty({
-              text: '<div class="noty__addto"><i class="icon-danger"></i><div class="noty__message">'+ data.message + '</div></div>',
+              text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ data.message + '</div></div>',
               layout:"topCenter",
               type:"warning",
               theme:"metroui",
@@ -1667,7 +1667,7 @@ $('.add-favorites').off('click').click(function(){
           // Если есть функция, которая отображает сообщения пользователю
           if(typeof(Noty) == "function") {
             new Noty({
-              text: '<div class="noty__addto"><i class="icon-danger"></i><div class="noty__message">'+ data.message + '</div></div>',
+              text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ data.message + '</div></div>',
               layout:"topCenter",
               type:"warning",
               theme:"metroui",
