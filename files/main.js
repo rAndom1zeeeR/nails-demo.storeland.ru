@@ -554,7 +554,7 @@ function goodspage() {
       480:{items:3},
       641:{items:3},
       768:{items:4},
-      992:{items:3},
+      992:{items:2},
       1200:{items:3},
       1400:{items:3}
     }
@@ -562,7 +562,7 @@ function goodspage() {
   // Сопутствующие товары Слайдер
   $('.related__goods .owl-carousel').owlCarousel({
     items: 4,
-    margin: 32,
+    margin: 0,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -593,7 +593,7 @@ function goodspage() {
   // С этим товаром смотрят Слайдер
   $('.related__views .owl-carousel').owlCarousel({
     items: 4,
-    margin: 32,
+    margin: 0,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -1271,17 +1271,17 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
               layout:"topCenter",
               type:"warning",
               theme:"",
-              closeWith: ['click', 'button'],
+              closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
                 open: 'animated fadeInDown',
                 close: 'animated fadeOutUp',
                 easing: 'swing',
-                speed: 500
+                speed: 400
               },
               timeout:"2000",
-              progressBar:false,
+              progressBar:true,
               closable:true,
               closeOnSelfClick:true,
               modal:false,
@@ -1305,10 +1305,10 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
                 open: 'animated fadeInDown',
                 close: 'animated fadeOutUp',
                 easing: 'swing',
-                speed: 500
+                speed: 400
               },
               timeout:"2000",
-              progressBar:false,
+              progressBar:true,
               closable:true,
               closeOnSelfClick:true,
               modal:false,
@@ -1458,17 +1458,17 @@ $('.add-compare').off('click').click(function(){
               text: '<div class="noty__addto"><i class="icon-check"></i><div class="noty__message">'+ data.message + '</div></div>',
               layout:"topCenter",
               type:"success",
-              theme:"metroui",
-              closeWith: ['click', 'button'],
+              theme:"",
+              closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInUp',
-                close: 'animated fadeOutDown',
+                open: 'animated fadeInDown',
+                close: 'animated fadeOutUp',
                 easing: 'swing',
-                speed: 500
+                speed: 400
               },
-              timeout:"3000",
+              timeout:"2000",
               progressBar:true,
               closable:true,
               closeOnSelfClick:true,
@@ -1485,17 +1485,17 @@ $('.add-compare').off('click').click(function(){
               text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ data.message + '</div></div>',
               layout:"topCenter",
               type:"warning",
-              theme:"metroui",
-              closeWith: ['click', 'button'],
+              theme:"",
+              closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInUp',
-                close: 'animated fadeOutDown',
+                open: 'animated fadeInDown',
+                close: 'animated fadeOutUp',
                 easing: 'swing',
-                speed: 500
+                speed: 400
               },
-              timeout:"3000",
+              timeout:"2000",
               progressBar:true,
               closable:true,
               closeOnSelfClick:true,
@@ -1643,17 +1643,17 @@ $('.add-favorites').off('click').click(function(){
               text: '<div class="noty__addto"><i class="icon-check"></i><div class="noty__message">'+ data.message + '</div></div>',
               layout:"topCenter",
               type:"success",
-              theme:"metroui",
-              closeWith: ['click', 'button'],
+              theme:"",
+              closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInUp',
-                close: 'animated fadeOutDown',
+                open: 'animated fadeInDown',
+                close: 'animated fadeOutUp',
                 easing: 'swing',
-                speed: 500
+                speed: 400
               },
-              timeout:"3000",
+              timeout:"2000",
               progressBar:true,
               closable:true,
               closeOnSelfClick:true,
@@ -1670,17 +1670,17 @@ $('.add-favorites').off('click').click(function(){
               text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ data.message + '</div></div>',
               layout:"topCenter",
               type:"warning",
-              theme:"metroui",
-              closeWith: ['click', 'button'],
+              theme:"",
+              closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInUp',
-                close: 'animated fadeOutDown',
+                open: 'animated fadeInDown',
+                close: 'animated fadeOutUp',
                 easing: 'swing',
-                speed: 500
+                speed: 400
               },
-              timeout:"3000",
+              timeout:"2000",
               progressBar:true,
               closable:true,
               closeOnSelfClick:true,
