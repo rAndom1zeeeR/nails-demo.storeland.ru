@@ -584,9 +584,9 @@ function goodspage() {
       0:{items:1},
       320:{items:1},
       481:{items:2},
-      641:{items:3},
+      641:{items:2},
       768:{items:3},
-      992:{items:4},
+      992:{items:3},
       1200:{items:4}
     }
   });
@@ -615,9 +615,9 @@ function goodspage() {
       0:{items:1},
       320:{items:1},
       481:{items:2},
-      641:{items:3},
+      641:{items:2},
       768:{items:3},
-      992:{items:4},
+      992:{items:3},
       1200:{items:4}
     }
   });
@@ -770,12 +770,12 @@ function catalogpage() {
 
   $('.filters__icon').click(function(event){
     event.preventDefault();
-    if ($(this).parent().hasClass('active')) {
-      $(this).next('.form__filters').slideUp(600);
-      $(this).parent().removeClass('active');
+    if ($(this).parent().parent().hasClass('opened')) {
+      $(this).parent().parent().removeClass('opened');
+      $('#overlay').removeClass('opened');
     } else {
-      $(this).next('.form__filters').slideDown(600);
-      $(this).parent().addClass('active');
+      $(this).parent().parent().addClass('opened');
+      $('#overlay').addClass('opened');
     }
   });
   
@@ -873,8 +873,10 @@ function priceFilter() {
   // Активный фильтр цены
   if (priceInputMin.val() > priceFilterMinAvailable || priceInputMax.val() < priceFilterMaxAvailable) {
     $('.filters-price').addClass('hasFilters');
+    $('.toolbar').addClass('hasFilters');
   }else{
     $('.filters-price').removeClass('hasFilters');
+    $('.toolbar').removeClass('hasFilters');
   }
   
 }
@@ -2919,6 +2921,40 @@ function pdtSale() {
       $(this).addClass('active').find('span').text("Скрыть все");
       pdtItem.addClass('show');
       $('html, body').animate({scrollTop : pdtContent.offset().top }, 800);
+    }
+  });
+}
+// Функции для главной страницы
+function recViewed() {
+  // Функция слайдера для Хитов продаж на главной странице
+  $('#viewed .owl-carousel').owlCarousel({
+    items: 4,
+    margin: 0,
+    loop: false,
+    rewind: true,
+    lazyLoad: true,
+    nav: true,
+    navContainer: '#viewed .owl-nav',
+    navText: [ , ],
+    dots: false,
+    autoHeight: false,
+    autoHeightClass: 'owl-height',
+    autoplay: false,
+    autoplayHoverPause: true,
+    smartSpeed: 500,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    responsiveClass: true,
+    responsiveRefreshRate: 100,
+    responsive: {
+      0:{items:1},
+      320:{items:1},
+      481:{items:2},
+      641:{items:2},
+      768:{items:3},
+      992:{items:3},
+      1200:{items:4}
     }
   });
 }

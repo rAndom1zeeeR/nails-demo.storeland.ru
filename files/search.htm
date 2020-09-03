@@ -102,7 +102,13 @@
               {% ENDFOR %}
             </a>
             <div class="product__ico">
-              {% IF goods.IS_TOP %}<span class="ico__best"></span>{% ENDIF %}
+              {% IF goods.IS_PLACE_ON_INDEX_PAGE %}
+              <span class="ico__sale"></span>
+              {% ELSEIF goods.IS_TOP %}
+              <span class="ico__best"></span>
+              {% ELSEIF goods.IS_NEW %}
+              <span class="ico__new"></span>
+              {% ENDIF %}
             </div>
           </div>
           <!-- Название товара -->
@@ -256,10 +262,13 @@
               <img class="goods-image-icon lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=florist" data-src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=florist{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" itemprop="image">
             </a>
             <div class="product__ico">
-              {% IF goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ELSEIF goods.MIN_PRICE_OLD>goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ENDIF %}
-              {% IF goods.IS_PLACE_ON_INDEX_PAGE %}<span class="ico__sale"></span>{% ENDIF %}
-              {% IF goods.IS_TOP %}<span class="ico__best"></span>{% ENDIF %}
-              {% IF goods.IS_NEW %}<span class="ico__new"></span>{% ENDIF %}
+              {% IF goods.IS_PLACE_ON_INDEX_PAGE %}
+              <span class="ico__sale"></span>
+              {% ELSEIF goods.IS_TOP %}
+              <span class="ico__best"></span>
+              {% ELSEIF goods.IS_NEW %}
+              <span class="ico__new"></span>
+              {% ENDIF %}
             </div>
           </div>
           <div class="product__shop {% IF goods.IS_HAS_IN_COMPARE_LIST || goods.IS_HAS_IN_FAVORITES_LIST %}added{% ENDIF %}">
