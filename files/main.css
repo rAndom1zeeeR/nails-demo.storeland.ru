@@ -1110,7 +1110,8 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 
 /*** Личный кабинет ***/
 .client, .form__client {width: 100%;display: flex;flex-wrap: wrap;justify-content: space-between;}
-.client__blocks {width: calc(50% - 1rem);display: flex;flex-wrap: wrap;justify-content: space-between;align-items: flex-start;}
+.client__blocks {width: 100%;display: flex;flex-wrap: wrap;justify-content: space-between;align-items: flex-start;}
+.client__blocks + .client__blocks {margin-top: 2rem;}
 .client__block {width: calc(50% - 1rem);}
 .client__title {font-size: 1.75rem;margin-bottom: 2rem;display: flex;align-items: center;}
 .client .form__fields label {display: none;}
@@ -1122,7 +1123,6 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .client__icon span {display: block;width: calc(100% - 70px);height: 1px;background: #e4e4ea;}
 @media all and (max-width: 1199px) {
 .client__blocks {width: 100%;}
-.client__blocks + .client__blocks {margin-top: 2rem;}
 .client__icon {margin-bottom: 1rem;}
 }
 @media all and (max-width: 640px) {
@@ -1150,6 +1150,7 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .client .product__item .product__links {display: none;}
 /*** ЛК История заказов (Список) ***/
 .client_history .table-box {background: #FFFFFF;}
+.order_info .table-box {background: #FFFFFF;}
 /*** Страница: Обратный звонок ***/
 .callback__page .form__fields {margin-bottom: 1rem;}
 .callback__page .form__buttons {margin-top: 2rem;}
@@ -1175,6 +1176,21 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .newsListBlockItemFiles {margin-top: 1rem;}
 .news__page .news__date {position: relative;text-align: right;margin-top: 1rem;}
 .news__page .htmlDataBlock img {margin-bottom: 1rem;}
+
+/*** Страница: Связь с администрацией ***/
+.callback__page .form__buttons {margin-top: 2rem;}
+.favorites__page .addto__links .favorites {display: none;}
+.feedback__page .client__block.maps {width: 100%;margin-top: 2rem;padding: 0;}
+.feedback__page .form__buttons {margin-top: 2rem;}
+.feedback__page .form__pp {margin: 1rem 0;}
+/* Контакты */
+.feedback__page .contacts__content {margin: 0;padding: 0;list-style: none;width: 100%;}
+.feedback__page .contacts__content > div {margin-bottom: 5px;}
+.feedback__page .contacts__content a {display: block;padding: 5px 0;line-height: 20px;margin-bottom: 1rem;}
+.feedback__page .contacts__content a b {display: none;}
+.feedback__page .contacts__content a i {margin-right: 0.625rem;color: #925ab5;font-size: 1.5rem;vertical-align: middle;}
+.feedback__page .contacts__content a span {vertical-align: middle;}
+.feedback__page .contacts__content a .icon-skype {width: 21px;height: 1.5rem;}
 
 
 /*** Страница: Сравнение ***/
@@ -1221,11 +1237,10 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .CompareGoodsTableTbody .actions .price-box .price__now {margin-right: 5px;}
 .CompareGoodsTableTbody .owl-stage-outer {margin-right: -1px;}
 @media all and (max-width: 480px) {
-	.CompareGoodsTableTbody .actions .price-box {width: 100%;margin-bottom: 1rem;}
-	.CompareGoodsTableTbody .actions .price-box .price__old {display: block;margin-top: 5px;}
-	.CompareGoodsTableTbody .actions .add-notify:before {display: none;}
+.CompareGoodsTableTbody .actions .price-box {width: 100%;margin-bottom: 1rem;}
+.CompareGoodsTableTbody .actions .price-box .price__old {display: block;margin-top: 5px;}
+.CompareGoodsTableTbody .actions .add-notify:before {display: none;}
 }
-
 
 
 

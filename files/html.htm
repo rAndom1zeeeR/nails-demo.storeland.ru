@@ -1824,7 +1824,6 @@
     $(document).ready(function () { 
       priceFilter();
       catalogpage();
-      recViewed();
     });
     {% ENDIF %}
     // Запуск основных скриптов для "главной" страницы
@@ -1837,6 +1836,10 @@
       pdtSale();
       pdtCatalog();
       pdtPromo();
+    });
+    {% ELSE %}
+    $(document).ready(function () {
+      recViewed();
     });
     {% ENDIF %}
     // Модальное окно уведомления при отправке сообщения
