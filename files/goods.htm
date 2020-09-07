@@ -8,10 +8,13 @@
       <a href="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=florist{% ELSE %}{GOODS_IMAGE_LARGE}{% ENDIF %}" data-fancybox="images">
         <img src="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=florist{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}" title="{GOODS_NAME}" alt="{GOODS_NAME}" class="goods-image-large" itemprop="image"/>
         <div class="product__ico">
-          {% IF GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT>GOODS_MOD_PRICE_NOW %}<span class="ico__sales"><label>sale</label></span>{% ELSEIF GOODS_MOD_PRICE_OLD>GOODS_MOD_PRICE_NOW %}<span class="ico__sales"><label>sale</label></span>{% ENDIF %}
-          {% IF GOODS_IS_PLACE_ON_INDEX_PAGE %}<span class="ico__sale"><label>top</label></span>{% ENDIF %}
-          {% IF GOODS_IS_TOP %}<span class="ico__best"><label>hit</label></span>{% ENDIF %}
-          {% IF GOODS_IS_NEW %}<span class="ico__new"><label>new</label></span>{% ENDIF %}
+          {% IF GOODS_IS_NEW %}
+          <span class="ico__new"></span>
+          {% ELSEIF GOODS_IS_TOP %}
+          <span class="ico__best"></span>
+          {% ELSEIF GOODS_IS_PLACE_ON_INDEX_PAGE %}
+          <span class="ico__sale"></span>
+          {% ENDIF %}
         </div>
       </a>
     </div>

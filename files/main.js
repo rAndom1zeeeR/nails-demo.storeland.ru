@@ -364,6 +364,11 @@ function GetSum(val,precision) {
 // Форматирует цену
 function number_format(n,e,t,r){var i=n,a=e,o=function(n,e){var t=Math.pow(10,e);return(Math.round(n*t)/t).toString()};i=isFinite(+i)?+i:0,a=isFinite(+a)?Math.abs(a):0;var u,d,f="undefined"==typeof r?",":r,h="undefined"==typeof t?".":t,l=a>0?o(i,a):o(Math.round(i),a),s=o(Math.abs(i),a);s>=1e3?(u=s.split(/\D/),d=u[0].length%3||3,u[0]=l.slice(0,d+(0>i))+u[0].slice(d).replace(/(\d{3})/g,f+"$1"),l=u.join(h)):l=l.replace(".",h);var c=l.indexOf(h);return a>=1&&-1!==c&&l.length-c-1<a?l+=new Array(a-(l.length-c-1)).join(0)+"0":a>=1&&-1===c&&(l+=h+new Array(a).join(0)+"0"),l}
 
+// Добавляет пробел 1000 -> 1 000  /  10000 -> 10 000
+function addSpaces(nStr){
+  return nStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+}
+
 // Проверка вводимых значений в количестве товара
 function keyPress(oToCheckField, oKeyEvent) {
   return oKeyEvent.charCode === 0 || /\d/.test(String.fromCharCode(oKeyEvent.charCode));
@@ -930,7 +935,7 @@ function quantity() {
     // Считаем новую сумму товара с учетом добавленных
     var multi = val * price + newPrice;
     // Обновляем новую сумму
-    $('.productView__price .price__now').attr('data-price', multi).find('.num').text(multi)
+    $('.productView__price .price__now').attr('data-price', multi).find('.num').text(addSpaces(multi));
   });
 }
 
@@ -1093,6 +1098,7 @@ function goodsModification() {
         }
         // Идентификатор товарной модификации
         goodsModificationId.val(modificationId);
+        $('.goodsDataMainModificationId').attr('name','form[goods_mod_id][' + modificationId + ']');
         // Меняет главное изображение товара на изображение с идентификатором goods_mod_image_id
         function changePrimaryGoodsImage(goods_mod_image_id) {
           // Если не указан идентификатор модификации товара, значит ничего менять не нужно.
@@ -1128,9 +1134,9 @@ function goodsModification() {
   });
 
   $('.related .checkbox__input').on('change', function(){
-    var $checkbox = $(this);
-    var modId = $checkbox.data('mod-id');
-    var checkboxActive = $checkbox.prop('checked');
+    let $checkbox = $(this);
+    let modId = $checkbox.data('mod-id');
+    let checkboxActive = $checkbox.prop('checked');
     if (checkboxActive) {
       // Создаём инпут с доп товаром
       var $input = $('<input class="goodsID-' + modId + '">')
@@ -1150,11 +1156,11 @@ function goodsModification() {
   });
 
   function changePrice(currentCheckbox, checkboxActive){
-    var $checkbox = currentCheckbox;
-    var checkboxPrice = $checkbox.data('mod-price');
-    var $priceNowBlock = $('.productView__price .price__now');
-    var nowPrice = $priceNowBlock.attr('data-price');
-    var newPrice = 0;
+    let $checkbox = currentCheckbox;
+    let checkboxPrice = $checkbox.data('mod-price');
+    let $priceNowBlock = $('.productView__price .price__now');
+    let nowPrice = $priceNowBlock.attr('data-price');
+    let newPrice = 0;
     if (checkboxActive) {
       newPrice = String(parseInt(nowPrice) + parseInt(checkboxPrice));
       $priceNowBlock.attr('data-price', parseInt(nowPrice) + parseInt(checkboxPrice))
@@ -1162,7 +1168,7 @@ function goodsModification() {
       newPrice = String(nowPrice - checkboxPrice);
       $priceNowBlock.attr('data-price', parseInt(nowPrice)  - parseInt(checkboxPrice))
     }
-    $priceNowBlock.find('.num').text(parseInt(newPrice))
+    $priceNowBlock.find('.num').text(addSpaces(newPrice))
   }
 }
 
@@ -2650,13 +2656,11 @@ function coupons() {
           cuponInput.parent().addClass('error');
           cuponInput.parent().removeClass('active');
           cuponInput.val("").attr("placeholder", "Купон неверен");
-          submitBtn.html('<i class="icon-arrow-right"></i>');
           $('.total__coupons').hide();
           $('.total__discount').show();
         } else {
           cuponInput.parent().removeClass('error');
           cuponInput.parent().addClass('active');
-          submitBtn.html('<i class="material-icons">done</i>');
           $('.total__coupons').show();
         }
       },
@@ -2672,8 +2676,8 @@ function coupons() {
       $('.total__coupons').hide();
       $('.total__discount').show();
       cuponInput.parent().removeClass('error');
+      cuponInput.parent().removeClass('active');
       cuponInput.val("").attr("placeholder", "Введите купон");
-      submitBtn.html('<i class="icon-arrow-right"></i>');
     }, 500);
   });
   // Отображение кнопки Сброс

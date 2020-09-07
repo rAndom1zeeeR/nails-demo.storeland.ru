@@ -13,14 +13,17 @@
         <div class="form__list">
           <div class="form__fields">
             <label for="sites_client_person" class="required"><span>Ваше Имя</span><em>*</em></label>
+            <i class="icon-user"></i>
             <input id="sites_client_person" type="text" name="form[contact][person]" value="{ORDER_FORM_CONTACT_PERSON}" maxlength="100" class="form__input" type="text" placeholder="ФИО *" required/>
           </div>
           <div class="form__fields">
             <label for="sites_client_phone" class="required"><span>Телефон</span><em>*</em></label>
+            <i class="icon-phone"></i>
             <input id="sites_client_phone" type="tel" name="form[contact][phone]" value="{ORDER_FORM_CONTACT_PHONE}" maxlength="255" class="form__input form__phone" type="text" placeholder="Телефон *" required/>
           </div>
           <div class="form__fields email">
             <label for="sites_client_email" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}class="required"{% ENDIF %}><span>Ваш E-mail</span><em>*</em></label>
+            <i class="icon-mail"></i>
             <input id="sites_client_email" type="email" name="form[contact][email]" value="{ORDER_FORM_CONTACT_EMAIL}" maxlength="255" class="form__input" type="text" placeholder="Электронная почта" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %}/>
           </div>
           <!-- Если в тарифном плане подключен раздел личного кабинета -->
@@ -41,8 +44,9 @@
           {% ENDIF %}
           <!-- Если поле комментарии запрашивается -->
           {% IF SETTINGS_ORDER_FIELDS_COMMENT < 3 %}
-          <div class="form__fields fields-1 {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}">
+          <div class="form__fields fields-1 fields__comment {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}">
             <label for="quickDeliveryComment" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}class="required"{% ENDIF %}><span>Комментарий</span><em>*</em></label>
+            <i class="icon-chat"></i>
             <textarea cols="100" rows="6" id="quickDeliveryComment" name="form[delivery][comment]" class="textarea" placeholder="Комментарий {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}>{ORDER_FORM_DELIVERY_COMMENT}</textarea>
           </div>
           {% ENDIF %}
@@ -100,7 +104,7 @@
           {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME < 3 %}
           <div class="form__fields deliveryDate {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %}">
             <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}><span>Дата доставки</span><em>*</em></label>
-            <input id="deliveryConvenientDate" type="text" name="form[delivery][convenient_date]" value="{ORDER_FORM_DELIVERY_CONVENIENT_DATE}" class="form__input" maxlength="10" minlength="10" placeholder="17.11.2020 {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %} />
+            <input id="deliveryConvenientDate" type="text" name="form[delivery][convenient_date]" value="{ORDER_FORM_DELIVERY_CONVENIENT_DATE}" class="form__input" maxlength="10" minlength="10" autocomplete="off" placeholder="17.11.2020 {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %} />
           </div>
           <div class="form__fields deliveryDate {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %}">
             <div class="form__field deliveryConvenientDate selectBox">
@@ -245,27 +249,31 @@
           {% ENDIF %}
         {% ENDFOR %}
         </div>
-        <!-- Если скидки по купонам активированы в панели управления магазином -->
-        {% IF ORDER_DISCOUNT_COUPON_IS_ENABLED %}
-        <div class="coupons">
-          <h3 class="title"><span>Код купона на скидку</span></h3>
-          <div class="form__fields coupon__order">
-            <input type="hidden" name="oldPromoDiscount" value="0">
-            <input type="hidden" name="orderSumDefaul" value="{CART_SUM_NOW}">
-            <input type="text" id="coupon__code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="form__input" placeholder="Введите код"/>
-            <a href="javascript:void(0)" class="coupon__button" title="Применить"><i class="icon-arrow-right"></i></a>
-            <a href="javascript:void(0)" class="coupon__reset" title="Сбросить"><i class="material-icons">close</i></a>
-          </div>
-        </div>
-        {% ENDIF %}
       </div>
+
+      <!-- Если скидки по купонам активированы в панели управления магазином -->
+      {% IF ORDER_DISCOUNT_COUPON_IS_ENABLED %}
+      <div class="coupons" order="5">
+        <h3 class="title"><span>Код купона на скидку</span></h3>
+        <div class="form__fields coupon__order">
+          <input type="hidden" name="oldPromoDiscount" value="0">
+          <input type="hidden" name="orderSumDefaul" value="{CART_SUM_NOW}">
+          <input type="text" id="coupon__code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="form__input" placeholder="Введите код"/>
+          <a href="javascript:void(0)" class="coupon__button" title="Применить"></a>
+          <a href="javascript:void(0)" class="coupon__reset" title="Сбросить"></a>
+        </div>
+      </div>
+      {% ENDIF %}
       <!-- END Если скидки по купонам активированы в панели управления магазином -->
       <div class="cart__total">
         <div class="total__items">
+          <div class="total__title">
+            <span>Детали заказа:</span>
+          </div>
           <!-- Скидки, действующие на заказ -->
           {% FOR cart_discount %}
           {% IF cart_discount.DISCOUNT_IS_ENABLED %}
-          <div class="total__item total__discount" style="display: none;">
+          <div class="total__item total__discount">
             <div class="total__label"><span>{cart_discount.DISCOUNT_NAME}</span>:</div>
             <div class="total__price"><span class="discount__value" data-value="{cart_discount.DISCOUNT_VALUE}">{cart_discount.DISCOUNT_VALUE}</span>{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="rub"> руб.</span>{% ENDIF %}</div>
           </div>
@@ -275,24 +283,33 @@
             <div class="total__label"><span>Купон</span>:</div>
             <div class="total__price"><span class="cartSumCoupons" data-value=""></span></div>
           </div>
-          <div class="total__item total__delivery" style="display: none;">
-            <div class="total__label"><span>Доставка</span>:</div>
+          <div class="total__item total__delivery">
+            <div class="total__label"><span>Стоимость доставки</span>:</div>
             <div class="total__price"><span class="cartSumDelivery" data-value="{CART_SUM_DELIVERY}">{CART_SUM_DELIVERY | money_format}</span></div>
           </div>
+          <!-- Оплата -->
+          <div class="total__payments">
+            <i class="icon-visa"></i>
+            <i class="icon-yandex"></i>
+            <i class="icon-mastercard"></i>
+            <i class="icon-paypal"></i>
+            <i class="icon-webmoney"></i>
+            <i class="icon-citibank"></i>
+          </div>
+        </div>
+        <div class="total__buttons">
+          <input type="hidden" name="hash" value="{HASH}" />
           <div class="total__item total__cart">
             <div class="total__label">Итого:</div>
             <div class="total__price cartSumTotal" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
             <div style="display: none;" class="total__price cartSum" data-value="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</div>
             <div style="display: none;" class="total__price cartSumTotalHide" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
           </div>
-        </div>
-        <div class="total__buttons">
-          <input type="hidden" name="hash" value="{HASH}" />
-          <div class="total__pp">Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
           <div class="total__buttons">
-            <a id="closeOrder" class="button button4" title="Отменить заказ"><span>Отменить </span><span>заказ</span></a>
-            <button type="submit" class="button disabled" titleOFF="Оформить заказ" data-tooltip="Заполните все поля"><span>Оформить </span><span>заказ</span></button>
+            <a id="closeOrder" class="button button" title="Отменить заказ"><span>Отменить </span><span>заказ</span></a>
+            <button type="submit" class="button button2 disabled" titleOFF="Оформить заказ" data-tooltip="Заполните все поля"><span>Оформить </span><span>заказ</span></button>
           </div>
+          <div class="total__pp">Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
         </div>
       </div>
     </form>
