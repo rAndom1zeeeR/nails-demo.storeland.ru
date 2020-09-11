@@ -1179,7 +1179,7 @@ function Compare() {
     items: 4,
     margin: 15,
     loop: false,
-    rewind: true,
+    rewind: false,
     lazyLoad: true,
     dots: false,
     nav: false,
