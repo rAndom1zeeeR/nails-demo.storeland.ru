@@ -1440,10 +1440,8 @@ $('.add-compare').off('click').click(function(){
             $('.compare__count').attr('data-count', data.compare_goods_count);
               if(data.compare_goods_count > 0){
                 $('.compare').addClass("hasItems");
-                $('.addto__compare').addClass("hasItems");
               }else{
                 $('.compare').removeClass("hasItems");
-                $('.addto__compare').removeClass("hasItems");
                 $('.compare__count').attr('data-count', '0').text("0");
                 $('.add-compare').removeAttr("title").removeClass("added");
               }
@@ -1623,12 +1621,8 @@ $('.add-favorites').off('click').click(function(){
             $('.favorites__count').attr('data-count', data.favorites_goods_count);
               if(data.favorites_goods_count > 0){
                 $('.favorites').addClass("hasItems");
-                $('.favorites__goods').addClass("hasItems");
-                $('#addtoFavorites').addClass("hasItems");
               }else{
                 $('.favorites').removeClass("hasItems");
-                $('.favorites__goods').removeClass("hasItems");
-                $('#addtoFavorites').removeClass("hasItems");
                 $('.favorites__count').attr('data-count', '0').text("0");
                 $('.add-favorites').removeAttr("title").removeClass("added");
               }
@@ -1751,7 +1745,6 @@ function removeFromFavoritesAll(e){
   if(confirm('Вы точно хотите очистить сравнение?')){
   // Предзагрузчик анимации
   $('.favorites__goods').prepend('<div class="preloader small"><div class="loading"></div></div>');
-  e.parent().fadeOut();
   let href = e.attr('href');
   $.ajax({
     cache  : false,
@@ -1812,7 +1805,6 @@ function removeFromCompareAll(e){
   if(confirm('Вы точно хотите очистить сравнение?')){
   // Предзагрузчик анимации
   $('.addto__compare').prepend('<div class="preloader small"><div class="loading"></div></div>');
-  e.parent().fadeOut();
   let href = e.attr('href');
   $.ajax({
     cache  : false,
@@ -1926,8 +1918,7 @@ $(function(){
   $('#callback .form__callback').submit(validSubmit);
 });
 
-
-// Валидаторы для Имени и телефона в "Служба поддержки" на главной
+// Валидаторы для Имени и телефона в "Обратный звонок"
 function validNameFancy(){
   let name = $('#fancybox__callback').find('.form__person');
   if(name.val() != ''){
@@ -2010,6 +2001,48 @@ function validSubmitNotify(){
 // Проверка отправки формы
 $(function(){
   $('#fancybox__notify .form__callback').submit(validSubmitNotify);
+});
+
+
+// Валидаторы для Имени и телефона в "Служба поддержки" на главной
+function validNameFeedback(){
+  let name = $('#fancybox__feedback').find('.form__person');
+  if(name.val() != ''){
+    name.removeClass('error');
+    name.parent().removeClass('error');
+    name.attr('placeholder','Введите Имя');
+    return true;
+  }else{
+    name.addClass('error');
+    name.parent().addClass('error');
+    name.attr('placeholder','Вы не ввели Имя');
+    return false;
+  }
+}
+function validPhoneFeedback(){
+  let tel = $('#fancybox__feedback').find('.form__phone');
+  let check = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/.test(tel.val());
+  if(check == true && check != ''){
+    tel.removeClass('error');
+    tel.parent().removeClass('error');
+    tel.attr('placeholder','Введите номер');
+    return true;
+  }
+  else{
+    tel.addClass('error');
+    tel.parent().addClass('error');
+    tel.attr('placeholder','Вы не ввели номер');
+    return false;
+  }
+}
+function validSubmitFeedback(){
+  let name = validNameFeedback();
+  let phone = validPhoneFeedback();
+  return name && phone;
+}
+// Проверка отправки формы
+$(function(){
+  $('#fancybox__feedback .form__callback').submit(validSubmitFeedback);
 });
 
 // Функция Быстрого просмотра товара
@@ -2172,6 +2205,11 @@ $(document).ready(function(){
     var href = $(this).attr('href');
     href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
     quickViewShowMod(href);
+    $(function(){
+      const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+      observer.observe();
+    });
+    preload();
     $('.fancybox-content .productView').removeClass('productViewQuick');
     $('.fancybox-content .productView').addClass('productViewMod');
     return false;
@@ -2546,7 +2584,6 @@ function cartDelete(s){
 // Функция быстрого оформления заказа в корзине
 function startOrder(){  
   var globalOrder = $('#globalOrder');
-  var closeOrder = $('#closeOrder');
   var cartTable = $('.cartTable');
   //объект блока куда будет выводиться форма быстрого заказа
   var OrderAjaxBlock = $('#OrderAjaxBlock');
@@ -2573,7 +2610,8 @@ function startOrder(){
       showPass();
       $(".form__phone").mask("+7 (999) 999-9999");
       $("#sites_client_phone").mask("+7 (999) 999-9999");
-      closeOrder.on('click', function() {
+      $('#closeOrder').on('click', function() {
+        console.log('close')
         cartTable.show('slow');
         globalOrder.hide();
         $('html, body').delay(400).animate({scrollTop : jQuery('#main').offset().top}, 800);
