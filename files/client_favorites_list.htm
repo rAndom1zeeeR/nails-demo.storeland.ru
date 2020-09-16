@@ -98,7 +98,7 @@
               ></a>
               {% ENDIF %}
               <!-- Если есть возможность добавить товар в Избранное -->
-              <a class="add-favorites"
+              <a class="add-favorites added"
                  data-action-delete-url="{FAVORITES_DELETE_URL}"
                  href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
                  title="Убрать &laquo;{favorites_goods.NAME}&raquo; из Избранного"

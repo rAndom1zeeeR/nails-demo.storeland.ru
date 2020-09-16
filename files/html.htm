@@ -271,7 +271,7 @@
                 </a>
                 {% ENDIF %}
                 <div class="addto__close">
-                  <i class="icon-arrow-right"></i>
+                  <i class="icon-close"></i>
                 </div>
               </div>
             </div>
@@ -1805,8 +1805,7 @@
     // Запуск основных скриптов для страницы "Товар"
     {% IF MOD_LNAME = goods %}
     $(document).ready(function () { 
-      goodspage(); 
-      quantity();
+      goodspage();
       goodsModification();
       newModification();
     });

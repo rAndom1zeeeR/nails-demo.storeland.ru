@@ -16,7 +16,7 @@
         <a class="categories__image" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
           <img class="goods-cat-image-medium" src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=florist{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">
         </a>
-        <a class="categories__name button" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;"><span>{nested_categories_list.NAME}</span><i class="icon-right-arrow"></i></a>
+        <a class="categories__name button" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;"><span>{nested_categories_list.NAME}</span></a>
       </div>
     {% ENDFOR %}
   </div>
