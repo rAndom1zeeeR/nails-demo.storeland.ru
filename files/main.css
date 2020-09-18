@@ -1057,7 +1057,7 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .productViewMod .productView__ratings {display: none;}
 .productViewMod .productView__links {display: none;}
 @media all and (max-width: 480px) {
-	.productViewMod .productView__qty {margin-right: 1rem;width: 120px;}
+.productViewMod .productView__qty {margin-right: 1rem;width: 120px;}
 /*.fancybox-content .productView__addto .add-cart {margin-top: 1.5rem;}*/
 }
 
@@ -1429,7 +1429,14 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .coupon__order.error input + .coupon__button {border-color: #b30020;}
 
 
-    /******************************************************************************
+/*** Наверх ***/
+.toTop {position: fixed;bottom: 1rem;right: 1rem;z-index: 99;width: 60px;height: 60px;font-size: 24px;color: #FFFFFF;background: #8da5db;border-radius: 100%;cursor: pointer;display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;}
+.toTop:hover {background: #925ab5;}
+
+
+
+
+/******************************************************************************
     *******************************************************************************/
 
 
