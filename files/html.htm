@@ -1265,6 +1265,16 @@
     <!-- Основные страницы -->
     <div id="main">
       <div class="container">
+        <!-- Баннер в каталоге -->
+        {% IF MOD_LNAME = catalog %}
+        <div class="products__banner">
+          <div class="slider__content lozad" data-background-image="{ASSETS_IMAGES_PATH}slide1.png?design=florist">
+            <div class="slider__title">
+              <a href="{CATALOG_URL}" title="Подробнее"><span>Другие товары</span><span>из этого раздела</span></a>
+            </div>
+          </div>
+        </div>
+        {% ENDIF %}
         <!-- Заголовок страницы -->
         <div id="page__title">
           {% IF MOD_LNAME=user && ACT=login %}
@@ -1844,25 +1854,25 @@
     // Модальное окно уведомления при отправке сообщения
     {% IF FORM_NOTICE %}
     new Noty({
-      text: '<div class="noty__message">{FORM_NOTICE | nl2br}</div>',
-      layout:"bottom",
+      text: '<div class="noty__addto"><i class="icon-{% IF FORM_NOTICE_IS_GOOD %}check{% ELSE %}warning{% ENDIF %}"></i><div class="noty__message">{FORM_NOTICE | nl2br}</div></div>',
+      layout:"topCenter",
       type:"{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}",
-      theme:"metroui",
+      theme:"",
       textAlign:"center",
       animation: {
-        open: 'animated slideInDown',
-        close: 'animated slideOutUp',
+        open: 'animated fadeInDown',
+        close: 'animated fadeOutUp',
         easing: 'swing',
-        speed: 500
+        speed: 400
       },
-      timeout:"3000",
+      timeout:"2000",
       progressBar:true,
-      closable:false,
+      closable:true,
       closeOnSelfClick:true,
       modal:false,
       dismissQueue:false,
       onClose:true,
-      killer:true
+      killer:false
     }).show();
     {% ENDIF %}
     // Анимация перед загружаемым объектом

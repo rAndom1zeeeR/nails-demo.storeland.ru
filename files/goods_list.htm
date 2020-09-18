@@ -1,12 +1,4 @@
 <!-- В корне каталога товаров отобразим все корневые категории если они есть на сайте -->
-<div class="products__banner">
-  <div class="slider__content lozad" data-background-image="{ASSETS_IMAGES_PATH}slide1.png?design=florist">
-    <div class="slider__title">
-      <a href="{CATALOG_URL}" title="Подробнее"><span>Другие товары</span><span>из этого раздела</span></a>
-    </div>
-  </div>
-</div>
-
 <div class="products">
   <!-- Вывод категорий -->
   {% IFNOT nested_categories_list_empty %}
