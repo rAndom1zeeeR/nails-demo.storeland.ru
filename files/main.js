@@ -289,11 +289,11 @@ $(function() {
             data.goods[i].image_icon = data.goods[i].image_icon;
           }
           // Отображаем результат поиска
-          if(i <= 4 ){
+          if(i <= 3){
             $("#search__result .result__goods").prepend('<div class="result__item" data-id="'+ data.goods[i].goods_id +'"><a href="'+ data.goods[i].url +'"><div class="result__image"><img src="'+ data.goods[i].image_icon +'" class="goods-image-icon" /></div><div class="result__name"><span>'+ data.goods[i].goods_name +'</span></div></a></div>');
           }
           // Если последняя итерация цикла вставим кнопку "показать все"
-          if(i > 4){
+          if(i > 3){
             $('.result__showAll').show();
           }
         }
@@ -2806,8 +2806,8 @@ function pdtSales() {
     loop: false,
     rewind: true,
     lazyLoad: true,
-    nav: false,
-    navContainer: '',
+    nav: true,
+    navContainer: '#pdt__sales .owl-nav',
     navText: [ , ],
     dots: false,
     autoHeight: false,
@@ -3019,6 +3019,8 @@ function slideShow() {
     URLhashListener: true,
     autoplay: false,
     autoplayHoverPause: true,
+    autoHeight: false,
+    autoHeightClass: 'owl-height',
     smartSpeed: 500,
     dotsSpeed: 400,
     mouseDrag: true,
