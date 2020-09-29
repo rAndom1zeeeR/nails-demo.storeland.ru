@@ -82,7 +82,7 @@
           </div>
           <div class="header__inner">
             <div class="catalog">
-              <div class="catalog__icon">
+              <div class="catalog__icon dropdown__open" data-open="catalog">
                 <i class="icon-catalog">
                   <span class="path1"></span>
                   <span class="path2"></span>
@@ -244,9 +244,38 @@
             </div>
           </div>
           {% ENDIF %}
+          <!-- Каталог -->
+          <div class="catalog">
+            <a href="{CATALOG_URL}" class="addto__label dropdown__open catalog__icon" title="Каталог" data-open="catalog">
+              <i class="icon-catalog">
+                <span class="path1"></span>
+                <span class="path2"></span>
+                <span class="path3"></span>
+                <span class="path4"></span>
+                <span class="path5"></span>
+                <span class="path6"></span>
+                <span class="path7"></span>
+                <span class="path8"></span>
+                <span class="path9"></span>
+              </i>
+            </a>
+            <div id="addtoCatalog" class="addto__catalog dropdown__content" data-open="catalog">
+              <div class="catalog__items">
+                {% FOR catalog_full %}
+                {% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}<div data-level="{catalog_full.LEVEL}" class="sub">{% ENDIF %}{% ENDIF %}
+                <div {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %} data-level="{catalog_full.LEVEL}" class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}">
+                  <a href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}" class="catalog__link {% IF catalog_full.CURRENT %}opened{% ENDIF %}">
+                    <span>{catalog_full.NAME}</span>
+                    {% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="open"></span>{% ENDIF %}
+                  </a>
+                  {% IF catalog_full.ISSET_SUB=0 %}</div>{% ENDIF %}
+                {% IF catalog_full.LAST %}{%FOR out%}</div> {%IFNOT catalog_full.out.LAST%}</div>{%ENDIF%}{%ENDFOR%}{% ENDIF %}
+              {% ENDFOR %}
+            </div>
+          </div>
           <!-- Обратная связь -->
-          <div class="callback">
-            <a href="{CALLBACK_URL}" class="addto__label dropdown__open callback__icon" title="Обратный звонок" data-open="callback">
+          <div class="callback dropdown">
+            <a href="{CALLBACK_URL}" class="addto__label dropdown__open callback__icon" data-open="callback" title="Обратный звонок">
               <i class="icon-phone"></i>
             </a>
             <div id="addtoCallback" class="addto__callback dropdown__content" data-open="callback">
@@ -277,21 +306,6 @@
               </div>
             </div>
           </div>
-          <!-- Каталог -->
-          <div class="catalog__icon">
-            <i class="icon-catalog">
-              <span class="path1"></span>
-              <span class="path2"></span>
-              <span class="path3"></span>
-              <span class="path4"></span>
-              <span class="path5"></span>
-              <span class="path6"></span>
-              <span class="path7"></span>
-              <span class="path8"></span>
-              <span class="path9"></span>
-            </i>
-          </div>
-
         </div>
       </div>
     </div>
@@ -1667,7 +1681,7 @@
           </div>
           <!-- Каталог -->
           <div class="catalog">
-            <div class="catalog__icon">
+            <div class="catalog__icon dropdown__open" data-open="catalog">
               <i class="icon-catalog">
                 <span class="path1"></span>
                 <span class="path2"></span>

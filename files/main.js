@@ -2612,7 +2612,6 @@ function startOrder(){
       $(".form__phone").mask("+7 (999) 999-9999");
       $("#sites_client_phone").mask("+7 (999) 999-9999");
       $('#closeOrder').on('click', function() {
-        console.log('close')
         cartTable.show('slow');
         globalOrder.hide();
         $('html, body').delay(400).animate({scrollTop : jQuery('#main').offset().top}, 800);
@@ -3211,7 +3210,6 @@ function OpenMenu() {
   $('.dropdown__open').on('click', function(event){
     event.preventDefault();
     let value = $(this).data('open');
-    console.log(value)
     if ($('.dropdown__content[data-open="'+ value +'"]').hasClass('opened')){
       $(this).removeClass('opened');
       $('#overlay').removeClass('opened');
