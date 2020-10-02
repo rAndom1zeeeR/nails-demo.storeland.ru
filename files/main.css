@@ -361,7 +361,7 @@ footer {padding-bottom: 82px;}
 #addto .dropdown__content {width: 100%;}
 #addto .dropdown__content.opened {padding: 1rem;}
 #addto .addto__qty a {width: 30px;height: 30px;}
-#addto .addto__qty input {width: 40px;height: 30px;}
+#addto .addto__qty input {width: 36px;height: 30px;}
 #addto .button {padding: 0 1.5rem;}
 .addto__contacts {flex-direction: column;align-items: flex-start}
 .addto__contacts .contacts__block + .contacts__block {margin: 1rem 0 0 0;}
@@ -409,9 +409,9 @@ footer {padding-bottom: 82px;}
 .addto__image img {max-width: 60px;max-height: 60px;}
 .addto__shop {width: calc(100% - 60px);}
 .addto__priceBox {margin-top: 0.75rem;flex-wrap: wrap;}
-.addto__priceBox .addto__price {width: 100%;margin-bottom: 0.75rem;}
+.addto__cart .addto__priceBox .addto__price {width: 100%;margin-bottom: 0.75rem;}
 .addto__buttons {flex-direction: column;}
-.addto__buttons a, .addto__empty a {width: 100%;line-height: 48px;}
+.addto__buttons a, .addto__empty a {width: 90%;line-height: 48px;}
 .addto__buttons a + a {margin-top: 1rem;}
 }
 
@@ -432,7 +432,7 @@ footer {padding-bottom: 82px;}
 .modal__content .form__field {width: calc(50% - 0.5rem);height: 68px;background: #FFFFFF;padding: 5px;border-radius: 20px;display: flex;flex-wrap: wrap;align-items: center;position: relative;}
 .modal__content .form__field.error i {color: #eb5c5e;}
 .modal__content .form__fields input {border: 0;height: 58px;padding: 0 1rem 0 3.5rem;border-radius: 20px;}
-.modal__content .form__fields i {position: absolute;left: 1rem;color: #ffbe31;font-size: 30px;}
+.modal__content .form__fields i {position: absolute;left: 1rem;color: #ffbe31;font-size: 30px;z-index: 2;}
 .modal__content .form__fields.error i {color: #eb5c5e;}
 .modal__content .textarea {border-radius: 20px;}
 .modal__content .form__buttons {text-align: center;margin-top: 1rem;}
@@ -687,7 +687,7 @@ header [class*="__icon"] {width: 38px;height: 38px;font-size: 20px;}
 #callback .form__fields {margin-top: 2rem;height: 68px;background: #FFFFFF;padding: 5px;border-radius: 20px;display: flex;flex-wrap: wrap;align-items: center;position: relative;}
 #callback .form__fields.error i {color: #eb5c5e;}
 #callback .form__fields input {border: 0;height: 58px;padding: 0 12rem 0 3.5rem;border-radius: 20px;}
-#callback .form__fields i {position: absolute;left: 1rem;color: #ffbe31;font-size: 30px;}
+#callback .form__fields i {position: absolute;left: 1rem;color: #ffbe31;font-size: 30px;z-index: 2;}
 #callback .form__fields .form__button {background: #925ab5;position: absolute;right: 0;}
 #callback .form__fields .form__button:hover {background: #8da5db;}
 #callback .form__pp {display: block;font-size: 12px;margin-top: 1.25rem;}
@@ -998,7 +998,7 @@ footer .copyright {text-align: center;}
 .goodsModDescription {width: 100%;margin-bottom: 0.5rem;padding: 0 10px;overflow: hidden;word-break: break-word;}
 /* Количество */
 .qty {display: flex;align-items: center;flex-wrap: nowrap;}
-.qty input {width: 50px;height: 40px;background: transparent;border: 0;text-align: center;padding: 0 0.25rem;}
+.qty input {width: 50px;height: 40px;line-height: 40px;background: transparent;border: 0;text-align: center;padding: 0 0.25rem;}
 .qty a {font-size: 1.5rem;width: 40px;height: 40px;background: #ffffff;border-radius: 100%;display: flex;align-items: center;justify-content: center;}
 .qty a:hover {background: #925ab5;color: #fff;}
 .qty i {font-size: 0.75rem;}
@@ -1059,8 +1059,8 @@ footer .copyright {text-align: center;}
 .delivery__text {margin-bottom: 1rem;word-break: break-all;}
 .delivery__price strong {margin-left: 4px;}
 .zone__open {display: flex;align-items: center;font-size: 1rem;font-weight: 700;margin-top: 1rem;}
-.zone__open:after {content: "\e925";font-family: 'icomoon';font-size: 1rem;margin-left: 1rem;}
-.zone__open.active:after {content: "\e920";}
+.zone__open:after {content: "\e937";font-family: 'icomoon';font-size: 1.5rem;margin-left: 1rem;line-height: 1;}
+.zone__open.active:after {content: "\e935";}
 .zone__list {display: none;}
 .zone__list > div {margin-top: 1rem;}
 .zone__list .delivery__name {margin-bottom: 0.5rem;}
@@ -1433,6 +1433,7 @@ footer .copyright {text-align: center;}
 .cart__delete {margin-left: 1rem;}
 .total__title {font-size: 1.75rem;}
 .fastOrderForm .total__cart {font-size: 1.75rem;}
+.cart__buttons {justify-content: center;}
 }
 
 /** Быстрый заказ в Модальном окне **/

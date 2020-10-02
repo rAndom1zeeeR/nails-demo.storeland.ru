@@ -279,8 +279,8 @@
   <div class="tabs__nav">
     {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}<div class="tab" data-tab="1"><span>Описание</span><i class="icon-miscellaneous"></i></div>{% ENDIF %}
     {% IFNOT goods_features_empty %}<div class="tab" data-tab="2"><span>Хар-ки</span><i class="icon-clipboard"></i></div>{% ENDIF %}
-    {% IFNOT goods_delivery_empty %}<div class="tab" data-tab="3"><span>Доставка</span><i class="icon-chat"></i></div>{% ENDIF %}
-    {% IF SETTINGS_OPINION_DISABLE=0 %}<div class="tab" data-tab="4"><span>Отзывы</span><i class="icon-delivery"></i></div>{% ENDIF %}
+    {% IFNOT goods_delivery_empty %}<div class="tab" data-tab="3"><span>Доставка</span><i class="icon-delivery"></i></div>{% ENDIF %}
+    {% IF SETTINGS_OPINION_DISABLE=0 %}<div class="tab" data-tab="4"><span>Отзывы</span><i class="icon-chat"></i></div>{% ENDIF %}
   </div>
   <div class="tabs__content">
     <!-- Описание -->
