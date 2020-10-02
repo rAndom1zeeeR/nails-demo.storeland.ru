@@ -2823,7 +2823,7 @@ function pdtSales() {
       0:{items:1},
       320:{items:1},
       481:{items:2},
-      641:{items:2},
+      641:{items:3},
       768:{items:3},
       992:{items:3},
       1200:{items:4}
@@ -2874,7 +2874,7 @@ function pdtSlider() {
       0:{items:1},
       320:{items:1},
       481:{items:2},
-      641:{items:2},
+      641:{items:3},
       768:{items:3},
       992:{items:3},
       1200:{items:4}
@@ -2907,7 +2907,7 @@ function pdtSlider() {
       0:{items:1},
       320:{items:1},
       481:{items:2},
-      641:{items:2},
+      641:{items:3},
       768:{items:3},
       992:{items:3},
       1200:{items:4}

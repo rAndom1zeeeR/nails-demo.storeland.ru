@@ -852,7 +852,7 @@ footer .copyright {text-align: center;}
 .product__item .product__addCart a {width: 50px;height: 50px;}
 .product__item .product__name a {max-height: 3rem;}
 }
-@media all and (max-width: 767px) {
+@media all and (max-width: 640px) {
 .products__grid .product__item {width: calc(50% - 1.25rem);}
 .products__grid .product__item:nth-child(3) {margin-top: 1.25rem;}
 }
