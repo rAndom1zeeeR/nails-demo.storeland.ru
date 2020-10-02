@@ -316,7 +316,7 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 #addto .addto__contacts [class*="__icon"] {background: #ffbe31;color: #ffffff;border: 5px solid #ffffff;}
 #addto .addto__contacts [class*="__icon"]:hover {background: #925ab5;}
 .addto__contacts .content {width: calc(100% - 68px);padding: 0 1rem 0 1.5rem;line-height: 24px;}
-.addto__contacts .more {font-size: 14px;margin-top: 0.25rem;}
+.addto__contacts .more {font-size: 14px;margin-top: 0.25rem;white-space: nowrap;}
 .addto__contacts .addto__close {position: absolute;right: 0;width: 55px;height: 68px;color: #fff;background: #e192e5;border: 5px solid #fff;border-radius: 0 20px 20px 0;display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;}
 .addto__contacts .addto__close:hover {background: #925ab5;cursor: pointer;}
 /* Каталог */
@@ -362,7 +362,7 @@ footer {padding-bottom: 82px;}
 #addto .dropdown__content.opened {padding: 1rem;}
 #addto .addto__qty a {width: 30px;height: 30px;}
 #addto .addto__qty input {width: 40px;height: 30px;}
-#addto .addto__buttons a {padding: 0 1.5rem;}
+#addto .button {padding: 0 1.5rem;}
 .addto__contacts {flex-direction: column;align-items: flex-start}
 .addto__contacts .contacts__block + .contacts__block {margin: 1rem 0 0 0;}
 .addto__contacts .addto__close {height: 100%;top: 0;}
@@ -372,6 +372,10 @@ footer {padding-bottom: 82px;}
 @media all and (max-width: 480px) {
 #addto .addto__links {justify-content: space-between;}
 #addto .addto__links > div {margin: 0 0.625rem 0 0;}
+#addto .addto__contacts [class*="__icon"] {border: 0;}
+}
+@media all and (max-width: 376px) {
+#addto #addtoCallback.dropdown__content {width: 100%;}
 }
 /** Добавленные **/
 .addto__items {max-height: 300px;overflow-y: auto;}
@@ -407,19 +411,19 @@ footer {padding-bottom: 82px;}
 .addto__priceBox {margin-top: 0.75rem;flex-wrap: wrap;}
 .addto__priceBox .addto__price {width: 100%;margin-bottom: 0.75rem;}
 .addto__buttons {flex-direction: column;}
-.addto__buttons a {width: 100%;line-height: 48px;}
+.addto__buttons a, .addto__empty a {width: 100%;line-height: 48px;}
 .addto__buttons a + a {margin-top: 1rem;}
 }
 
 
 /*** Модальные окна ***/
 .fancybox-content {padding: 2rem;background: #edf2ff;border-radius: 20px;max-width: 800px;}
-.fancybox-slide--html .fancybox-close-small {border-radius: 100%;background: transparent;}
+.fancybox-slide--html .fancybox-close-small {border-radius: 100%;background: transparent;color: #001b59;}
 .fancybox-slide--html .fancybox-close-small:hover {color: #925ab5;}
 .modal__title .title {padding: 1rem 1.25rem;color: #ffffff;background: #ffbe31;border: 5px solid #fff;border-radius: 20px;display: flex;align-items: center;justify-content: center;}
 @media all and (max-width: 480px) {
 .fancybox-content {padding: 1rem;}
-.fancybox-slide--html .fancybox-close-small {top: 1rem;right: 1rem;}
+/*.fancybox-slide--html .fancybox-close-small {top: 1rem;right: 1rem;}*/
 }
 /*** Модальный Обратный звонок ***/
 #fancybox__callback, #fancybox__feedback, #fancybox__notify {background: #edf2ff;max-width: 540px;}
@@ -518,7 +522,7 @@ header .header__inner {width: calc(100% - 218px - 200px);background: #FFFFFF;pad
 header .search {width: calc(100% - 220px);position: relative;order: 3;}
 header .search input {border: 0;}
 .search__form {position: relative;display: flex;align-items: center;}
-.search__input {padding: 0 5rem 0 2rem;height: 58px;}
+.search__input {padding: 0 5rem 0 2rem;height: 58px;line-height: 58px;}
 .search__submit {position: absolute;top: 0;right: 0;padding: 0;line-height: 1;border: 0;border-radius: 20px;background-color: #ffbe31;width: 58px;height: 58px;display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;}
 .search__submit:hover {background: #925ab5;cursor: pointer;}
 .search__submit i {font-size: 24px;color: #FFFFFF;}
@@ -583,7 +587,7 @@ header .logo {width: calc(100% - 148px);}
 header .logo a {font-size: 20px;}
 header .header__inner {height: 48px;}
 header [class*="__icon"] {width: 38px;height: 38px;font-size: 20px;}
-.search__input {height: 38px;}
+.search__input {height: 38px;line-height: 38px;}
 .search__submit {width: 38px;height: 38px;}
 .search__submit i {font-size: 1rem;}
 }
@@ -614,8 +618,8 @@ header [class*="__icon"] {width: 38px;height: 38px;font-size: 20px;}
 #slideshow .owl-dots {right: 3rem}
 }
 @media all and (max-width: 480px) {
-#slideshow .owl-dots {right: 1rem}
-.slider__content {padding: 0;height: auto;background: #FFFFFF !important;}
+#slideshow .owl-dots {right: 1rem;top: 4rem;}
+#slideshow .slider__content {padding: 0;height: auto;background: #FFFFFF !important;}
 .slider__image {display: block;}
 .slider__title {padding: 1rem 0;text-align: center;}
 .slider__title a {color: #001b59;font-size: 24px;}
@@ -634,7 +638,7 @@ header [class*="__icon"] {width: 38px;height: 38px;font-size: 20px;}
 #catalog .owl-item:nth-child(3n) .catalog__item {background-color: #ffbe31;}
 #catalog .owl-item:nth-child(4n) .catalog__item {background-color: #8da5db;}
 @media all and (max-width: 480px) {
-#catalog .catalog__item {height: 48px;}
+#catalog .catalog__item {height: 58px;}
 }
 
 
@@ -720,8 +724,7 @@ header [class*="__icon"] {width: 38px;height: 38px;font-size: 20px;}
 #contacts .email:hover .contacts__icon {border-color: #925ab5;color: #925ab5;}
 #contacts .region:hover .contacts__icon {border-color: #ffbe31;color: #ffbe31;}
 #contacts .work:hover .contacts__icon {border-color: #e192e5;color: #e192e5;}
-
-#contacts .more {font-size: 14px;font-weight: 800;}
+#contacts .more {font-size: 14px;font-weight: 800;margin-top: 0.75rem;}
 @media all and (max-width: 1199px) {
 #contacts .content {width: 100%;padding: 1rem 1rem 0 0;}
 }
@@ -790,6 +793,7 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 }
 @media all and (max-width: 480px) {
 .social__links a {width: 50px;height: 50px;border: 0;}
+footer .copyright {text-align: center;}
 }
 
 
@@ -903,10 +907,10 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 /*** Категории ***/
 .categories__list + .toolbar {margin-top: 2rem;}
 .categories__list {display: flex;flex-wrap: wrap;margin-left: -0.625rem;margin-right: -0.625rem;}
-.categories__item {position: relative;width: calc(25% - 1.25rem);margin: 2rem 0.625rem 0 0.625rem;}
+.categories__item {position: relative;width: calc(25% - 1.25rem);height: 100%;margin: 2rem 0.625rem 0 0.625rem;}
 .categories__item:nth-child(-n+4) {margin-top: 0;}
-.categories__name {margin-top: 1rem;padding: 1rem 2rem;width: 100%;line-height: 1;word-break: break-word;white-space: break-spaces;}
-.categories__image {background: #ffffff;border: 5px solid #fff;border-radius: 20px;height: calc(100% - 84px);position: relative;display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;}
+.categories__name {margin-top: 1rem;padding: 1rem;width: 100%;line-height: 1;word-break: break-word;white-space: break-spaces;}
+.categories__image {background: #ffffff;border: 5px solid #fff;border-radius: 20px;height: 244px;position: relative;display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;}
 .categories__image img {border-radius: 20px;max-width: 100%;max-height: 100%;}
 .categories__image:before {content: "";background-color: rgba(255, 255, 255, 0.5);border-radius: 20px;display: block;width: 100%;height: 100%;position: absolute;transition: all 0.3s ease;}
 .categories__item:hover .categories__image:before {background-color: rgba(255, 255, 255, 0);}
@@ -915,13 +919,19 @@ footer .logo {width: auto;text-align: left;padding-right: 1rem;}
 .categories__item {width: calc(33.333333% - 1.25rem);}
 .categories__item:nth-child(4) {margin-top: 2rem;}
 }
-@media all and (max-width: 767px) {
+@media all and (max-width: 991px) {
+.categories__image {height: 192px;}
+}
+@media all and (max-width: 640px) {
 .categories__item {width: calc(50% - 1.25rem);}
 .categories__item:nth-child(3) {margin-top: 2rem;}
 }
 @media all and (max-width: 480px) {
-.categories__item {width: 100%;}
-.categories__item:nth-child(2) {margin-top: 2rem;}
+.categories__name {padding: 0.75rem;margin-top: 0.5rem;font-size: 14px;}
+.categories__image {height: 160px;}
+}
+@media all and (max-width: 376px) {
+.categories__image {height: 134px;}
 }
 
 
