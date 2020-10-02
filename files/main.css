@@ -327,21 +327,25 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 #addto .catalog__items {position: relative;}
 #addto .catalog__item a {font-size: 1rem;padding: 1.5rem;border-radius: 20px;display: inline-block;}
 #addto .catalog__item a:hover, #addto .catalog__item a.opened {background: #FFFFFF;}
-#addto .catalog__item .open {margin-left: 0.25rem;vertical-align: middle;line-height: 1;}
+#addto .catalog__item .open {margin-left: 0.25rem;vertical-align: middle;width: 30px;height: 30px;line-height: 30px;display: inline-block;text-align: center;}
 #addto .catalog__item .open:before {content: "\e934";font-family: 'icomoon';font-size: 1.25rem;}
+@media all and (min-width: 992px) {
 #addto .catalog__item .sub {display: none;position: absolute;top: 0;height: 100%;overflow-x: auto;}
 #addto .catalog__item .sub[data-level="3"] {display: none !important;}
 #addto .catalog__item:hover > .sub {display: block;}
 #addto .catalog__item[data-level="0"]:hover > .sub[data-level="1"] {left: 33%;width: 66%;}
 #addto .catalog__item[data-level="1"]:hover > .sub[data-level="2"] {left: 50%;width: 50%;}
+#addto .catalog__item a {max-width: 240px;}
+}
 @media all and (max-width: 1199px) {
 #addto #addtoCatalog.dropdown__content {width: 838px;}
 #addto #addtoCatalog.dropdown__content.open {padding: 1rem;}
 }
 @media all and (max-width: 991px) {
-#addto #addtoCatalog.dropdown__content {width: 618px;}
-#addto .catalog__item .sub[data-level="2"] {display: none !important;}
-#addto .catalog__item[data-level="0"]:hover > .sub[data-level="1"] {left: 50%;width: 50%;}
+#addto #addtoCatalog.dropdown__content {width: 300px;}
+#addto .catalog__item .sub {display: none;padding-left: 1rem;}
+#addto .catalog__item a {padding: 1rem;}
+#addto .catalog__item .open.opened:before {content: "\e937";}
 }
 @media all and (max-width: 767px) {
 .container {padding-left: 1rem;}
