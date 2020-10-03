@@ -342,7 +342,12 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 #addto #addtoCatalog.dropdown__content.open {padding: 1rem;}
 }
 @media all and (max-width: 991px) {
+.addto__items {max-height: auto;overflow: visible;}
 #addto #addtoCatalog.dropdown__content {width: 300px;}
+#addto .dropdown__content.opened {max-height: calc(100vh - 134px - 82px);overflow-y: auto;}
+#addto .dropdown__content::-webkit-scrollbar {width: 0.5rem;height: 0;}
+#addto .dropdown__content::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #925ab5;}
+#addto .dropdown__content::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #edf2ff;}
 #addto .catalog__item .sub {display: none;padding-left: 1rem;}
 #addto .catalog__item a {padding: 1rem;}
 #addto .catalog__item .open.opened:before {content: "\e937";}
