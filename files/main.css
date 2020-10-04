@@ -266,8 +266,7 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 *******************************************************************************/
 
 /*** Иконки ***/
-[class*="__icon"] {position: relative;width: 68px;height: 68px;font-size: 30px;color: #FFFFFF;border: 5px solid #FFFFFF;border-radius: 20px;display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;}
-[class*="__icon"]:hover {cursor: pointer;}
+[class*="__icon"] {position: relative;width: 68px;height: 68px;font-size: 30px;color: #FFFFFF;border: 5px solid #FFFFFF;border-radius: 20px;display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;cursor: pointer;}
 .catalog__icon {width: 220px;height: 58px;padding: 0 1.5rem 0 1.25rem;background-color: #8da5db;font-size: 1rem;border: 0;font-weight: bold;cursor: pointer;}
 .catalog__icon:hover, .catalog__icon.opened {background: #925ab5;}
 .catalog__icon i {font-size: 20px;}

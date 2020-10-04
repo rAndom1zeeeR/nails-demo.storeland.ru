@@ -3016,7 +3016,7 @@ function slideShow() {
     dots: true,
     dotsContainer: '',
     URLhashListener: true,
-    autoplay: false,
+    autoplay: true,
     autoplayHoverPause: true,
     autoHeight: false,
     autoHeightClass: 'owl-height',
