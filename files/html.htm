@@ -1894,13 +1894,13 @@
     {% IF FORM_NOTICE %}
     new Noty({
       text: '<div class="noty__addto"><i class="icon-{% IF FORM_NOTICE_IS_GOOD %}check{% ELSE %}warning{% ENDIF %}"></i><div class="noty__message">{FORM_NOTICE | nl2br}</div></div>',
-      layout:"topCenter",
+      layout:"bottomCenter",
       type:"{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}",
       theme:"",
       textAlign:"center",
       animation: {
-        open: 'animated fadeInDown',
-        close: 'animated fadeOutUp',
+	      open: 'animated fadeInUp',
+	      close: 'animated fadeOutDown',
         easing: 'swing',
         speed: 400
       },

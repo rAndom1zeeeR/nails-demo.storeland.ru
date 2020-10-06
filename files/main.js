@@ -1277,15 +1277,15 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
           if(typeof(Noty) == "function") {
             new Noty({
               text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ $(data).html() + '</div></div>',
-              layout:"topCenter",
+              layout:"bottomCenter",
               type:"warning",
               theme:"",
               closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInDown',
-                close: 'animated fadeOutUp',
+                open: 'animated fadeInUp',
+                close: 'animated fadeOutDown',
                 easing: 'swing',
                 speed: 400
               },
@@ -1304,15 +1304,15 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
           if(typeof(Noty) == "function") {
             new Noty({
               text: '<div class="noty__addto"><i class="icon-check"></i><div class="noty__message">'+ $(data).html() + '</div></div>',
-              layout:"topCenter",
+              layout:"bottomCenter",
               type:"success",
               theme:"",
               closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInDown',
-                close: 'animated fadeOutUp',
+                open: 'animated fadeInUp',
+                close: 'animated fadeOutDown',
                 easing: 'swing',
                 speed: 400
               },
@@ -1463,15 +1463,15 @@ $('.add-compare').off('click').click(function(){
           if(typeof(Noty) == "function") {
             new Noty({
               text: '<div class="noty__addto"><i class="icon-check"></i><div class="noty__message">'+ data.message + '</div></div>',
-              layout:"topCenter",
+              layout:"bottomCenter",
               type:"success",
               theme:"",
               closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInDown',
-                close: 'animated fadeOutUp',
+                open: 'animated fadeInUp',
+                close: 'animated fadeOutDown',
                 easing: 'swing',
                 speed: 400
               },
@@ -1490,15 +1490,15 @@ $('.add-compare').off('click').click(function(){
           if(typeof(Noty) == "function") {
             new Noty({
               text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ data.message + '</div></div>',
-              layout:"topCenter",
+              layout:"bottomCenter",
               type:"warning",
               theme:"",
               closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInDown',
-                close: 'animated fadeOutUp',
+                open: 'animated fadeInUp',
+                close: 'animated fadeOutDown',
                 easing: 'swing',
                 speed: 400
               },
@@ -1644,15 +1644,15 @@ $('.add-favorites').off('click').click(function(){
           if(typeof(Noty) == "function") {
             new Noty({
               text: '<div class="noty__addto"><i class="icon-check"></i><div class="noty__message">'+ data.message + '</div></div>',
-              layout:"topCenter",
+              layout:"bottomCenter",
               type:"success",
               theme:"",
               closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInDown',
-                close: 'animated fadeOutUp',
+                open: 'animated fadeInUp',
+                close: 'animated fadeOutDown',
                 easing: 'swing',
                 speed: 400
               },
@@ -1671,15 +1671,15 @@ $('.add-favorites').off('click').click(function(){
           if(typeof(Noty) == "function") {
             new Noty({
               text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ data.message + '</div></div>',
-              layout:"topCenter",
+              layout:"bottomCenter",
               type:"warning",
               theme:"",
               closeWith: ['click'],
               textAlign:"center",
               easing:"swing",
               animation: {
-                open: 'animated fadeInDown',
-                close: 'animated fadeOutUp',
+                open: 'animated fadeInUp',
+                close: 'animated fadeOutDown',
                 easing: 'swing',
                 speed: 400
               },
