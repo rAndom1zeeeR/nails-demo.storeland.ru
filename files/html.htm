@@ -139,9 +139,11 @@
             </a>
             <div id="addtoCart" class="addto__cart dropdown__content" data-open="cart">
               {% IFNOT cart_items_empty %}
+	            <form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="addto__cart-action">
+	            <input type="hidden" name="hash" value="{HASH}" />
               <div class="addto__items">
                 {% FOR cart_items %}
-                <div class="addto__item" data-id="{cart_items.GOODS_ID}">
+                <div class="addto__item" data-id="{cart_items.GOODS_MOD_ID}">
                   <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="addto__image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=nails{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon" /></a>
                   <div class="addto__shop">
                     <!-- Название -->
@@ -149,11 +151,11 @@
                     {% IFNOT cart_items.distinctive_properties_empty %}<div class="addto__mod">({% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %}, {% ENDIF %}{% ENDFOR %})</div>{% ENDIF %}
                     <!-- Цена -->
                     <div class="addto__priceBox {CURRENCY_CHAR_CODE}">
-                      <div class="addto__price price__now" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</div>
+                      <div class="addto__price price__now" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</div>
                       <!-- Количество -->
                       <div class="addto__qty qty">
                         <a href="javascript:void(0)" class="qty__minus unselectable" title="Уменьшить"><i class="icon-minus"></i></a>
-                        <input type="text" name="form[goods_mod_quantity]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" min="1" max="{cart_items.MAX_REST_VALUE}" title="Количество" class="quantity" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
+                        <input type="text" name="form[quantity][{cart_items.GOODS_MOD_ID}]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" min="1" max="{cart_items.MAX_REST_VALUE}" title="Количество" class="quantity quantity-ajax" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
                         <a href="javascript:void(0)" class="qty__plus unselectable" title="Увеличить"><i class="icon-plus"></i></a>
                       </div>
                       <!-- Удаление -->
@@ -163,6 +165,7 @@
                 </div>
                 {% ENDFOR %}
               </div>
+	            </form>
               {% ENDIF %}
               <div class="addto__empty">
                 <div class="addto__title">В корзине пока ничего нет</div>

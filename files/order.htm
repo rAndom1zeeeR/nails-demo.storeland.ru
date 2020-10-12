@@ -194,8 +194,8 @@
           </div>
           {% ENDIF %}
           <!-- Если поле даты доставки запрашивается -->
-          <div class="form__fields two">
           {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME < 3 %}
+	        <div class="form__fields two">
             <div class="form__field">
               <label for="deliveryConvenientDate" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Дата доставки <em>*</em></label>
               <input id="deliveryConvenientDate" type="text" name="form[delivery][convenient_date]" value="{ORDER_FORM_DELIVERY_CONVENIENT_DATE}" class="form__input" maxlength="10" minlength="10" placeholder="17.11.19" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %} />
@@ -208,12 +208,12 @@
                 {% ENDFOR %}
               </select>
             </div>
+	        </div>
           {% ENDIF %}
-          </div>
           <!-- Если поле комментарии запрашивается -->
           {% IF SETTINGS_ORDER_FIELDS_COMMENT < 3 %}
           <div class="form__fields">
-            <label style="display: none;" for="quickDeliveryComment" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}class="required"{% ENDIF %}>Комментарий <em>*</em></label>
+            <label for="quickDeliveryComment" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}class="required"{% ENDIF %}>Комментарий <em>*</em></label>
             <textarea cols="100" rows="5" id="quickDeliveryComment" name="form[delivery][comment]" class="textarea" placeholder="Комментарий" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}>{ORDER_FORM_DELIVERY_COMMENT}</textarea>
           </div>
           {% ENDIF %}

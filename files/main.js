@@ -70,10 +70,10 @@ function SearchFieldInit(obj) {
   });
 
   //Считываем нажатие клавиш, уже после вывода подсказки
-  var suggestCount;
-  var suggestSelected = 0;
+  let suggestCount;
+  let suggestSelected = 0;
   function keyActivate(n){
-    var $links = $('#search__result .result__item a');
+    let $links = $('#search__result .result__item a');
     $links.eq(suggestSelected-1).removeClass('active');	
     if(n == 1 && suggestSelected < suggestCount){
       suggestSelected++;
@@ -94,8 +94,8 @@ function SearchFieldInit(obj) {
     // Нажатие enter при выделенном пункте из поиска
     case 13: // enter
     if(suggestSelected){
-      var $link = $('#search__result .result__item').eq(suggestSelected - 1).find('a');
-      var href = $link.attr('href');
+      let $link = $('#search__result .result__item').eq(suggestSelected - 1).find('a');
+      let href = $link.attr('href');
       if(href){
         document.location = href
       } else {
@@ -158,15 +158,15 @@ return substr(md5(parseInt(new Date().getTime() / 1000, 10)),rand(0,24),8);
 // Живой поиск
 $(function() {
   // Навигационная таблица над таблицей с данными
-  var searchBlock = $('.search');
-  var options = {
+  let searchBlock = $('.search');
+  let options = {
     target: 'form.store_ajax_catalog',
     url:  '/admin/store_catalog',
     items_target: '#goods',
     last_search_query:  '',
   };
   // По этому хэшу будем обращаться к объекту извне
-  var randHash = GenMd5Hash();
+  let randHash = GenMd5Hash();
   // Если объекта со списком ajax функций не существует, создаём её
   if(typeof(document.SearchInCatalogAjaxQuerySender) == 'undefined') {
   document.SearchInCatalogAjaxQuerySender = {};
@@ -181,14 +181,14 @@ $(function() {
   }
   // Отправляет запрос к серверу с задачей поиска товаров
   document.SearchInCatalogAjaxQuerySender[randHash] = function (old_val) {
-    var last_search_query_array = [];
+    let last_search_query_array = [];
     // sessionStorage is available
     if (typeof sessionStorage !== 'undefined') {
       try {
         if(sessionStorage.getItem('lastSearchQueryArray')){
         last_search_query_array = JSON.parse(sessionStorage.getItem('lastSearchQueryArray'));
         // Находим соответствие текущего запроса с sessionStorage
-        var currentSearch = $.grep(last_search_query_array, function (item){
+        let currentSearch = $.grep(last_search_query_array, function (item){
           return item.search_query == old_val
         })[0]
         if(currentSearch){
@@ -209,7 +209,7 @@ $(function() {
       // Добавляем нашей форме поиска поле загрузки
       searchBlock.f_search.addClass('search__loading');
       // Собираем параметры для Ajax запроса
-      var params = {
+      let params = {
         'ajax_q'                : 1,
         'goods_search_field_id' : 0,
         'q'                     : options['last_search_query'],
@@ -233,7 +233,7 @@ $(function() {
         try {
           sessionStorage.setItem('lastSearchQueryArray', JSON.stringify(last_search_query_array))
           // Находим соответствие текущего запроса с sessionStorage
-          var currentSearch = $.grep(last_search_query_array, function (item){
+          let currentSearch = $.grep(last_search_query_array, function (item){
             return item.search_query == old_val
           })[0]
           //Если такого запроса ещё не было запишем его в sessionStorage
@@ -357,7 +357,7 @@ function genWordEnd(num, e, m, mm) {
 function GetSum(val,precision) {
   if(typeof (precision) == "undefined" || precision < 0) { precision = 0; }
   // Возводим в степень точности 10 для округления
-  var p = Math.pow(10,precision);  
+  var p = Math.pow(10,precision);
   try {return Math.round(parseFloat(eval(val.toString().replace(/\s/gi, "").replace(/,/gi, ".")))*p)/p;} catch (e) {return 0;}
 }
 
@@ -466,7 +466,7 @@ function RefreshImageAction(img,num,cnt) {
 
 // Функция определения браузера
 $(document).ready(function() {
-  var ua = detect.parse(navigator.userAgent);
+  let ua = detect.parse(navigator.userAgent);
   if (ua.browser.family === 'Safari') {
     $('body').addClass('Safari');
   }
@@ -627,8 +627,8 @@ function goodspage() {
     }
   });
   // Функция показать больше для Отзывов
-  var opinionContent = $('.opinion__items');
-  var opinionCount = opinionContent.find('.opinion__item').length;
+  let opinionContent = $('.opinion__items');
+  let opinionCount = opinionContent.find('.opinion__item').length;
   if(opinionCount<=3){ opinionContent.find('.opinion__buttons').hide(); }
   opinionContent.find('.opinion__buttons .showAll').on('click',function(){
     if($(this).hasClass('active')){
@@ -665,7 +665,7 @@ function goodspage() {
   });
   // Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
   $(".opinion__form .button").on('click', function(){
-    var form = $(".opinion__form");
+    let form = $(".opinion__form");
     form.validate({
       errorPlacement: function(error, element) { }
     });
@@ -680,15 +680,15 @@ function goodspage() {
   });
   // Переключение табов
   function tabSwitch() {
-    var tabs = $('.productView__tabs');
-    var tab = tabs.find('.tab');
-    var block = $('.tabs__content > div');
+    let tabs = $('.productView__tabs');
+    let tab = tabs.find('.tab');
+    let block = $('.tabs__content > div');
     tab.first().addClass('active');
     block.first().addClass('active');
     // Табы в карточке
     tab.on('click', function(){
-      var id = $(this).data('tab');
-      var content = tabs.find('.tabs__content > div[data-tab="'+ id +'"]');
+      let id = $(this).data('tab');
+      let content = tabs.find('.tabs__content > div[data-tab="'+ id +'"]');
       tab.removeClass('active');
       block.removeClass('active');
       $(this).addClass('active');
@@ -742,7 +742,7 @@ function catalogpage() {
   });
   // Закрытие сортировки и показать по
   $(document).mouseup(function (e){
-    var selectDown = $(".selectBox .dropdown");
+    let selectDown = $(".selectBox .dropdown");
     if (!selectDown.is(e.target)) {
       selectDown.parent().parent().removeClass('opened');
       setTimeout(function(){
@@ -751,8 +751,8 @@ function catalogpage() {
     }
   });
   // Обновление названия сортировки
-  var selectText = $('.toolbar .sort-by.selectBox .dropdown .dropdown__item[selected]').text();
-  var lengthText = selectText.length;
+  let selectText = $('.toolbar .sort-by.selectBox .dropdown .dropdown__item[selected]').text();
+  let lengthText = selectText.length;
   if (lengthText == '0' ){
     selectText = 'Название сортировки';
   }
@@ -854,7 +854,7 @@ function priceFilter() {
   });
   // При изменении минимального значения цены
   priceInputMin.keyup(function(){
-    var newVal = parseInt($(this).val());
+    let newVal = parseInt($(this).val());
     if(newVal < priceFilterMinAvailable) {
       newVal = priceFilterMinAvailable;
     }
@@ -864,7 +864,7 @@ function priceFilter() {
   });
   // При изменении максимального значения цены
   priceInputMax.keyup(function(){
-    var newVal = parseInt($(this).val());
+    let newVal = parseInt($(this).val());
     if(newVal > priceFilterMaxAvailable) {
       newVal = priceFilterMaxAvailable;
     }
@@ -890,9 +890,8 @@ function priceFilter() {
 function quantity() {
   //Regulator Up копки + в карточке товара при добавлении в корзину
   $('.qty__plus').off('click').click(function(){
-    var
-      quantity = $(this).parent().find('.quantity, .cartqty'),
-      currentVal = parseInt(quantity.val());
+    let quantity = $(this).parent().find('.quantity, .cartqty');
+    let currentVal = parseInt(quantity.val());
     if (!isNaN(currentVal)){
       quantity.val(currentVal + 1);
       quantity.trigger('keyup');
@@ -902,9 +901,8 @@ function quantity() {
   });
   //Regulator Down копки - в карточке товара при добавлении в корзину
   $('.qty__minus').off('click').click(function(){
-    var
-      quantity = $(this).parent().find('.quantity, .cartqty'),
-      currentVal = parseInt(quantity.val());
+    let quantity = $(this).parent().find('.quantity, .cartqty');
+    let currentVal = parseInt(quantity.val());
     if (!isNaN(currentVal)){
       quantity.val(currentVal - 1);
       quantity.trigger('keyup');
@@ -1043,8 +1041,8 @@ function goodsModification() {
         goodsPriceNow.attr('data-price', modificationPriceNow);
         goodsPriceNow.attr('content', modificationPriceNow);
         $('.related .checkbox__input').each(function(i, checkbox){
-          var $checkbox = $(checkbox);
-          var checkboxActive = $checkbox.prop('checked');
+          let $checkbox = $(checkbox);
+          let checkboxActive = $checkbox.prop('checked');
           if(checkboxActive) {
             changePrice($checkbox, checkboxActive);
           }
@@ -1140,7 +1138,7 @@ function goodsModification() {
     let checkboxActive = $checkbox.prop('checked');
     if (checkboxActive) {
       // Создаём инпут с доп товаром
-      var $input = $('<input class="goodsID-' + modId + '">')
+      let $input = $('<input class="goodsID-' + modId + '">')
         .attr('type', 'hidden')
         .attr('name', 'form[goods_mod_id][' + modId + ']')
         .attr('data-price', $checkbox.data('mod-price'))
@@ -1175,7 +1173,7 @@ function goodsModification() {
 
 // Сравнение товаров
 function Compare() {
-  var owlCompare = $('.CompareGoodsTableTbody .owl-carousel');
+  let owlCompare = $('.CompareGoodsTableTbody .owl-carousel');
   owlCompare.owlCarousel({
     items: 4,
     margin: 15,
@@ -1248,15 +1246,15 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
   $('.cart__count').animate({opacity: 0,display: "none"},500);
   $('.cart__count').animate({display: "inline",opacity: 1},500);
   // Находим форму, которую отправляем на сервер, для добавления товара в корзину
-  var formBlock = $($(this).get(0));
-  var addressCart = '/cart';
+  let formBlock = $($(this).get(0));
+  let addressCart = '/cart';
     // Проверка на существование формы отправки запроса на добавление товара в корзину
     if (1 > formBlock.length || formBlock.get(0).tagName != 'FORM') {
       alert('Не удалось найти форму добавления товара в корзину');
       return false;
     }
     // Получаем данные формы, которые будем отправлять на сервер
-    var formData = formBlock.serializeArray();
+    let formData = formBlock.serializeArray();
     // Сообщаем серверу, что мы пришли через ajax запрос
     formData.push({name: 'ajax_q', value: 1});
     // Так же сообщим ему, что нужно сразу отобразить форму быстрого заказа
@@ -1270,7 +1268,7 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
       success: function(data) {
         //$.fancybox.open(data);
         // Анализ системного сообщения в коризне
-        var str = $(data).html();
+        let str = $(data).html();
         // Проверяем текст сообщения на наличие ошибки
         if (str.indexOf("Не удалось добавить товар") != -1) {
           // Сообщение с ошибкой
@@ -1340,7 +1338,7 @@ function Addto() {
 // Добавление/удаление товара на сравнение/Сохраненное через ajax
 $('.add-compare').off('click').click(function(){
   // Объект ссылки, по которой кликнули
-  var 
+  let
   a = $(this)
   isAdd = a.attr('data-action-is-add'),
   addUrl = a.attr('data-action-add-url'),
@@ -1360,9 +1358,9 @@ $('.add-compare').off('click').click(function(){
   delTooltip = a.attr('data-action-text-del'),
   requestUrl = a.attr('href');
   
-  var atl = $(this).closest('.product__links');
-  var atlS = $(this).closest('.product__shop');
-  var flag = 0;
+  let atl = $(this).closest('.product__links');
+  let atlS = $(this).closest('.product__shop');
+  let flag = 0;
   $('.addto__compare .addto__item').each(function(){
     if($(this).attr('data-id') == pDataid){
       flag = 1;
@@ -1406,7 +1404,7 @@ $('.add-compare').off('click').click(function(){
         }
         if('ok' == data.status) {
           if(isAdd == 1) {
-            var 
+            let
               from = addUrl
               ,to = delUrl
               ,newIsAddStatus = 0
@@ -1417,7 +1415,7 @@ $('.add-compare').off('click').click(function(){
             atl.addClass('added');
             atlS.addClass('added');
           } else {
-            var 
+            let
               from = delUrl
               ,to = addUrl
               ,newIsAddStatus = 1
@@ -1432,7 +1430,7 @@ $('.add-compare').off('click').click(function(){
           // Если указано, что изменилось число товаров на сравнении
           if(typeof(data.compare_goods_count) != 'undefined') {
             // Блок информации о том, что есть товары на сравнении
-            var sidecount = $('.compare__count');
+            let sidecount = $('.compare__count');
             // Если на сравнении больше нет товаров
             // Указываем информацию о новом количестве товаров на сравнении
             // Блок обновления списка сравнения в каталога
@@ -1521,7 +1519,7 @@ $('.add-compare').off('click').click(function(){
 // Добавление/удаление товара на сравнение/Сохраненное через ajax
 $('.add-favorites').off('click').click(function(){
   // Объект ссылки, по которой кликнули
-  var 
+  let
   a = $(this)
   addUrl = a.attr('data-action-add-url'),
   delUrl = a.attr('data-action-delete-url'),
@@ -1542,9 +1540,9 @@ $('.add-favorites').off('click').click(function(){
   delTooltip = a.attr('data-action-text-del'),
   requestUrl = a.attr('href');
   
-  var atl = $(this).closest('.product__links');
-  var atlS = $(this).closest('.product__shop');
-  var flag = 0;
+  let atl = $(this).closest('.product__links');
+  let atlS = $(this).closest('.product__shop');
+  let flag = 0;
   $('.addto__favorites .addto__item').each(function(){
     if($(this).attr('data-id') == pDataid){
       flag = 1;
@@ -1587,7 +1585,7 @@ $('.add-favorites').off('click').click(function(){
         }
         if('ok' == data.status) {
           if(isAdd == 1) {
-            var 
+            let
               from = addUrl
               ,to = delUrl
               ,newIsAddStatus = 0
@@ -1598,7 +1596,7 @@ $('.add-favorites').off('click').click(function(){
             atl.addClass('added');
             atlS.addClass('added');
           } else {
-            var 
+            let
               from = delUrl
               ,to = addUrl
               ,newIsAddStatus = 1
@@ -1613,7 +1611,7 @@ $('.add-favorites').off('click').click(function(){
           // Если указано, что изменилось число товаров на сравнении
           if(typeof(data.favorites_goods_count) != 'undefined') {
             // Блок информации о том, что есть товары на сравнении
-            var sidecount = $('.favorites__count');
+            let sidecount = $('.favorites__count');
             // Если на сравнении больше нет товаров
             // Указываем информацию о новом количестве товаров на сравнении
             // Блок обновления списка сравнения в каталога
@@ -2051,7 +2049,7 @@ function quickView() {
 // Получение центральной разметки страницы (для быстрого просмотра)
 $(document).ready(function(){
   $.fn.getColumnContent = function() {
-    var block = ($(this).length && $(this).hasClass('productViewBlock') ? $(this).filter('.productViewBlock') : $('.productViewBlock:eq(0)'));
+    let block = ($(this).length && $(this).hasClass('productViewBlock') ? $(this).filter('.productViewBlock') : $('.productViewBlock:eq(0)'));
     block.each(function(){
       // Удаляем все блоки, которые не отображаются в быстром просмотре.
       $(this).children().not('.productView').remove();
@@ -2064,7 +2062,7 @@ $(document).ready(function(){
   // При наведении на блок товара загружаем контент этого товара, который будет использоваться для быстрого просмотра, чтобы загрузка происходила быстрее.
   $('.product__item').mouseover(function() {
     // Если в блоке нет ссылки на быстрый просмотр, то не подгружаем никаких данных
-    var link = $(this).find('a.quickview');
+    let link = $(this).find('a.quickview');
     if(link.length < 1) {
       return true;
     }
@@ -2072,7 +2070,7 @@ $(document).ready(function(){
     if(typeof(document.quickviewPreload) == 'undefined') {
       document.quickviewPreload = [];
     }
-    var href = link.attr('href');
+    let href = link.attr('href');
     href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
     // Если контент по данной ссылке ещё не загружен
     if(typeof(document.quickviewPreload[href]) == 'undefined') {
@@ -2093,7 +2091,7 @@ $(document).ready(function(){
 // Действие при нажатии на кнопку быстрого просмотра.  
 $(document).ready(function(){
   $(document).on('click', 'a.quickview', function() {
-    var href = $(this).attr('href');
+    let href = $(this).attr('href');
     href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
     quickViewShow(href);
     $(function(){
@@ -2161,7 +2159,7 @@ function quickViewMod() {
 // Получение центральной разметки страницы (для быстрого просмотра)
 $(document).ready(function(){
   $.fn.getColumnContent = function() {
-    var block = ($(this).length && $(this).hasClass('productViewBlock') ? $(this).filter('.productViewBlock') : $('.productViewBlock:eq(0)'));
+    let block = ($(this).length && $(this).hasClass('productViewBlock') ? $(this).filter('.productViewBlock') : $('.productViewBlock:eq(0)'));
     block.each(function(){
       // Удаляем все блоки, которые не отображаются в быстром просмотре.
       $(this).children().not('.productView').remove();
@@ -2174,7 +2172,7 @@ $(document).ready(function(){
   // При наведении на блок товара загружаем контент этого товара, который будет использоваться для быстрого просмотра, чтобы загрузка происходила быстрее.
   $('.product__item').mouseover(function() {
     // Если в блоке нет ссылки на быстрый просмотр, то не подгружаем никаких данных
-    var link = $(this).find('a.add-mod');
+    let link = $(this).find('a.add-mod');
     if(link.length < 1) {
       return true;
     }
@@ -2182,7 +2180,7 @@ $(document).ready(function(){
     if(typeof(document.quickviewPreload) == 'undefined') {
       document.quickviewPreload = [];
     }
-    var href = link.attr('href');
+    let href = link.attr('href');
     href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
     // Если контент по данной ссылке ещё не загружен
     if(typeof(document.quickviewPreload[href]) == 'undefined') {
@@ -2203,7 +2201,7 @@ $(document).ready(function(){
 // Действие при нажатии на кнопку быстрого просмотра.  
 $(document).ready(function(){
   $(document).on('click', 'a.add-mod', function() {
-    var href = $(this).attr('href');
+    let href = $(this).attr('href');
     href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
     quickViewShowMod(href);
     $(function(){
@@ -2269,14 +2267,14 @@ function quickViewShowMod(href, atempt) {
 // Быстрый заказ
 function quickOrder(formSelector) {
   // Находим форму, которую отправляем на сервер, для добавления товара в корзину
-  var formBlock = $($(formSelector).get(0));
+  let formBlock = $($(formSelector).get(0));
   // Проверка на существование формы отправки запроса на добавление товара в корзину
   if(1 > formBlock.length || formBlock.get(0).tagName != 'FORM') {
     alert('Не удалось найти форму добавления товара в корзину');
     return false;
   }
   // Получаем данные формы, которые будем отправлять на сервер
-  var formData = formBlock.serializeArray();
+  let formData = formBlock.serializeArray();
   // Сообщаем серверу, что мы пришли через ajax запрос
   formData.push({name: 'ajax_q', value: 1});
   // Так же сообщим ему, что нужно сразу отобразить форму быстрого заказа 
@@ -2334,14 +2332,14 @@ function OrderScripts() {
     }
   });
   // Отображение вариантов оплаты
-  var ID = $('input[name="form[delivery][id]"]:checked').val();
+  let ID = $('input[name="form[delivery][id]"]:checked').val();
   $('.order__payment').hide();
   $('.order__payment[rel="' + ID + '"]').show();
   $('.order__payment[rel="' + ID + '"]').find('input:first').click();
   // Действия при выборе варианта доставки на этапе оформления заказа
   $('.delivery__radio').click(function(d){
     // Отображение вариантов оплаты при выборе доставки
-    var ID = $('input[name="form[delivery][id]"]:checked').val();
+    let ID = $('input[name="form[delivery][id]"]:checked').val();
     $('.order__payment').hide();
     $('.order__payment[rel="' + ID + '"]').show();
     $('.order__payment[rel="' + ID + '"]').find('input:first').click();
@@ -2351,15 +2349,15 @@ function OrderScripts() {
     $('.zone__radio').each(function(){
       $(this).prop('checked',false);
     });
-    var val = $(this).val();
-    var fz = $($('.zone__radio[deliveryid='+val+']')[0]);       
+    let val = $(this).val();
+    let fz = $($('.zone__radio[deliveryid='+val+']')[0]);
     $(this).prop('checked',true);
     fz.prop('checked',true);
-    var price = $(this).attr('price');
-    var priceBlock = $('.delivery__option[rel='+ val +']').find('.delivery__price').find('.num');
+    let price = $(this).attr('price');
+    let priceBlock = $('.delivery__option[rel='+ val +']').find('.delivery__price').find('.num');
     // Обновление цены при наличии зоны
-    var cartSumTotal = $('.cartSumTotal').data('value');
-    var zonePrice =  $('.zone__radio:checked').attr('price');
+    let cartSumTotal = $('.cartSumTotal').data('value');
+    let zonePrice =  $('.zone__radio:checked').attr('price');
     if(zonePrice > 0){
       priceBlock.text(zonePrice);
       $('.cartSumDelivery .num').text(zonePrice);
@@ -2368,8 +2366,8 @@ function OrderScripts() {
       $('.cartSumDelivery .num').text(price);
     }
     // Обновление цены с учетом доставки
-    var cartSumTotalHide = $('.cartSumTotalHide:eq(0) .num').text().toString().replace(/\s/g, '');
-    var newSum = parseInt(cartSumTotalHide) + parseInt(priceBlock.text());
+    let cartSumTotalHide = $('.cartSumTotalHide:eq(0) .num').text().toString().replace(/\s/g, '');
+    let newSum = parseInt(cartSumTotalHide) + parseInt(priceBlock.text());
     $('.cartSumTotal .num').text(newSum);
     // Скрытие необязательных полей при выборе самовывоза
     if($(this).data('name') == 'Самовывоз'){
@@ -2387,9 +2385,9 @@ function OrderScripts() {
   
   // Действия при выборе зоны внутри варианта доставки на этапе оформления заказа
   $('.zone__radio').click(function(){
-    var val = $(this).attr('deliveryid');
-    var price = $(this).attr('price');
-    var priceBlock = $('.delivery__option[rel='+ val +']').find('.delivery__price').find('.num');
+    let val = $(this).attr('deliveryid');
+    let price = $(this).attr('price');
+    let priceBlock = $('.delivery__option[rel='+ val +']').find('.delivery__price').find('.num');
     // Обновление цены
     priceBlock.text(price);
     //
@@ -2402,13 +2400,13 @@ function OrderScripts() {
       }
     });
     // Выбор варианта оплаты при выборе зоны доставки
-    var ID = $('input[name="form[delivery][id]"]:checked').val();
+    let ID = $('input[name="form[delivery][id]"]:checked').val();
     $('.order__payment').hide();
     $('.order__payment[rel="' + ID + '"]').show();
     $('.order__payment[rel="' + ID + '"]').find('input:first').click();
     // Обновление цены с учетом доставки
-    var cartSumTotalHide = $('.cartSumTotalHide:eq(0) .num').text().toString().replace(/\s/g, '');
-    var newSum = parseInt(cartSumTotalHide) + parseInt(priceBlock.text());
+    let cartSumTotalHide = $('.cartSumTotalHide:eq(0) .num').text().toString().replace(/\s/g, '');
+    let newSum = parseInt(cartSumTotalHide) + parseInt(priceBlock.text());
     $('.cartSumTotal .num').text(newSum);
     $('.cartSumDelivery .num').text(price);
   });
@@ -2522,19 +2520,19 @@ function OrderScriptsSelect() {
 // Корзина
 function cartQuantity(){
   $('.cartqty').change($.debounce(300, function(){
-    var quantity = $(this);
-    var qVal = $(this).val();
+    let quantity = $(this);
+    let qVal = $(this).val();
     if(qVal >= '1'){
-      var id = $(this).closest('.cart__item').data('id');
-      var qty = $(this).val();
-      var data = $('.cartForm').serializeArray();
+      let id = $(this).closest('.cart__item').data('id');
+      let qty = $(this).val();
+      let data = $('.cartForm').serializeArray();
       data.push({name: 'only_body', value: 1});
       $.ajax({
         data: data,
         cache:false,
         success:function(d){
           quantity.val($(d).find('.cart__item[data-id="' + id + '"] .cartqty').val());
-          item = $('.cart__item[data-id="' + id + '"]');
+          let item = $('.cart__item[data-id="' + id + '"]');
           item.find('.cartPriceTotal span').html($(d).find('.cart__item[data-id="' + id + '"] .cartPriceTotal span').html());
           $('.cart__total').html($(d).find('.cart__total').html());
           c = $(d).find('.cart__item[data-id="' + id + '"] .cartqty').val();
@@ -2559,9 +2557,45 @@ function cartQuantity(){
   quantity();
 }
 
+// Выпадающая корзина. Изменение кол-ва
+function ajaxCartQty(){
+  $('.quantity-ajax').off('change').on('change', $.debounce(300, function(){
+    let quantity = $(this);
+    let id = $(this).closest('.addto__item').data('id');
+    let qtyInputVal = quantity.val();
+    if(qtyInputVal < 1) {
+      quantity.val(1)
+    }
+    let formData = $('.addto__cart-action').serializeArray();
+    formData.push({name: 'only_body', value: 1});
+
+    $.ajax({
+      url: '/cart',
+      data: formData,
+      cache: false,
+      success: function(data) {
+        let $data = $(data);
+        let newQtyInputVal = $data.find('.cart__item[data-id="' + id + '"] .cartqty').val();
+        if(qtyInputVal > newQtyInputVal){
+          let newQtyInputVal = $data.find('[data-id="' + id + '"] .cartqty').val();
+          quantity.val(newQtyInputVal)
+          return;
+        }
+        /* Обновление счетчиков кол-ва. НЕ РАБОТАЕТ */
+        $('.cart__count').html($data.filter('#newCartCount').html());
+        $('.cart__count').attr('data-count', $data.filter('#newCartCount').html());
+        /* Обновление цены */
+        let newPrice = $data.find('.cart__item[data-id="' + id + '"]').find('.cart__price').html();
+        $('.addto__item[data-id="' + id + '"]').find('.price__now').html(newPrice);
+      }
+    })
+  }));
+}
+
+
 // Удаление товара из корзины
 function cartDelete(s){
-  var yep = confirm('Вы точно хотите удалить товар из корзины?');
+  let yep = confirm('Вы точно хотите удалить товар из корзины?');
   if(yep == true){
     s.closest('.cart__item').fadeOut();
     url = s.data('href');
@@ -2583,14 +2617,14 @@ function cartDelete(s){
 }
 
 // Функция быстрого оформления заказа в корзине
-function startOrder(){  
-  var globalOrder = $('#globalOrder');
-  var cartTable = $('.cartTable');
+function startOrder(){
+  let globalOrder = $('#globalOrder');
+  let cartTable = $('.cartTable');
   //объект блока куда будет выводиться форма быстрого заказа
-  var OrderAjaxBlock = $('#OrderAjaxBlock');
-  var urlQuickForm = '/cart/add'; // адрес страницы с формой
+  let OrderAjaxBlock = $('#OrderAjaxBlock');
+  let urlQuickForm = '/cart/add'; // адрес страницы с формой
   // данные которые отарвятся на сервер чтобы получить только форму быстрого заказа без нижней части и верхней части сайта
-  var quickFormData = [
+  let quickFormData = [
     {name: 'ajax_q', value: 1},
     {name: 'fast_order', value: 1}
   ];
@@ -2619,7 +2653,7 @@ function startOrder(){
       });
       // Валидация формы на странице оформления заказа
       $(".total__buttons button").on('click', function(){
-        var form = $(".fastOrder__form");
+        let form = $(".fastOrder__form");
         form.validate({
           errorPlacement: function(error, element) { }
         });
@@ -2652,14 +2686,14 @@ function startOrder(){
 
 // Отправка купона при оформлении заказа
 function coupons() {
-  var submitBtn = $('.coupon__button');
-  var cuponInput = $('#coupon__code');
-  var resetBtn = $('.coupon__reset');
+  let submitBtn = $('.coupon__button');
+  let cuponInput = $('#coupon__code');
+  let resetBtn = $('.coupon__reset');
   submitBtn.on('click', function(){
-    var url = '/order/stage/confirm';
-    var val = cuponInput.val();
+    let url = '/order/stage/confirm';
+    let val = cuponInput.val();
     // Получаем данные формы, которые будем отправлять на сервер
-    var formData = $('#myform').serializeArray();
+    let formData = $('#myform').serializeArray();
     formData.push({name: 'ajax_q', value: 1});
     formData.push({name: 'only_body', value: 1});
     formData.push({name: 'form[coupon_code]', value: val});
@@ -2669,21 +2703,21 @@ function coupons() {
       url: url,
       data: formData,
       success: function(data) {
-        var oldQuickPrice = $('.cartSumTotal:eq(0) .num').text().toString().replace(/\s/g, '')
-        var discountBlock = $(data).closest('#myform').find('.discount');
-        var discountName = discountBlock.find('.name').text();
-        var discountPercent = discountBlock.find('.percent').text();
-        var totalBlock = $(data).closest('#myform').find('.total');
+        let oldQuickPrice = $('.cartSumTotal:eq(0) .num').text().toString().replace(/\s/g, '')
+        let discountBlock = $(data).closest('#myform').find('.discount');
+        let discountName = discountBlock.find('.name').text();
+        let discountPercent = discountBlock.find('.percent').text();
+        let totalBlock = $(data).closest('#myform').find('.total');
         // Записываем название и размер скидки по купону
         $('.total__coupons .total__label span').html(discountName);
         $('.total__coupons .cartSumCoupons').html(discountPercent);
         $('.total__discount').hide();
         $('.total__coupons').show();
         // Получаем новую итоговую стоимость заказа
-        var totalSum = totalBlock.find('.total-sum').data('total-sum');
-        var deliveryPrice = parseInt($('.delivery__price .changeprice').text());
-        var newTotalSum = totalSum + deliveryPrice;
-        var cartSum = $('.cartSumTotal').data('value');
+        let totalSum = totalBlock.find('.total-sum').data('total-sum');
+        let deliveryPrice = parseInt($('.delivery__price .changeprice').text());
+        let newTotalSum = totalSum + deliveryPrice;
+        let cartSum = $('.cartSumTotal').data('value');
         // Обновляем значение итоговой стоимости
         $('.cartSumTotal .num').text(newTotalSum);
         $('.cartSumTotal').attr('data-value', newTotalSum);
@@ -3250,28 +3284,28 @@ function goodsModRest() {
 
 // Отсчет даты до окончания акции
 function counterDate() {
-// Устанавливаем дату обратного отсчета ММ-ДД-ГГ
-var end = $('.counter').attr('end');
-var countDownDate = new Date(end).getTime();
-// Обновление счетчика каждую секунду
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  // Вывод
-  $('.counter .days span').text(days);
-  $('.counter .hours span').text(hours);
-  $('.counter .minutes span').text(minutes);
-  $('.counter .seconds span').text(seconds);
-  // Счетчик завершен
-  if (distance < 0) {
-    clearInterval(x);
-    $('.counter').hide();
-  }
-}, 1000);
+  // Устанавливаем дату обратного отсчета ММ-ДД-ГГ
+  let end = $('.counter').attr('end');
+  let countDownDate = new Date(end).getTime();
+  // Обновление счетчика каждую секунду
+  let x = setInterval(function() {
+    let now = new Date().getTime();
+    let distance = countDownDate - now;
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Вывод
+    $('.counter .days span').text(days);
+    $('.counter .hours span').text(hours);
+    $('.counter .minutes span').text(minutes);
+    $('.counter .seconds span').text(seconds);
+    // Счетчик завершен
+    if (distance < 0) {
+      clearInterval(x);
+      $('.counter').hide();
+    }
+  }, 1000);
 }
 
 // Загрузка основных функций шаблона
@@ -3283,6 +3317,7 @@ $(document).ready(function(){
   quickViewMod();
   goodsModRest();
   quantity();
+  ajaxCartQty();
   // Ленивая загрузка
   $(function(){
     const observer = lozad(); // lazy loads elements with default selector as '.lozad'
