@@ -1246,15 +1246,15 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
   $('.cart__count').animate({opacity: 0,display: "none"},500);
   $('.cart__count').animate({display: "inline",opacity: 1},500);
   // Находим форму, которую отправляем на сервер, для добавления товара в корзину
-  let formBlock = $($(this).get(0));
-  let addressCart = '/cart';
+  var formBlock = $($(this).get(0));
+  var addressCart = '/cart';
     // Проверка на существование формы отправки запроса на добавление товара в корзину
     if (1 > formBlock.length || formBlock.get(0).tagName != 'FORM') {
       alert('Не удалось найти форму добавления товара в корзину');
       return false;
     }
     // Получаем данные формы, которые будем отправлять на сервер
-    let formData = formBlock.serializeArray();
+    var formData = formBlock.serializeArray();
     // Сообщаем серверу, что мы пришли через ajax запрос
     formData.push({name: 'ajax_q', value: 1});
     // Так же сообщим ему, что нужно сразу отобразить форму быстрого заказа
@@ -1268,7 +1268,7 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
       success: function(data) {
         //$.fancybox.open(data);
         // Анализ системного сообщения в коризне
-        let str = $(data).html();
+        var str = $(data).html();
         // Проверяем текст сообщения на наличие ошибки
         if (str.indexOf("Не удалось добавить товар") != -1) {
           // Сообщение с ошибкой
@@ -1357,7 +1357,7 @@ $('.add-compare').off('click').click(function(){
   addTooltip = a.attr('data-action-text-add'),
   delTooltip = a.attr('data-action-text-del'),
   requestUrl = a.attr('href');
-  
+
   let atl = $(this).closest('.product__links');
   let atlS = $(this).closest('.product__shop');
   let flag = 0;
@@ -1404,7 +1404,7 @@ $('.add-compare').off('click').click(function(){
         }
         if('ok' == data.status) {
           if(isAdd == 1) {
-            let
+            var
               from = addUrl
               ,to = delUrl
               ,newIsAddStatus = 0
@@ -1415,7 +1415,7 @@ $('.add-compare').off('click').click(function(){
             atl.addClass('added');
             atlS.addClass('added');
           } else {
-            let
+            var
               from = delUrl
               ,to = addUrl
               ,newIsAddStatus = 1
@@ -1585,7 +1585,7 @@ $('.add-favorites').off('click').click(function(){
         }
         if('ok' == data.status) {
           if(isAdd == 1) {
-            let
+            var
               from = addUrl
               ,to = delUrl
               ,newIsAddStatus = 0
@@ -1596,7 +1596,7 @@ $('.add-favorites').off('click').click(function(){
             atl.addClass('added');
             atlS.addClass('added');
           } else {
-            let
+            var
               from = delUrl
               ,to = addUrl
               ,newIsAddStatus = 1
