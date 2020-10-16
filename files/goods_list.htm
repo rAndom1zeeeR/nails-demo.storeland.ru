@@ -6,7 +6,7 @@
     {% FOR nested_categories_list %}
       <div class="categories__item" data-id="{nested_categories_list.ID}" {% IF nested_categories_list.LEVEL > 0 %}style="display: none;"{% ENDIF %}>
         <a class="categories__image" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-          <img class="goods-cat-image-medium" src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=florist{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">
+          <img class="goods-cat-image-medium" src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=nails{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">
         </a>
         <a class="categories__name button" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;"><span>{nested_categories_list.NAME}</span></a>
       </div>
@@ -34,7 +34,7 @@
       {% FOR goods_filters %}
         <input type="hidden" name="{goods_filters.NAME}" value="{goods_filters.VALUE}" />
       {% ENDFOR %}
-      {% IF SHOW_GOODS_PRICE_FILTERS || goods_filters_empty=1 %}
+      {% IF SHOW_GOODS_PRICE_FILTERS || SHOW_GOODS_FILTERS %}
       <div class="filters__icon selectBox">
         <span>Фильтр</span>
       </div>
@@ -84,12 +84,12 @@
       </div>
       <!-- /END Вид Таблица/Список -->
     </form>
-    {% IF SHOW_GOODS_PRICE_FILTERS || goods_filters_empty=1 %}
-    <form action="" method="get" class="form__filters">
+	  {% IF SHOW_GOODS_PRICE_FILTERS || SHOW_GOODS_FILTERS %}
+    <form action="" method="get" class="form__filters {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}hasFilters {% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}hasFilters {% ENDIF %}{% ENDFOR %}{% ENDFOR %}">
       <div class="filter__lists">
         <!-- Если есть возможность фильтрации товаров по ценам -->
         {% IF SHOW_GOODS_PRICE_FILTERS %}
-        <div class="filter__list collapsible filters-price">
+        <div class="filter__list collapsible filters-price active">
           <div class="filter__name collapsible__click"><span>Цена</span></div>
           <div class="filter__items collapsible__content">
             <div class="priceSlider">

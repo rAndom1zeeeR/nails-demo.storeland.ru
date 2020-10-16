@@ -324,7 +324,7 @@ input.square:after, .CompareCheckbox:after {content: "\e876";font-family: 'Mater
 #addto .catalog__icon:hover, #addto .catalog__icon.opened {background: #925ab5;}
 #addto #addtoCatalog.dropdown__content {width: 1038px;}
 #addto .catalog__items {position: relative;}
-#addto .catalog__item a {font-size: 1rem;padding: 1.5rem;border-radius: 20px;display: inline-block;}
+#addto .catalog__item a {font-size: 1rem;padding: 1rem 1.5rem;border-radius: 20px;display: inline-block;}
 #addto .catalog__item a:hover, #addto .catalog__item a.opened {background: #FFFFFF;}
 #addto .catalog__item .open {margin-left: 0.25rem;vertical-align: middle;width: 30px;height: 30px;line-height: 30px;display: inline-block;text-align: center;}
 #addto .catalog__item .open:before {content: "\e934";font-family: 'icomoon';font-size: 1.25rem;}
@@ -563,7 +563,9 @@ header .search input {border: 0;}
 #search__result .result__category .result__image {display: none;}
 #search__result .result__category .result__name {width: 100%;}
 #search__result .result__category a {font-weight: bold;}
-#search__result .result__showAll {margin-top: 1rem;border-radius: 0;}
+#search__result .result__showAll {margin-top: 1rem;padding: 0 1rem;width: 100%;color: #8da5db;}
+#search__result .result__showAll:hover {color: #925ab5;}
+#search__result .result__showAll a {display: inline-block;}
 #search__result::-webkit-scrollbar {width: 0.5rem;height: 0;}
 #search__result::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #8da5db;}
 #search__result::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #f3f3f3;}
