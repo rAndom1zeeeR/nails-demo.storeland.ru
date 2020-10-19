@@ -1306,6 +1306,7 @@ footer .copyright {text-align: center;}
 .promotion__name {font-size: 1.25rem;margin-bottom: 1rem;}
 .promotion__date {color: #b2adb9;font-size: 14px;transition: all 0.3s ease;}
 .promotion__campaign .promotion__item:hover .promotion__date {color: #FFFFFF;}
+.promotion__text {margin-top: 1rem;}
 
 /*** Просмотр акции ***/
 .promotion__content {text-align: center;padding: 0;margin: 0 0 2rem 0;}
