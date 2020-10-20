@@ -9,7 +9,7 @@
       <div class="cart__items">
         {% FOR cart_items %}
         <div class="cart__item" data-id="{cart_items.GOODS_MOD_ID}">
-          <div class="cart__image"><a href="{cart_items.GOODS_URL}"><img class="goods-image-icon" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=florist{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}"></a></div> 
+          <div class="cart__image"><a href="{cart_items.GOODS_URL}"><img class="goods-image-icon" src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=glamour{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}"></a></div> 
           <div class="cart__inner">
             <div class="cart__info"> 
               <a class="cart__name" href="{cart_items.GOODS_URL}">{cart_items.GOODS_NAME}</a>

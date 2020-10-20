@@ -141,7 +141,7 @@
 			<tr class="border" id="order-item-row-{order_lines.ID}">
 				<td>
 					{% IF order_lines.TYPE_ID=1 %}
-					<a href="{order_lines.GOODS_URL}"><img src="{% IFNOT order_lines.GOODS_IMAGE_EMPTY %}{order_lines.GOODS_IMAGE_MEDIUM}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-medium.png?design=florist{% ENDIF %}" style="max-width:60px;max-height:60px;" title="{order_lines.GOODS_IMAGE_NAME}" alt="{order_lines.GOODS_IMAGE_NAME}"></a>
+					<a href="{order_lines.GOODS_URL}"><img src="{% IFNOT order_lines.GOODS_IMAGE_EMPTY %}{order_lines.GOODS_IMAGE_MEDIUM}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo-medium.png?design=glamour{% ENDIF %}" style="max-width:60px;max-height:60px;" title="{order_lines.GOODS_IMAGE_NAME}" alt="{order_lines.GOODS_IMAGE_NAME}"></a>
 					{% ELSE %}
 					{% IF order_lines.ART_NUMBER %}{order_lines.ART_NUMBER}{%ELSE%}&nbsp;{%ENDIF%}
 					{% ENDIF %}

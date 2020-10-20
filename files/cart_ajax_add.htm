@@ -6,7 +6,7 @@
       {% FOR cart_items %}
         {% IF cart_items.GOODS_MOD_ID = FORM_GOODS_MOD_ID %}
         <div class="addto__item" data-id="{cart_items.GOODS_ID}">
-          <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="addto__image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=florist{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon" /></a>
+          <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="addto__image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=glamour{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon" /></a>
           <div class="addto__shop">
             <!-- Название -->
             <a href="{cart_items.GOODS_URL}" class="addto__name" title="{cart_items.GOODS_NAME}"><span>{cart_items.GOODS_NAME}</span></a>
@@ -36,7 +36,7 @@
   <div class="addto__items">
     {% FOR cart_items %}
     <div class="addto__item" data-id="{cart_items.GOODS_ID}">
-      <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="addto__image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=florist{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon" /></a>
+      <a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="addto__image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=glamour{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon" /></a>
       <div class="addto__shop">
         <!-- Название -->
         <a href="{cart_items.GOODS_URL}" class="addto__name" title="{cart_items.GOODS_NAME}"><span>{cart_items.GOODS_NAME}</span></a>

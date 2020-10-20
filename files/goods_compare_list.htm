@@ -28,7 +28,7 @@
           <div class="compare-td compare-td-{goods_mod_info.index}">
             <div class="image">
               <a href="{goods_mod_info.GOODS_MOD_URL}" title="Перейти к странице &laquo;{goods_mod_info.GOODS_NAME}&raquo;">
-                <img src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=florist{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" rel="{goods_mod_info.GOODS_IMAGE_ID}" class="CompareGoodsImageMain{goods_mod_info.GOODS_MOD_ID} goods-image-small" alt="{goods_mod_info.GOODS_NAME}" />
+                <img src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=glamour{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" rel="{goods_mod_info.GOODS_IMAGE_ID}" class="CompareGoodsImageMain{goods_mod_info.GOODS_MOD_ID} goods-image-small" alt="{goods_mod_info.GOODS_NAME}" />
               </a>
               <a class="remove" href="{COMPARE_DELETE_URL}?id={goods_mod_info.GOODS_MOD_ID}" title="Убрать из таблицы сравнения"><i class="material-icons">close</i></a>
             </div>

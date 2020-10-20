@@ -32,7 +32,7 @@ body {position: relative;font-family: 'Nunito', sans-serif;font-size: 14px;line-
 /* END Настройки максимальных размеров генерируемых изображений */
 
 /* Иконки форматов файлов */
-.file_extension_icon        {width:1rem;height:1rem;display:block;float: left;margin-right: 0.625rem;background:#ffffff url('{ASSEST_IMAGES_PATH}icons-files-extensions.gif?design=florist') no-repeat left top;}
+.file_extension_icon        {width:1rem;height:1rem;display:block;float: left;margin-right: 0.625rem;background:#ffffff url('{ASSEST_IMAGES_PATH}icons-files-extensions.gif?design=glamour') no-repeat left top;}
 .file_extension_icon.torrent{background-position:-1rem 0}
 .file_extension_icon.xls    {background-position:-2rem 0}
 .file_extension_icon.ie7    {background-position:-48px 0}
@@ -657,8 +657,8 @@ header [class*="__icon"] {width: 38px;height: 38px;font-size: 20px;}
 /*** Баннеры ***/
 .banners__items {display: flex;flex-wrap: wrap;justify-content: space-between;}
 .banners__item {width: calc(50% - 10px);position: relative;padding: 1.75rem 2.5rem;border-radius: 20px;background-repeat: no-repeat;background-size: cover;background-position: right center;}
-.banners__item:nth-child(1) {background-color: #9cb7e8;background-image: url("{ASSETS_IMAGES_PATH}banner1.png?design=florist");}
-.banners__item:nth-child(2) {background-color: #ffbe31;background-image: url("{ASSETS_IMAGES_PATH}banner2.png?design=florist");}
+.banners__item:nth-child(1) {background-color: #9cb7e8;background-image: url("{ASSETS_IMAGES_PATH}banner1.png?design=glamour");}
+.banners__item:nth-child(2) {background-color: #ffbe31;background-image: url("{ASSETS_IMAGES_PATH}banner2.png?design=glamour");}
 .banners__title a {font-size: 28px;font-weight: bold;color: #fff;}
 .banners__title span {display: block;}
 .banners__subtitle {color: #fff;margin: 0.625rem 0;line-height: 24px;height: 48px;}
@@ -692,7 +692,7 @@ header [class*="__icon"] {width: 38px;height: 38px;font-size: 20px;}
 
 
 /*** Обратная связь ***/
-#callback .callback__inner {padding: 2rem 3rem;border-radius: 20px;background-color: #ffbe31;background-image: url("{ASSETS_IMAGES_PATH}callback.png?design=florist");background-repeat: no-repeat;background-size: cover;background-position: center center;}
+#callback .callback__inner {padding: 2rem 3rem;border-radius: 20px;background-color: #ffbe31;background-image: url("{ASSETS_IMAGES_PATH}callback.png?design=glamour");background-repeat: no-repeat;background-size: cover;background-position: center center;}
 #callback .form__callback {width: 55%;color: #FFFFFF;}
 #callback .callback__title {font-size: 30px;font-weight: bold;margin-bottom: 1.5rem;}
 #callback .callback__subtitle span {display: block;line-height: 24px;}
@@ -976,7 +976,7 @@ footer .copyright {text-align: center;}
 /** Товар: Основное описание **/
 .productView__shop {position: relative;width: 60%;padding-left: 1rem;}
 .productView__name {margin-bottom: 1.5rem;font-size: 24px;font-weight: bold;line-height: 2rem;max-height: 6rem;overflow: hidden;}
-.productView__campaign {margin-bottom: 1.5rem;font-size: 20px;font-weight: bold;color: #fff;padding: 2rem;border-radius: 20px;background-color: #ffbe31;background-image: url("{ASSETS_IMAGES_PATH}callback.png?design=florist");background-repeat: no-repeat;background-size: cover;background-position: center center;}
+.productView__campaign {margin-bottom: 1.5rem;font-size: 20px;font-weight: bold;color: #fff;padding: 2rem;border-radius: 20px;background-color: #ffbe31;background-image: url("{ASSETS_IMAGES_PATH}callback.png?design=glamour");background-repeat: no-repeat;background-size: cover;background-position: center center;}
 .productView__articles {margin-bottom: 1.5rem;}
 .productView__available {margin-bottom: 1.5rem;}
 .productView__text {margin-bottom: 1.5rem;}
@@ -1059,7 +1059,7 @@ footer .copyright {text-align: center;}
 .productView__features {display: flex;flex-wrap: wrap;}
 .features__item {margin: 0 1rem 1rem 0;width: calc(50% - 1rem);position: relative;display: flex;flex-wrap: nowrap;justify-content: space-between;align-items: flex-end;}
 .features__item:nth-child(2n) {margin: 0 0 1rem 1rem;}
-.features__name {flex-grow: 1;background-image: url("{ASSETS_IMAGES_PATH}dot.png?design=nails");background-repeat: repeat-x;background-position: 0 100%;}
+.features__name {flex-grow: 1;background-image: url("{ASSETS_IMAGES_PATH}dot.png?design=glamour");background-repeat: repeat-x;background-position: 0 100%;}
 .features__name span {position: relative;overflow: hidden;background: #edf2ff;padding: 0 0.5rem 0 0;}
 .features__value {padding: 0 0 0 0.5rem}
 /* Товар: Доставка */
