@@ -433,7 +433,6 @@ footer {padding-bottom: 82px;}
 .modal__title .title {padding: 1rem 1.25rem;color: #ffffff;background: #ffbe31;border: 5px solid #fff;border-radius: 20px;display: flex;align-items: center;justify-content: center;}
 @media all and (max-width: 480px) {
 .fancybox-content {padding: 1rem;}
-/*.fancybox-slide--html .fancybox-close-small {top: 1rem;right: 1rem;}*/
 }
 /*** Модальный Обратный звонок ***/
 #fancybox__callback, #fancybox__feedback, #fancybox__notify {background: #edf2ff;max-width: 540px;}
