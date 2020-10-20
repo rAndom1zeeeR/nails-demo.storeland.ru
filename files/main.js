@@ -2777,7 +2777,7 @@ function pdtCatalog() {
     dots: false,
     autoHeight: false,
     autoHeightClass: 'owl-height',
-    autoplay: false,
+    autoplay: true,
     autoplayHoverPause: true,
     smartSpeed: 500,
     mouseDrag: true,
