@@ -22,6 +22,7 @@
     <div class="thumblist {% FOR goods_images %}{% IF goods_images.index > 1 %}show {% ENDIF %}{% ENDFOR %}">
       <div class="thumblist__items owl-carousel">
         {% FOR goods_images %}
+	      {% IF goods_images.first %}{continue}{% ENDIF %}
           <div class="thumblist__item" data-id="{goods_images.ID}" data-index="{goods_images.index}">
             <a href="{goods_images.LARGE}" data-fancybox="images">
               <img class="goods-image-icon lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=glamour" data-src="{goods_images.ICON}" alt="{goods_images.NAME}" itemprop="image" />
