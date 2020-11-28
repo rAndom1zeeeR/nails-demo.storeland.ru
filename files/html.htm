@@ -316,7 +316,6 @@
     <!-- Слайдшоу -->
     <section id="slideshow">
       <div class="container">
-        <div class="preloader"><div class="loading"></div></div>
         <!-- Слайдер -->
         <div class="slider owl-carousel">
           <div class="slider__item" data-slide="1">
@@ -404,7 +403,6 @@
         <!-- Хиты продаж -->
         {% IFNOT index_page_favorites_goods_empty %}
         <div id="pdt__best" data-content="pdt__best" class="active">
-          <div class="preloader"><div class="loading"></div></div>
           <div class="products__grid owl-carousel">
             {% FOR index_page_favorites_goods %}
             <div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_favorites_goods.MAX_REST_VALUE=0 %}empty{% ENDIF %}" itemscope itemtype="https://schema.org/Product">
@@ -570,7 +568,6 @@
         <!-- Новинки -->
         {% IFNOT index_page_new_goods_empty %}
         <div id="pdt__new" data-content="pdt__new" {% IF index_page_favorites_goods_empty || index_page_goods_empty %}class="active"{% ENDIF %}>
-          <div class="preloader"><div class="loading"></div></div>
           <div class="products__grid owl-carousel">
             {% FOR index_page_new_goods %}
             <div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_new_goods.MAX_REST_VALUE=0 %}empty{% ENDIF %}" itemscope itemtype="https://schema.org/Product">
@@ -772,7 +769,6 @@
     {% IFNOT index_page_sale_goods_empty %}
     <div id="pdt__sales" data-content="pdt__sales">
       <div class="container">
-        <div class="preloader"><div class="loading"></div></div>
         <div class="block__title block__nav">
           <a href="{DISCOUNT_URL}" class="title">Распродажа</a>
           <div class="owl-nav"></div>
@@ -990,7 +986,6 @@
     {% IFNOT index_page_goods_empty %}
     <section id="pdt__sale">
       <div class="container">
-        <div class="preloader"><div class="loading"></div></div>
         <div class="block__title">
           <a href="{CATALOG_INDEX_PAGE_URL}" class="title">Товары на главной</a>
         </div>
@@ -1175,7 +1170,6 @@
     {% IF news_list_all_empty=0 || news_list_shop_empty=0 || news_list_articles_empty=0 || news_list_mass_media_empty=0 %}
     <section id="news">
       <div class="container">
-        <div class="preloader"><div class="loading"></div></div>
         <div class="block__title block__nav">
           <div class="nav__tabs">
             {% IFNOT news_list_all_empty %}<div class="nav__tab title active" data-content="news_list_all">Новости</div>{% ENDIF %}
@@ -1447,7 +1441,6 @@
           </div>
           <div class="owl-nav"></div>
         </div>
-        <div class="preloader"><div class="loading"></div></div>
         <div class="products__grid owl-carousel">
           {% FOR recently_viewed_goods %}
           <div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && recently_viewed_goods.MAX_REST_VALUE=0 %}empty{% ENDIF %}" itemscope itemtype="https://schema.org/Product">

@@ -3059,8 +3059,8 @@ function slideShow() {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    animateOut: 'slideOutUp',
-    animateIn: 'slideInUp'
+    animateOut: 'slideOutLeft',
+    animateIn: 'slideInRight'
   });
 }
 // Новости
