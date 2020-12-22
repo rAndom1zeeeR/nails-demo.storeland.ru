@@ -16,7 +16,7 @@
 		"http-proxy": "^1.18.1",
 		"moment": "^2.25.3",
 		"node-fetch": "^2.6.1",
-		"node-notifier": "^7.0.0",
+		"node-notifier": "^8.0.1",
 		"nodejs-base64": "^1.0.3",
 		"object-path": "^0.11.5",
 		"yargs-parser": "^13.1.2"
